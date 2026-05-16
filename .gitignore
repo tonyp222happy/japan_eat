@@ -1,0 +1,18 @@
+# Large data files — keep local only
+data/*.json
+data/*.csv
+
+# Worktrees (managed by git)
+.worktrees/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Hermes
+.hermes/
