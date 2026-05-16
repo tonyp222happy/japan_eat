@@ -1,0 +1,53 @@
+job_id: "J001"
+title: "Hyakumeiten Nearby Finder — Frontend MVP"
+description: |
+  Build a static frontend web app (GitHub Pages compatible) that:
+  1. Loads pre-scraped/geocoded Hyakumeiten restaurant data (JSON)
+  2. Uses browser geolocation API to get user's current position
+  3. Filters and sorts restaurants by distance from user
+  4. Displays results on a map (Leaflet) and as a list
+  5. Supports bilingual UI (JP/EN toggle)
+
+  MVP scope:
+  - Genres: ramen, sushi, italian, french, yakitori (5 representative genres)
+  - ~1000 restaurants max for performance
+  - No backend — all client-side with static JSON data
+  - Hosted on GitHub Pages
+
+  Technical requirements:
+  - Vanilla HTML/CSS/JS (no build step for GitHub Pages simplicity)
+  - Leaflet.js for map display (CDN)
+  - Responsive design (mobile-first)
+  - Language toggle (日本語/English)
+
+  Output:
+  - frontend/index.html
+  - frontend/css/style.css
+  - frontend/js/app.js
+  - frontend/data/restaurants.json (filtered MVP dataset)
+  - frontend/README.md (deployment instructions)
+
+scope:
+  files:
+    - "frontend/**"
+  exclude:
+    - "data/*.json"
+    - "*.py"
+
+verifier:
+  commands:
+    - "python scripts/verify_frontend.py"
+  max_retries: 3
+  stop_on_cost: 5.00
+
+depends_on: []
+
+agent:
+  model: "qwen3.6-plus"
+  max_turns: 24
+  toolsets:
+    - terminal
+    - file
+
+created: "2026-05-16"
+status: "pending"

@@ -1,0 +1,40 @@
+# Job Spec Template
+# Copy to jobs/J###/spec.yaml and fill in
+job_id: "J###"
+title: "Short descriptive title"
+description: |
+  Detailed description of what this job should accomplish.
+  Include specific requirements, constraints, and expected outcomes.
+
+# Scope: which files/directories this job should modify
+scope:
+  files:
+    - "src/api/*"
+    - "tests/api/*"
+  exclude:
+    - "data/*.json"
+
+# Verifier: how to check if the job succeeded
+verifier:
+  commands:
+    - "npm run lint"
+    - "npm run test"
+    - "npm run typecheck"
+    - "python scripts/smoke_test.py"
+  max_retries: 3
+  stop_on_cost: 5.00  # USD
+
+# Dependencies: jobs that must complete first
+depends_on: []
+
+# Agent settings
+agent:
+  model: "qwen3.6-plus"
+  max_turns: 24
+  toolsets:
+    - terminal
+    - file
+
+# Metadata
+created: "2026-05-16"
+status: "pending"  # pending | running | succeeded | failed | stopped
