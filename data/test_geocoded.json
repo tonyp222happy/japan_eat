@@ -1,0 +1,41 @@
+[
+  {
+    "id": "23081865",
+    "name": "黒川 ゆうあん亭",
+    "area": "愛知県 黒川駅",
+    "genre": "食堂",
+    "region": null,
+    "tabelog_url": "https://tabelog.com/aichi/A2301/A230110/23081865/",
+    "image_url": "https://d2py3gk9dukd01.cloudfront.net/assets/hyakumeiten2026/restaurants/shokudo/23081865-eb4207616a2e10bf48eeafe6087306c370c1f8cb0fad4878027b3a9074c41027.jpg",
+    "holiday": "火曜日",
+    "is_new": false,
+    "lat": 35.1984836,
+    "lng": 136.912447
+  },
+  {
+    "id": "11043868",
+    "name": "キセキ食堂 上尾店",
+    "area": "埼玉県 上尾駅",
+    "genre": "食堂",
+    "region": null,
+    "tabelog_url": "https://tabelog.com/saitama/A1104/A110401/11043868/",
+    "image_url": "https://d2py3gk9dukd01.cloudfront.net/assets/hyakumeiten2026/restaurants/shokudo/11043868-e658e6d88a5b6d17edfca03eb5bbfed52e510811f1a309c73805c81d5f09b9d2.jpg",
+    "holiday": "土曜日、日曜日",
+    "is_new": false,
+    "lat": 36.0157021,
+    "lng": 139.6126387
+  },
+  {
+    "id": "13014630",
+    "name": "スワチカ",
+    "area": "東京都 大崎広小路駅",
+    "genre": "食堂",
+    "region": null,
+    "tabelog_url": "https://tabelog.com/tokyo/A1316/A131603/13014630/",
+    "image_url": "https://d2py3gk9dukd01.cloudfront.net/assets/hyakumeiten2026/restaurants/shokudo/13014630-aeeb103635402cdcbadab6a13059f121d930542f16d64e34304f3228e2b48f95.jpg",
+    "holiday": "土曜日、日曜日、祝日",
+    "is_new": false,
+    "lat": 35.6225443,
+    "lng": 139.7225696
+  }
+]
