@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百名店 Nearby Finder — Find Tabelog Hyakumeiten Near You</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        :root {
+            --primary: #E44040;
+            --primary-dark: #C13535;
+            --bg: #F5F5F5;
+            --card-bg: #FFFFFF;
+            --text: #1A1A1A;
+            --text-secondary: #666;
+            --border: #E0E0E0;
+            --radius: 8px;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+        
+        /* Header */
+        header { background: var(--primary); color: white; padding: 16px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        header h1 { font-size: 1.3rem; display: flex; align-items: center; gap: 8px; }
+        header h1 span { font-size: 1.5rem; }
+        .subtitle { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+
+        /* Controls */
+        .controls { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 12px 16px; position: sticky; top: 70px; z-index: 999; }
+        .controls-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+        .btn { padding: 8px 14px; border: none; border-radius: var(--radius); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+        .btn-outline:hover { background: var(--bg); }
+        .search-input { flex: 1; min-width: 150px; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.9rem; }
+        .search-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(228,64,64,0.1); }
+        .filter-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+        .chip { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; border: 1px solid var(--border); background: white; transition: all 0.15s; white-space: nowrap; }
+        .chip:hover { background: var(--bg); }
+        .chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .stats { font-size: 0.8rem; color: var(--text-secondary); margin-left: auto; }
+
+        /* Main layout */
+        .main { display: flex; height: calc(100vh - 140px); }
+        #map { flex: 1; min-height: 300px; }
+        .sidebar { width: 380px; background: var(--card-bg); overflow-y: auto; border-left: 1px solid var(--border); }
+
+        /* Restaurant cards */
+        .restaurant-card { padding: 14px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+        .restaurant-card:hover { background: #FFF5F5; }
+        .restaurant-card.highlighted { background: #FFF0F0; border-left: 3px solid var(--primary); }
+        .card-header { display: flex; gap: 12px; }
+        .card-image { width: 80px; height: 60px; border-radius: 6px; object-fit: cover; background: #EEE; flex-shrink: 0; }
+        .card-info { flex: 1; min-width: 0; }
+        .card-name { font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 6px; }
+        .new-badge { background: #FFD700; color: #333; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .card-area { font-size: 0.8rem; color: var(--text-secondary); }
+        .card-meta { display: flex; gap: 12px; margin-top: 6px; font-size: 0.8rem; }
+        .card-meta span { display: flex; align-items: center; gap: 4px; }
+        .card-genre { display: inline-block; background: var(--bg); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-top: 6px; }
+        .card-distance { color: var(--primary); font-weight: 600; }
+        .card-actions { display: flex; gap: 8px; margin-top: 8px; }
+        .card-actions a { font-size: 0.8rem; color: var(--primary); text-decoration: none; padding: 4px 0; }
+        .card-actions a:hover { text-decoration: underline; }
+
+        /* Loading & empty states */
+        .loading { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
+        .loading .spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 10px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main { flex-direction: column; height: auto; }
+            #map { height: 40vh; min-height: 250px; }
+            .sidebar { width: 100%; max-height: 50vh; }
+            .controls { position: static; }
+            header { position: static; }
+        }
+
+        /* Leaflet custom */
+        .leaflet-popup-content-wrapper { border-radius: var(--radius); }
+        .popup-content { padding: 4px; }
+        .popup-content h4 { margin-bottom: 4px; }
+        .popup-content p { font-size: 0.85rem; color: var(--text-secondary); }
+
+        /* Genre dropdown */
+        .genre-dropdown { position: relative; }
+        .genre-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); max-height: 300px; overflow-y: auto; z-index: 1001; min-width: 200px; padding: 8px; }
+        .genre-menu.show { display: block; }
+        .genre-menu-item { padding: 6px 12px; cursor: pointer; font-size: 0.85rem; border-radius: 4px; display: flex; justify-content: space-between; }
+        .genre-menu-item:hover { background: var(--bg); }
+        .genre-menu-item.active { background: var(--primary); color: white; }
+        .genre-count { color: var(--text-secondary); font-size: 0.75rem; }
+        .genre-menu-item.active .genre-count { color: rgba(255,255,255,0.8); }
+
+        .radius-slider { width: 120px; }
+        .radius-label { font-size: 0.8rem; color: var(--text-secondary); min-width: 40px; text-align: center; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span>🌟</span> 百名店 Nearby Finder</h1>
+        <div class="subtitle">Find Tabelog Hyakumeiten (食べログ百名店) restaurants near you</div>
+    </header>
+
+    <div class="controls">
+        <div class="controls-row">
+            <button class="btn btn-primary" id="locateBtn">📍 Near Me</button>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search restaurant name...">
+            <input type="text" class="search-input" id="addressInput" placeholder="Search by city/address..." style="max-width: 200px;">
+            <div class="genre-dropdown">
+                <button class="btn btn-outline" id="genreBtn">🍜 Genre ▾</button>
+                <div class="genre-menu" id="genreMenu"></div>
+            </div>
+            <input type="range" class="radius-slider" id="radiusSlider" min="1" max="50" value="10" step="1">
+            <span class="radius-label" id="radiusLabel">10km</span>
+            <span class="stats" id="stats">Loading...</span>
+        </div>
+    </div>
+
+    <div class="main">
+        <div id="map"></div>
+        <div class="sidebar" id="sidebar">
+            <div class="loading"><div class="spinner"></div><br>Loading restaurants...</div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let restaurants = [];
+        let markers = [];
+        let userMarker = null;
+        let userLat = null, userLng = null;
+        let activeGenre = null;
+        let activeRadius = 10;
+        let searchTerm = '';
+        let map, markersLayer;
+
+        // Initialize map
+        map = L.map('map').setView([36.5, 138], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+            maxZoom: 18
+        }).addTo(map);
+        markersLayer = L.layerGroup().addTo(map);
+
+        // Custom icons
+        const userIcon = L.divIcon({
+            html: '<div style="background:#4285F4;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3)"></div>',
+            iconSize: [22, 22], iconAnchor: [11, 11], className: ''
+        });
+        const restaurantIcon = L.divIcon({
+            html: '<div style="background:#E44040;width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.2)"></div>',
+            iconSize: [16, 16], iconAnchor: [8, 8], className: ''
+        });
+
+        // Load data
+        fetch('data.json')
+            .then(r => r.json())
+            .then(data => {
+                restaurants = data;
+                buildGenreMenu();
+                filterAndDisplay();
+            })
+            .catch(err => {
+                document.getElementById('sidebar').innerHTML = `<div class="empty-state">⚠️ Failed to load data: ${err.message}</div>`;
+            });
+
+        // Genre menu
+        function buildGenreMenu() {
+            const counts = {};
+            restaurants.forEach(r => { counts[r.genre] = (counts[r.genre] || 0) + 1; });
+            const sorted = Object.entries(counts).sort((a,b) => b[1] - a[1]);
+            const menu = document.getElementById('genreMenu');
+            menu.innerHTML = sorted.map(([genre, count]) => 
+                `<div class="genre-menu-item" data-genre="${genre}">${genre}<span class="genre-count">${count}</span></div>`
+            ).join('');
+            menu.querySelectorAll('.genre-menu-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    activeGenre = activeGenre === el.dataset.genre ? null : el.dataset.genre;
+                    menu.querySelectorAll('.genre-menu-item').forEach(e => e.classList.toggle('active', e.dataset.genre === activeGenre));
+                    filterAndDisplay();
+                });
+            });
+        }
+
+        // Haversine distance
+        function haversine(lat1, lng1, lat2, lng2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) ** 2 + Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) * Math.sin(dLng/2) ** 2;
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        }
+
+        // Filter and display
+        function filterAndDisplay() {
+            let filtered = restaurants;
+
+            // Genre filter
+            if (activeGenre) filtered = filtered.filter(r => r.genre === activeGenre);
+
+            // Search filter
+            if (searchTerm) {
+                const term = searchTerm.toLowerCase();
+                filtered = filtered.filter(r => r.name.toLowerCase().includes(term) || r.area.toLowerCase().includes(term));
+            }
+
+            // Distance filter and sort
+            if (userLat !== null) {
+                filtered = filtered.map(r => ({...r, dist: haversine(userLat, userLng, r.lat, r.lng)}))
+                    .filter(r => r.dist <= activeRadius)
+                    .sort((a, b) => a.dist - b.dist);
+            }
+
+            updateStats(filtered.length);
+            updateMarkers(filtered);
+            renderCards(filtered);
+        }
+
+        function updateStats(count) {
+            const total = restaurants.length;
+            const geo = userLat !== null ? ` within ${activeRadius}km` : '';
+            document.getElementById('stats').textContent = `${count} of ${total}${geo}`;
+        }
+
+        function updateMarkers(list) {
+            markersLayer.clearLayers();
+            list.slice(0, 500).forEach(r => { // Limit markers for performance
+                const m = L.marker([r.lat, r.lng], { icon: restaurantIcon });
+                m.bindPopup(`<div class="popup-content"><h4>${r.name}</h4><p>${r.area}</p><p>${r.genre}${r.dist !== undefined ? ` · ${r.dist.toFixed(1)}km` : ''}</p></div>`);
+                m.on('click', () => highlightCard(r.id));
+                markersLayer.addLayer(m);
+            });
+        }
+
+        function renderCards(list) {
+            const sidebar = document.getElementById('sidebar');
+            if (list.length === 0) {
+                sidebar.innerHTML = `<div class="empty-state">${userLat !== null ? '🔍 No restaurants found in this area' : '📍 Click "Near Me" to find restaurants around you'}</div>`;
+                return;
+            }
+
+            const display = list.slice(0, 200); // Limit rendered cards
+            sidebar.innerHTML = display.map(r => `
+                <div class="restaurant-card" data-id="${r.id}" onclick="focusRestaurant(${r.lat}, ${r.lng}, '${r.name.replace(/'/g, "\\'")}')">
+                    <div class="card-header">
+                        <img class="card-image" src="${r.image_url}" alt="${r.name}" loading="lazy" onerror="this.style.display='none'">
+                        <div class="card-info">
+                            <div class="card-name">${r.name}${r.is_new ? '<span class="new-badge">NEW</span>' : ''}</div>
+                            <div class="card-area">${r.area}${r.station_name ? ` · ${r.station_name}駅` : ''}</div>
+                            <div class="card-meta">
+                                ${r.rating ? `<span>⭐ ${r.rating}</span>` : ''}
+                                ${r.review_count ? `<span>📝 ${r.review_count} reviews</span>` : ''}
+                                ${r.dist !== undefined ? `<span class="card-distance">📍 ${r.dist.toFixed(1)}km</span>` : ''}
+                            </div>
+                            <span class="card-genre">${r.genre}</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="${r.tabelog_url}" target="_blank" rel="noopener">食べログ →</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}" target="_blank" rel="noopener">Directions →</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function highlightCard(id) {
+            document.querySelectorAll('.restaurant-card').forEach(c => c.classList.remove('highlighted'));
+            const card = document.querySelector(`.restaurant-card[data-id="${id}"]`);
+            if (card) { card.classList.add('highlighted'); card.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        }
+
+        function focusRestaurant(lat, lng, name) {
+            map.panTo([lat, lng], { animate: true });
+            // Find and open the popup
+            markersLayer.eachLayer(layer => {
+                if (Math.abs(layer.getLatLng().lat - lat) < 0.0001 && Math.abs(layer.getLatLng().lng - lng) < 0.0001) {
+                    layer.openPopup();
+                }
+            });
+        }
+
+        // Geolocation
+        document.getElementById('locateBtn').addEventListener('click', () => {
+            if (!navigator.geolocation) { alert('Geolocation is not supported by your browser'); return; }
+            document.getElementById('locateBtn').textContent = '⏳ Locating...';
+            navigator.geolocation.getCurrentPosition(
+                pos => {
+                    userLat = pos.coords.latitude;
+                    userLng = pos.coords.longitude;
+                    if (userMarker) map.removeLayer(userMarker);
+                    userMarker = L.marker([userLat, userLng], { icon: userIcon }).addTo(map).bindPopup('You are here').openPopup();
+                    // No auto-zoom — user controls the zoom
+                    if (map.getZoom() < 10) map.setView([userLat, userLng], 12);
+                    document.getElementById('locateBtn').textContent = '📍 Near Me';
+                    filterAndDisplay();
+                },
+                err => { alert('Could not get your location: ' + err.message); document.getElementById('locateBtn').textContent = '📍 Near Me'; },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        });
+
+        // Search
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchTerm = e.target.value.trim();
+            filterAndDisplay();
+        });
+
+        // Radius
+        document.getElementById('radiusSlider').addEventListener('input', (e) => {
+            activeRadius = parseInt(e.target.value);
+            document.getElementById('radiusLabel').textContent = `${activeRadius}km`;
+            filterAndDisplay();
+        });
+
+        // Genre dropdown toggle
+        document.getElementById('genreBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('genreMenu').classList.toggle('show');
+        });
+        document.addEventListener('click', () => document.getElementById('genreMenu').classList.remove('show'));
+        document.getElementById('genreMenu').addEventListener('click', (e) => e.stopPropagation());
+
+        // Address/city search — geocode and set user location, zoom to result
+        let addressTimeout = null;
+        document.getElementById('addressInput').addEventListener('input', (e) => {
+            clearTimeout(addressTimeout);
+            const query = e.target.value.trim();
+            if (query.length < 2) return;
+            addressTimeout = setTimeout(() => {
+                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query + ', Japan')}&limit=1`)
+                    .then(r => r.json())
+                    .then(results => {
+                        if (results.length > 0) {
+                            const { lat, lon, display_name } = results[0];
+                            userLat = parseFloat(lat);
+                            userLng = parseFloat(lon);
+                            if (userMarker) map.removeLayer(userMarker);
+                            userMarker = L.marker([userLat, userLng], { icon: userIcon }).addTo(map).bindPopup(display_name).openPopup();
+                            // Zoom to the searched location
+                            map.setView([userLat, userLng], 13);
+                            filterAndDisplay();
+                        }
+                    })
+                    .catch(err => console.error('Address search failed:', err));
+            }, 800);
+        });
+        // Allow Enter to trigger search immediately
+        document.getElementById('addressInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                clearTimeout(addressTimeout);
+                e.target.dispatchEvent(new Event('input'));
+            }
+        });
+    </script>
+</body>
+</html>
