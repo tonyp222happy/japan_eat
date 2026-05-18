@@ -135,8 +135,27 @@
         let searchTerm = '';
         let map, markersLayer;
 
-        // Initialize map
-        map = L.map('map', { scrollWheelZoom: false }).setView([36.5, 138], 5);
+        // Initialize map — scroll wheel zoom disabled by default (prevents conflict with sidebar scroll)
+        // Re-enable when Ctrl/Cmd key is held down (Google Maps style)
+        map = L.map('map', { scrollWheelZoom: false, zoomControl: true }).setView([36.5, 138], 5);
+        map.on('wheel', function(e) {
+            if (e.originalEvent.ctrlKey || e.originalEvent.metaKey) {
+                map.scrollWheelZoom.enable();
+            }
+        });
+        map.on('wheel', function(e) {
+            if (!e.originalEvent.ctrlKey && !e.originalEvent.metaKey) {
+                // Small delay so the zoom finishes before re-disabling
+                setTimeout(() => map.scrollWheelZoom.disable(), 500);
+            }
+        });
+
+        // Keyboard zoom: + to zoom in, - to zoom out
+        document.addEventListener('keydown', function(e) {
+            if (e.target.tagName === 'INPUT') return; // Don't intercept when typing
+            if (e.key === '+' || e.key === '=') map.zoomIn();
+            if (e.key === '-' || e.key === '_') map.zoomOut();
+        });
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
             maxZoom: 18
