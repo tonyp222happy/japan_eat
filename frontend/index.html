@@ -97,8 +97,6 @@
         .genre-count { color: var(--text-secondary); font-size: 0.75rem; }
         .genre-menu-item.active .genre-count { color: rgba(255,255,255,0.8); }
 
-        .radius-slider { width: 120px; }
-        .radius-label { font-size: 0.8rem; color: var(--text-secondary); min-width: 40px; text-align: center; }
     </style>
 </head>
 <body>
@@ -116,8 +114,6 @@
                 <button class="btn btn-outline" id="genreBtn">🍜 Genre ▾</button>
                 <div class="genre-menu" id="genreMenu"></div>
             </div>
-            <input type="range" class="radius-slider" id="radiusSlider" min="1" max="50" value="10" step="1">
-            <span class="radius-label" id="radiusLabel">10km</span>
             <span class="stats" id="stats">Loading...</span>
         </div>
     </div>
@@ -136,12 +132,11 @@
         let userMarker = null;
         let userLat = null, userLng = null;
         let activeGenre = null;
-        let activeRadius = 10;
         let searchTerm = '';
         let map, markersLayer;
 
         // Initialize map
-        map = L.map('map').setView([36.5, 138], 5);
+        map = L.map('map', { scrollWheelZoom: false }).setView([36.5, 138], 5);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
             maxZoom: 18
@@ -210,10 +205,9 @@
                 filtered = filtered.filter(r => r.name.toLowerCase().includes(term) || r.area.toLowerCase().includes(term));
             }
 
-            // Distance filter and sort
+            // Distance sort (no radius filter)
             if (userLat !== null) {
                 filtered = filtered.map(r => ({...r, dist: haversine(userLat, userLng, r.lat, r.lng)}))
-                    .filter(r => r.dist <= activeRadius)
                     .sort((a, b) => a.dist - b.dist);
             }
 
@@ -224,7 +218,7 @@
 
         function updateStats(count) {
             const total = restaurants.length;
-            const geo = userLat !== null ? ` within ${activeRadius}km` : '';
+            const geo = userLat !== null ? ' near you' : '';
             document.getElementById('stats').textContent = `${count} of ${total}${geo}`;
         }
 
@@ -308,13 +302,6 @@
         // Search
         document.getElementById('searchInput').addEventListener('input', (e) => {
             searchTerm = e.target.value.trim();
-            filterAndDisplay();
-        });
-
-        // Radius
-        document.getElementById('radiusSlider').addEventListener('input', (e) => {
-            activeRadius = parseInt(e.target.value);
-            document.getElementById('radiusLabel').textContent = `${activeRadius}km`;
             filterAndDisplay();
         });
 
