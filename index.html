@@ -200,7 +200,7 @@
             return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         }
 
-        // Filter and display
+        // Filter and display — always sorted by distance from map center
         function filterAndDisplay() {
             let filtered = restaurants;
 
@@ -213,16 +213,30 @@
                 filtered = filtered.filter(r => r.name.toLowerCase().includes(term) || r.area.toLowerCase().includes(term));
             }
 
-            // Distance sort (no radius filter)
-            if (userLat !== null) {
-                filtered = filtered.map(r => ({...r, dist: haversine(userLat, userLng, r.lat, r.lng)}))
-                    .sort((a, b) => a.dist - b.dist);
-            }
+            // Always sort by distance from map center
+            const center = map.getCenter();
+            const centerLat = center.lat;
+            const centerLng = center.lng;
+            filtered = filtered.map(r => ({...r, dist: haversine(centerLat, centerLng, r.lat, r.lng)}))
+                .filter(r => r.dist !== null && !isNaN(r.dist))
+                .sort((a, b) => a.dist - b.dist);
 
             updateStats(filtered.length);
             updateMarkers(filtered);
             renderCards(filtered);
         }
+
+        // Debounce helper
+        function debounce(fn, delay) {
+            let timer;
+            return function(...args) {
+                clearTimeout(timer);
+                timer = setTimeout(() => fn.apply(this, args), delay);
+            };
+        }
+
+        // Re-sort when user pans or zooms the map
+        map.on('moveend zoomend', debounce(() => filterAndDisplay(), 300));
 
         function updateStats(count) {
             const total = restaurants.length;
