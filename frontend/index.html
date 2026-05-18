@@ -135,20 +135,9 @@
         let searchTerm = '';
         let map, markersLayer;
 
-        // Initialize map — scroll wheel zoom disabled by default (prevents conflict with sidebar scroll)
-        // Re-enable when Ctrl/Cmd key is held down (Google Maps style)
-        map = L.map('map', { scrollWheelZoom: false, zoomControl: true }).setView([36.5, 138], 5);
-        map.on('wheel', function(e) {
-            if (e.originalEvent.ctrlKey || e.originalEvent.metaKey) {
-                map.scrollWheelZoom.enable();
-            }
-        });
-        map.on('wheel', function(e) {
-            if (!e.originalEvent.ctrlKey && !e.originalEvent.metaKey) {
-                // Small delay so the zoom finishes before re-disabling
-                setTimeout(() => map.scrollWheelZoom.disable(), 500);
-            }
-        });
+        // Initialize map — scroll wheel zooms the map directly when cursor is over it
+        // Sidebar scrolls independently (no page scroll conflict)
+        map = L.map('map', { scrollWheelZoom: true, zoomControl: true }).setView([36.5, 138], 5);
 
         // Keyboard zoom: + to zoom in, - to zoom out
         document.addEventListener('keydown', function(e) {
