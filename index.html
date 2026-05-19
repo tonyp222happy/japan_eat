@@ -112,6 +112,12 @@
         .toggle-btn:hover { background: var(--bg); }
         .toggle-btn.active { background: #E8F5E9; border-color: #4CAF50; color: #2E7D32; }
 
+        /* Price display on cards */
+        .card-prices { display: flex; gap: 12px; margin-top: 4px; font-size: 0.78rem; }
+        .card-prices .price-lunch { color: #E65C00; }
+        .card-prices .price-dinner { color: #C13535; }
+        .card-prices .price-label { font-weight: 600; }
+
     </style>
 </head>
 <body>
@@ -215,6 +221,7 @@
         }
 
         // Price menu
+        let priceFilterTime = 'dinner'; // 'lunch' or 'dinner'
         const priceRanges = [
             { label: '〜¥1,000', min: 0, max: 1000 },
             { label: '¥1,000〜¥2,000', min: 1000, max: 2000 },
@@ -226,10 +233,32 @@
 
         function buildPriceMenu() {
             const menu = document.getElementById('priceMenu');
-            menu.innerHTML = priceRanges.map((range, i) => {
-                const count = restaurants.filter(r => matchesPrice(r, range)).length;
+            renderPriceMenu(menu);
+        }
+
+        function renderPriceMenu(menu) {
+            const timeBtn = `<div style="display:flex;gap:4px;padding:4px 8px 8px;border-bottom:1px solid var(--border);margin-bottom:4px;">
+                <button class="price-time-btn" data-time="lunch" style="flex:1;padding:4px 8px;border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:0.8rem;background:${priceFilterTime==='lunch'?'var(--primary)':'white'};color:${priceFilterTime==='lunch'?'white':'var(--text)'}">昼 Lunch</button>
+                <button class="price-time-btn" data-time="dinner" style="flex:1;padding:4px 8px;border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:0.8rem;background:${priceFilterTime==='dinner'?'var(--primary)':'white'};color:${priceFilterTime==='dinner'?'white':'var(--text)'}">夜 Dinner</button>
+            </div>`;
+            
+            const items = priceRanges.map((range, i) => {
+                const count = restaurants.filter(r => matchesPrice(r, range, priceFilterTime)).length;
                 return `<div class="price-menu-item" data-index="${i}">${range.label}<span class="price-count">${count}</span></div>`;
             }).join('');
+            
+            menu.innerHTML = timeBtn + items;
+            
+            // Time toggle buttons
+            menu.querySelectorAll('.price-time-btn').forEach(el => {
+                el.addEventListener('click', () => {
+                    priceFilterTime = el.dataset.time;
+                    activePrice = null; // reset price selection
+                    renderPriceMenu(menu);
+                    filterAndDisplay();
+                });
+            });
+            
             menu.querySelectorAll('.price-menu-item').forEach(el => {
                 el.addEventListener('click', () => {
                     const idx = parseInt(el.dataset.index);
@@ -250,8 +279,9 @@
             return (nums[0] + nums[1]) / 2;
         }
 
-        function matchesPrice(r, range) {
-            const mid = parseBudgetMidpoint(r.budget_dinner || r.budget_lunch);
+        function matchesPrice(r, range, time) {
+            const budgetKey = time === 'lunch' ? 'budget_lunch' : 'budget_dinner';
+            const mid = parseBudgetMidpoint(r[budgetKey]);
             if (mid === null) return false;
             return mid >= range.min && mid < range.max;
         }
@@ -273,7 +303,7 @@
             if (activeGenre) filtered = filtered.filter(r => r.genre === activeGenre);
 
             // Price filter
-            if (activePrice) filtered = filtered.filter(r => matchesPrice(r, activePrice));
+            if (activePrice) filtered = filtered.filter(r => matchesPrice(r, activePrice, priceFilterTime));
 
             // Bookable filter
             if (bookableOnly) filtered = filtered.filter(r => r.reservable === true);
@@ -345,6 +375,10 @@
                                 ${r.dist !== undefined ? `<span class="card-distance">📍 ${r.dist.toFixed(1)}km</span>` : ''}
                             </div>
                             <span class="card-genre">${r.genre}</span>
+                            <div class="card-prices">
+                                ${r.budget_lunch ? `<span class="price-lunch"><span class="price-label">昼</span> ${r.budget_lunch}</span>` : ''}
+                                ${r.budget_dinner ? `<span class="price-dinner"><span class="price-label">夜</span> ${r.budget_dinner}</span>` : ''}
+                            </div>
                         </div>
                     </div>
                     <div class="card-actions">
