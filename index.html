@@ -25,7 +25,7 @@
         header { background: var(--primary); color: white; padding: 16px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
         header h1 { font-size: 1.3rem; display: flex; align-items: center; gap: 8px; }
         header h1 span { font-size: 1.5rem; }
-        .subtitle { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+        .subtitle { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; padding-right: 80px; }
 
         /* Controls */
         .controls { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 12px 16px; position: sticky; top: 70px; z-index: 999; }
@@ -123,14 +123,15 @@
 <body>
     <header>
         <h1><span>🌟</span> 百名店 Nearby Finder</h1>
-        <div class="subtitle">Find Tabelog Hyakumeiten (食べログ百名店) restaurants near you</div>
+        <div class="subtitle" data-i18n="subtitle">Find Tabelog Hyakumeiten (食べログ百名店) restaurants near you</div>
+        <button class="toggle-btn" id="langBtn" style="position:absolute;right:20px;top:16px;font-size:0.85rem;padding:4px 10px;">🇯🇵 JP</button>
     </header>
 
     <div class="controls">
         <div class="controls-row">
             <button class="btn btn-primary" id="locateBtn">📍 Near Me</button>
-            <input type="text" class="search-input" id="searchInput" placeholder="Search restaurant name...">
-            <input type="text" class="search-input" id="addressInput" placeholder="Search by city/address..." style="max-width: 200px;">
+            <input type="text" class="search-input" id="searchInput" data-i18n-ph="searchPlaceholder" placeholder="Search restaurant name...">
+            <input type="text" class="search-input" id="addressInput" data-i18n-ph="addressPlaceholder" placeholder="Search by city/address..." style="max-width: 200px;">
             <div class="genre-dropdown">
                 <button class="btn btn-outline" id="genreBtn">🍜 Genre ▾</button>
                 <div class="genre-menu" id="genreMenu"></div>
@@ -146,8 +147,8 @@
 
     <div class="main">
         <div id="map"></div>
-        <div class="sidebar" id="sidebar">
-            <div class="loading"><div class="spinner"></div><br>Loading restaurants...</div>
+            <div class="sidebar" id="sidebar">
+                <div class="loading"><div class="spinner"></div><br data-i18n="loading">Loading restaurants...</div>
         </div>
     </div>
 
@@ -161,7 +162,72 @@
         let searchTerm = '';
         let activePrice = null; // { label, min, max }
         let bookableOnly = false;
+        let currentLang = 'en'; // 'en' or 'ja'
         let map, markersLayer;
+
+        // Translations
+        const i18n = {
+            en: {
+                subtitle: 'Find Tabelog Hyakumeiten (食べログ百名店) restaurants near you',
+                locateBtn: '📍 Near Me',
+                searchPlaceholder: 'Search restaurant name...',
+                addressPlaceholder: 'Search by city/address...',
+                genreBtn: '🍜 Genre ▾',
+                priceBtn: '💰 Price ▾',
+                bookableBtn: '📅 Reservable',
+                loading: 'Loading restaurants...',
+                empty: '🔍 No restaurants found in this area',
+                reviews: 'reviews',
+                tabelog: '食べログ →',
+                directions: 'Directions →',
+                youAreHere: 'You are here',
+                priceLunch: '昼 Lunch',
+                priceDinner: '夜 Dinner',
+                langBtn: '🇯🇵 JP',
+                cardGenre: r => r.genre,
+                priceLabelLunch: '昼',
+                priceLabelDinner: '夜',
+            },
+            ja: {
+                subtitle: '食べログ百名店を近くで探そう',
+                locateBtn: '📍 近くで検索',
+                searchPlaceholder: '店名で検索...',
+                addressPlaceholder: '住所・地名で検索...',
+                genreBtn: '🍜 ジャンル ▾',
+                priceBtn: '💰 料金 ▾',
+                bookableBtn: '📅 予約可',
+                loading: '読み込み中...',
+                empty: '🔍 このエリアには見つかりません',
+                reviews: '件',
+                tabelog: '食べログ →',
+                directions: '案内 →',
+                youAreHere: '現在地',
+                priceLunch: '昼 ランチ',
+                priceDinner: '夜 ディナー',
+                langBtn: '🇺🇸 EN',
+                cardGenre: r => r.genre,
+                priceLabelLunch: '昼',
+                priceLabelDinner: '夜',
+            }
+        };
+
+        function applyLanguage() {
+            const t = i18n[currentLang];
+            // Text content
+            const el = (sel) => document.querySelector(sel);
+            const sub = document.querySelector('[data-i18n="subtitle"]');
+            if (sub) sub.textContent = t.subtitle;
+            el('#locateBtn').textContent = t.locateBtn;
+            el('#genreBtn').textContent = t.genreBtn;
+            el('#priceBtn').textContent = t.priceBtn;
+            el('#bookableBtn').textContent = t.bookableBtn;
+            el('#langBtn').textContent = t.langBtn;
+            // Placeholders
+            el('#searchInput').placeholder = t.searchPlaceholder;
+            el('#addressInput').placeholder = t.addressPlaceholder;
+            // Re-render cards
+            filterAndDisplay();
+        }
 
         // Initialize map — scroll wheel zooms the map directly when cursor is over it
         // Sidebar scrolls independently (no page scroll conflict)
@@ -237,9 +303,10 @@
         }
 
         function renderPriceMenu(menu) {
+            const t = i18n[currentLang];
             const timeBtn = `<div style="display:flex;gap:4px;padding:4px 8px 8px;border-bottom:1px solid var(--border);margin-bottom:4px;">
-                <button class="price-time-btn" data-time="lunch" style="flex:1;padding:4px 8px;border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:0.8rem;background:${priceFilterTime==='lunch'?'var(--primary)':'white'};color:${priceFilterTime==='lunch'?'white':'var(--text)'}">昼 Lunch</button>
-                <button class="price-time-btn" data-time="dinner" style="flex:1;padding:4px 8px;border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:0.8rem;background:${priceFilterTime==='dinner'?'var(--primary)':'white'};color:${priceFilterTime==='dinner'?'white':'var(--text)'}">夜 Dinner</button>
+                <button class="price-time-btn" data-time="lunch" style="flex:1;padding:4px 8px;border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:0.8rem;background:${priceFilterTime==='lunch'?'var(--primary)':'white'};color:${priceFilterTime==='lunch'?'white':'var(--text)'}">${t.priceLunch}</button>
+                <button class="price-time-btn" data-time="dinner" style="flex:1;padding:4px 8px;border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:0.8rem;background:${priceFilterTime==='dinner'?'var(--primary)':'white'};color:${priceFilterTime==='dinner'?'white':'var(--text)'}">${t.priceDinner}</button>
             </div>`;
             
             const items = priceRanges.map((range, i) => {
@@ -357,8 +424,9 @@
 
         function renderCards(list) {
             const sidebar = document.getElementById('sidebar');
+            const t = i18n[currentLang];
             if (list.length === 0) {
-                sidebar.innerHTML = `<div class="empty-state">🔍 No restaurants found in this area</div>`;
+                sidebar.innerHTML = `<div class="empty-state">${t.empty}</div>`;
                 return;
             }
 
@@ -372,19 +440,19 @@
                             <div class="card-area">${r.area}${r.station_name ? ` · ${r.station_name}駅` : ''}</div>
                             <div class="card-meta">
                                 ${r.rating ? `<span>⭐ ${r.rating}</span>` : ''}
-                                ${r.review_count ? `<span>📝 ${r.review_count} reviews</span>` : ''}
+                                ${r.review_count ? `<span>📝 ${r.review_count} ${t.reviews}</span>` : ''}
                                 ${r.dist !== undefined ? `<span class="card-distance">📍 ${r.dist.toFixed(1)}km</span>` : ''}
                             </div>
                             <span class="card-genre">${r.genre}</span>
                             <div class="card-prices">
-                                ${r.budget_lunch ? `<span class="price-lunch"><span class="price-label">昼</span> ${r.budget_lunch}</span>` : ''}
-                                ${r.budget_dinner ? `<span class="price-dinner"><span class="price-label">夜</span> ${r.budget_dinner}</span>` : ''}
+                                ${r.budget_lunch ? `<span class="price-lunch"><span class="price-label">${t.priceLabelLunch}</span> ${r.budget_lunch}</span>` : ''}
+                                ${r.budget_dinner ? `<span class="price-dinner"><span class="price-label">${t.priceLabelDinner}</span> ${r.budget_dinner}</span>` : ''}
                             </div>
                         </div>
                     </div>
                     <div class="card-actions">
-                        <a href="${r.tabelog_url}" target="_blank" rel="noopener">食べログ →</a>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}" target="_blank" rel="noopener">Directions →</a>
+                        <a href="${r.tabelog_url}" target="_blank" rel="noopener">${t.tabelog}</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}" target="_blank" rel="noopener">${t.directions}</a>
                     </div>
                 </div>
             `).join('');
@@ -415,12 +483,12 @@
                     userLat = pos.coords.latitude;
                     userLng = pos.coords.longitude;
                     if (userMarker) map.removeLayer(userMarker);
-                    userMarker = L.marker([userLat, userLng], { icon: userIcon }).addTo(map).bindPopup('You are here').openPopup();
+                    userMarker = L.marker([userLat, userLng], { icon: userIcon }).addTo(map).bindPopup(i18n[currentLang].youAreHere).openPopup();
                     // Center map on user — moveend listener triggers re-sort
                     map.setView([userLat, userLng], map.getZoom() < 10 ? 12 : map.getZoom());
-                    document.getElementById('locateBtn').textContent = '📍 Near Me';
+                    document.getElementById('locateBtn').textContent = i18n[currentLang].locateBtn;
                 },
-                err => { alert('Could not get your location: ' + err.message); document.getElementById('locateBtn').textContent = '📍 Near Me'; },
+                err => { alert('Could not get your location: ' + err.message); document.getElementById('locateBtn').textContent = i18n[currentLang].locateBtn; },
                 { enableHighAccuracy: true, timeout: 10000 }
             );
         });
@@ -454,6 +522,14 @@
             bookableOnly = !bookableOnly;
             document.getElementById('bookableBtn').classList.toggle('active', bookableOnly);
             filterAndDisplay();
+        });
+
+        // Language toggle
+        document.getElementById('langBtn').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ja' : 'en';
+            applyLanguage();
+            // Rebuild price menu with correct language
+            buildPriceMenu();
         });
 
         // Address/city search — geocode and zoom to result, list re-sorts automatically
