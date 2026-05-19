@@ -1,0 +1,3482 @@
+[
+  {
+    "id": "osm_4828423125",
+    "name": "Shuri Castle",
+    "name_ja": "首里城",
+    "lat": 26.217001,
+    "lng": 127.719373,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_1179835155",
+    "name": "Marugame Castle",
+    "name_ja": "丸亀城",
+    "lat": 34.286022,
+    "lng": 133.800101,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_7165213888",
+    "name": "上桜城跡",
+    "name_ja": "上桜城跡",
+    "lat": 34.053587,
+    "lng": 134.320696,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_3792430167",
+    "name": "特別史跡 熊本城",
+    "name_ja": "頬当御門",
+    "lat": 32.80602,
+    "lng": 130.704588,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_12871663877",
+    "name": "Nagoya Castle Ruins",
+    "name_ja": "名護屋城跡",
+    "lat": 33.527066,
+    "lng": 129.875958,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_1948765554",
+    "name": "Kasugayama Castle",
+    "name_ja": "春日山城",
+    "lat": 37.146819,
+    "lng": 138.205771,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_2500238880",
+    "name": "Himeji-jo",
+    "name_ja": "合坂",
+    "lat": 34.838669,
+    "lng": 134.695431,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_3740796912",
+    "name": "Ninomaru-goten Palace",
+    "name_ja": "二条城二ﾉ丸御殿",
+    "lat": 35.013534,
+    "lng": 135.749721,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_3961802645",
+    "name": "Iga Ueno Castle",
+    "name_ja": "上野城",
+    "lat": 34.770191,
+    "lng": 136.127128,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_5407217952",
+    "name": "Kasuga Castle Ruins",
+    "name_ja": "春日城址",
+    "lat": 35.837051,
+    "lng": 137.949166,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_6308661257",
+    "name": "若桜鬼ヶ城跡",
+    "name_ja": "若桜鬼ヶ城跡",
+    "lat": 35.33702,
+    "lng": 134.398258,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_6534679728",
+    "name": "Toyama Castle",
+    "name_ja": "Toyama Castle",
+    "lat": 36.692681,
+    "lng": 137.211563,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_9054990168",
+    "name": "二条城跡",
+    "name_ja": "二条城跡",
+    "lat": 36.473557,
+    "lng": 139.725324,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_12818799098",
+    "name": "Nagoya Castle",
+    "name_ja": "名古屋城",
+    "lat": 35.185319,
+    "lng": 136.899177,
+    "category": "castle",
+    "emoji": "🏯",
+    "score": 35
+  },
+  {
+    "id": "osm_7598971767",
+    "name": "Osaka Maishima Seaside Park",
+    "name_ja": "大阪まいしまシーサイドパーク(ネモフィラ祭り)",
+    "lat": 34.666959,
+    "lng": 135.388473,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_9282033834",
+    "name": "Fujimidai",
+    "name_ja": "藤見台",
+    "lat": 35.024943,
+    "lng": 135.807318,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_10825637176",
+    "name": "Ōnishi Park Sakura Cherry Trees",
+    "name_ja": "大西公園の桜",
+    "lat": 35.56157,
+    "lng": 138.035555,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_1420785337",
+    "name": "Yumenoshima Tropical Greenhouse Dome",
+    "name_ja": "東京都夢の島熱帯植物館",
+    "lat": 35.65134,
+    "lng": 139.829395,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_12981434960",
+    "name": "桜丘の森",
+    "name_ja": "桜丘の森",
+    "lat": 35.655492,
+    "lng": 139.702974,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_1423637535",
+    "name": "Bamboo Grove",
+    "name_ja": "竹林",
+    "lat": 34.399823,
+    "lng": 132.468551,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_5152457098",
+    "name": "Miyajima Natural Botanical Garden",
+    "name_ja": "宮島自然植物実験所",
+    "lat": 34.282945,
+    "lng": 132.2882,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_8321685594",
+    "name": "芝桜の丘",
+    "name_ja": "芝桜の丘",
+    "lat": 34.073564,
+    "lng": 132.974077,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_8321685596",
+    "name": "桜の丘",
+    "name_ja": "桜の丘",
+    "lat": 34.074684,
+    "lng": 132.97345,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_1420981677",
+    "name": "富士竹類植物園",
+    "name_ja": "富士竹類植物園",
+    "lat": 35.161119,
+    "lng": 138.888143,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_9938928795",
+    "name": "Hakonegora Koen Nettai Botanical Gardens",
+    "name_ja": "箱根強羅公園熱帯植物園",
+    "lat": 35.249126,
+    "lng": 139.045413,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_13509525285",
+    "name": "ニコライ バーグマン 箱根 ガーデンズ",
+    "name_ja": "ニコライ バーグマン 箱根 ガーデンズ",
+    "lat": 35.25401,
+    "lng": 139.033254,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_4200352576",
+    "name": "日光市上三依水生植物園",
+    "name_ja": "日光市上三依水生植物園",
+    "lat": 37.00873,
+    "lng": 139.726263,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_4695055444",
+    "name": "Pink Moss Hill",
+    "name_ja": "芝桜の丘",
+    "lat": 35.981226,
+    "lng": 139.088708,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_5656748026",
+    "name": "桜(花木園)",
+    "name_ja": "桜(花木園)",
+    "lat": 36.070294,
+    "lng": 139.367511,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_6805629575",
+    "name": "Tateyama Family Park",
+    "name_ja": "館山ファミリーパーク",
+    "lat": 34.946516,
+    "lng": 139.813933,
+    "category": "garden",
+    "emoji": "🌸",
+    "score": 34
+  },
+  {
+    "id": "osm_11109468505",
+    "name": "Shuri Kinjo Big Akagi Tree",
+    "name_ja": "首里金城の大アカギ",
+    "lat": 26.215863,
+    "lng": 127.716063,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_5405011840",
+    "name": "Ninen zaka - sannen zaka",
+    "name_ja": "Ninen zaka - sannen zaka",
+    "lat": 34.997986,
+    "lng": 135.780827,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_4615456890",
+    "name": "The birthplace of osaka city waterworks",
+    "name_ja": "大阪市水道発祥之地",
+    "lat": 34.707745,
+    "lng": 135.518777,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_13343519318",
+    "name": "Giant Ginkgo of Shimoaoki Yakushidō",
+    "name_ja": "下青木薬師堂の大銀杏",
+    "lat": 35.554973,
+    "lng": 138.039606,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_11152108399",
+    "name": "Katakura Minamihara Odō-no-sakura (weeping cherry tree)",
+    "name_ja": "片倉南原お堂の桜",
+    "lat": 35.940222,
+    "lng": 138.102337,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_11149499119",
+    "name": "Katakura Shidarezakura (weeping cherry tree)",
+    "name_ja": "片倉の枝垂れ桜",
+    "lat": 35.944145,
+    "lng": 138.104286,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_12485412499",
+    "name": "Katsuma Yakushidō-no-shidarezakura Weeping Cherry Tree",
+    "name_ja": "勝間薬師堂のしだれ桜",
+    "lat": 35.822108,
+    "lng": 138.062514,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_7308258886",
+    "name": "Kisoji is to the north of here",
+    "name_ja": "Kisoji is to the north of here",
+    "lat": 35.515171,
+    "lng": 137.550283,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_12487730454",
+    "name": "Kumano Sakura Cherry Tree",
+    "name_ja": "熊野桜",
+    "lat": 35.903112,
+    "lng": 138.096622,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_10913669665",
+    "name": "Kyozoji Yamamon (Former Sakuramaru Ninomon Gate of Iida Castle)",
+    "name_ja": "経蔵寺山門（飯田城移築桜丸二ノ門）",
+    "lat": 35.511634,
+    "lng": 137.845583,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_7057437686",
+    "name": "Nihonbashi Sakura-dori",
+    "name_ja": "日本橋さくら通り",
+    "lat": 35.680882,
+    "lng": 139.772458,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_2125953396",
+    "name": "Peace Memorial Statue",
+    "name_ja": "平和記念像",
+    "lat": 35.754681,
+    "lng": 139.736609,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_5755329621",
+    "name": "Sumiyoshi Srine",
+    "name_ja": "Sumiyoshi Srine",
+    "lat": 35.752676,
+    "lng": 140.285706,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_1540780282",
+    "name": "Togan-ji (Nagoya-daibutsu)",
+    "name_ja": "名古屋大仏 (Nagoya-daibutsu)",
+    "lat": 35.161444,
+    "lng": 136.96516,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_10225557159",
+    "name": "Kamakura Daibutsu",
+    "name_ja": "鎌倉大仏坂記",
+    "lat": 35.315689,
+    "lng": 139.535345,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_9057454179",
+    "name": "Akiba-sama and Konpira-sama of Yokaichia",
+    "name_ja": "八日市場の秋葉様・金毘羅様",
+    "lat": 35.371243,
+    "lng": 137.962807,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_9019020587",
+    "name": "Suwa Jinja Keyaki",
+    "name_ja": "諏訪神社の欅",
+    "lat": 35.475794,
+    "lng": 137.848626,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_8233533989",
+    "name": "Tenryukyo Gorge",
+    "name_ja": "天龍峡",
+    "lat": 35.441286,
+    "lng": 137.818853,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_3671351285",
+    "name": "Kehi Shrine",
+    "name_ja": "Kehi Shrine",
+    "lat": 40.649065,
+    "lng": 141.382605,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_1942545045",
+    "name": "Millennium Sunrise Event",
+    "name_ja": "새천년해맞이행사지 (Millennium Sunrise Event)",
+    "lat": 35.673706,
+    "lng": 128.076198,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_551417234",
+    "name": "Peace Memorial",
+    "name_ja": "위령탑 (Peace Memorial)",
+    "lat": 35.556535,
+    "lng": 127.927701,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_5841516987",
+    "name": "NHK Hakodate Broadcasting Station Birthplace Broadcasting Tower",
+    "name_ja": "ＮＨＫ函館放送局誕生の地放送記念塔",
+    "lat": 41.761422,
+    "lng": 140.714573,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_12918184574",
+    "name": "National Flagpole Monument - Beppu City Minami Elementary School",
+    "name_ja": "國旗掲揚塔 - 別府市立南小学校",
+    "lat": 33.270714,
+    "lng": 131.50583,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_6330403086",
+    "name": "Otaru birthplace of",
+    "name_ja": "小樽発祥の地",
+    "lat": 43.1602,
+    "lng": 141.228428,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_8642377018",
+    "name": "Place of Origin of Sendai Miso",
+    "name_ja": "仙台みそ発祥の地",
+    "lat": 38.262861,
+    "lng": 140.857918,
+    "category": "historic",
+    "emoji": "📜",
+    "score": 33
+  },
+  {
+    "id": "osm_8488926151",
+    "name": "Sumiyoshi Shrine",
+    "name_ja": "住吉神社",
+    "lat": 26.204017,
+    "lng": 127.667294,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8328555884",
+    "name": "Kotohira shrine observatorium",
+    "name_ja": "金刀比羅宮展望台",
+    "lat": 34.184261,
+    "lng": 133.80964,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_12245019482",
+    "name": "Suwa jinja",
+    "name_ja": "諏訪神社",
+    "lat": 34.03123,
+    "lng": 133.812364,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_13011284170",
+    "name": "Beppu Bay & City viewing platform",
+    "name_ja": "Beppu Bay & City viewing platform",
+    "lat": 33.28673,
+    "lng": 131.432964,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_4486818795",
+    "name": "Kamishikimi Kumanoimasu Shrine",
+    "name_ja": "上色見熊野座神社",
+    "lat": 32.853804,
+    "lng": 131.158503,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_13071670995",
+    "name": "Konpirasama (Inzan)",
+    "name_ja": "金毘羅様（隠山）",
+    "lat": 33.254594,
+    "lng": 131.495903,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_11455418197",
+    "name": "Kotohiragu",
+    "name_ja": "金刀比羅宮",
+    "lat": 33.280676,
+    "lng": 131.478106,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_2342361731",
+    "name": "Okunoin",
+    "name_ja": "奥の院",
+    "lat": 33.29754,
+    "lng": 130.572847,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5953888099",
+    "name": "Hachimangu",
+    "name_ja": "八幡宮",
+    "lat": 33.518463,
+    "lng": 130.452746,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_2516433315",
+    "name": "Kumano Shrine",
+    "name_ja": "熊野神社",
+    "lat": 33.682843,
+    "lng": 130.457007,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_1412324184",
+    "name": "Caldera Observation Deck",
+    "name_ja": "立山カルデラ展望台",
+    "lat": 36.564856,
+    "lng": 137.560748,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_6339382085",
+    "name": "Kurobe Dam Observatory",
+    "name_ja": "ダム展望台",
+    "lat": 36.567652,
+    "lng": 137.664829,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_5473264858",
+    "name": "Fujihonai Shrine 藤保内神社",
+    "name_ja": "Fujihonai Shrine 藤保内神社",
+    "lat": 36.881038,
+    "lng": 137.554021,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5493705634",
+    "name": "Gassanhachimangu",
+    "name_ja": "月山八幡宮",
+    "lat": 36.944336,
+    "lng": 137.551377,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_6149803657",
+    "name": "Hachiman Jinja 脇子八幡宮",
+    "name_ja": "Hachiman Jinja 脇子八幡宮",
+    "lat": 36.958268,
+    "lng": 137.571662,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5470097895",
+    "name": "Hachimangu 八幡宮",
+    "name_ja": "Hachimangu 八幡宮",
+    "lat": 36.84271,
+    "lng": 137.559101,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_12669168089",
+    "name": "Itsukushima Shrine",
+    "name_ja": "厳島神社",
+    "lat": 37.109018,
+    "lng": 137.992873,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5749574788",
+    "name": "Konpirasha 金毘羅社",
+    "name_ja": "Konpirasha 金毘羅社",
+    "lat": 36.851179,
+    "lng": 137.536348,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5380971598",
+    "name": "Kotohira Shrine 琴平神社",
+    "name_ja": "Kotohira Shrine 琴平神社",
+    "lat": 37.180895,
+    "lng": 138.245466,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4837725708",
+    "name": "Sakura Square",
+    "name_ja": "桜広場",
+    "lat": 34.840823,
+    "lng": 135.470629,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_4330533165",
+    "name": "Hachimangu Shrine",
+    "name_ja": "八幡宮",
+    "lat": 34.95219,
+    "lng": 134.5286,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_10092618769",
+    "name": "Hachimangū",
+    "name_ja": "八幡宮",
+    "lat": 35.09376,
+    "lng": 135.443521,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_10092618770",
+    "name": "Hachimangū",
+    "name_ja": "八幡宮",
+    "lat": 35.096988,
+    "lng": 135.445473,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_10092618771",
+    "name": "Hachimangū",
+    "name_ja": "八幡宮",
+    "lat": 35.10171,
+    "lng": 135.440529,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_10092618780",
+    "name": "Kasuga-jinja",
+    "name_ja": "春日神社",
+    "lat": 35.079591,
+    "lng": 135.472671,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_10092618778",
+    "name": "Katsuragi-jinja",
+    "name_ja": "葛城神社",
+    "lat": 35.126905,
+    "lng": 135.41285,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_10092618781",
+    "name": "Kibitsu-jinja (Kibi-jinja)",
+    "name_ja": "吉備津神社（吉備神社）",
+    "lat": 35.084436,
+    "lng": 135.460636,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_13751633772",
+    "name": "Arashiyama Bamboo Forest",
+    "name_ja": "竹林の道",
+    "lat": 35.016796,
+    "lng": 135.671266,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_6341312586",
+    "name": "Bamboo grove view",
+    "name_ja": "Bamboo grove view",
+    "lat": 35.016818,
+    "lng": 135.672287,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_1742869075",
+    "name": "Boukodai",
+    "name_ja": "望湖台",
+    "lat": 35.020472,
+    "lng": 136.417733,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_3689032300",
+    "name": "Kasuga Taisha Shrine Sacred Stone",
+    "name_ja": "神石「出現石」or「額塚」",
+    "lat": 34.680926,
+    "lng": 135.848404,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_13704681901",
+    "name": "Sakura viewpoint",
+    "name_ja": "Sakura viewpoint",
+    "lat": 35.030452,
+    "lng": 135.771044,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_2275292373",
+    "name": "Fujimi Viewing Platform",
+    "name_ja": "富士見展望台",
+    "lat": 36.325601,
+    "lng": 138.417199,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_4794626421",
+    "name": "Daigozakura Cherry Blossoms",
+    "name_ja": "落合の醍醐桜",
+    "lat": 35.023944,
+    "lng": 133.64719,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_5848150377",
+    "name": "Isemiya Shrine",
+    "name_ja": "伊勢宮神社",
+    "lat": 35.110411,
+    "lng": 134.163591,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_6373458075",
+    "name": "Konpira Shrine",
+    "name_ja": "金比羅神社",
+    "lat": 35.11349,
+    "lng": 134.073453,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_1909416319",
+    "name": "Kumano Shrine",
+    "name_ja": "熊野神社",
+    "lat": 34.836925,
+    "lng": 133.908722,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_1907346036",
+    "name": "Shichisha Hachiman-gu Shrine",
+    "name_ja": "七社八幡宮",
+    "lat": 34.864286,
+    "lng": 133.902453,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4839287921",
+    "name": "Small Shrine (Bamboo)",
+    "name_ja": "Small Shrine (Bamboo)",
+    "lat": 34.966204,
+    "lng": 133.629534,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_6346894171",
+    "name": "Tamaigu Toshogu Torii",
+    "name_ja": "玉井宮東照宮鳥居",
+    "lat": 34.655849,
+    "lng": 133.944666,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5043360934",
+    "name": "Hiramatsu-Kasuga Jinja Shrine",
+    "name_ja": "平松春日神社",
+    "lat": 36.504967,
+    "lng": 136.5685,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_12058873582",
+    "name": "Hitohanehachimangu",
+    "name_ja": "Hitohanehachimangu",
+    "lat": 36.91295,
+    "lng": 136.932172,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_6302910745",
+    "name": "Isetama Shrine",
+    "name_ja": "伊勢玉神社",
+    "lat": 36.849185,
+    "lng": 136.988945,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5084980858",
+    "name": "Ishitate-Suwa Jinja Shrine",
+    "name_ja": "石立諏訪神社",
+    "lat": 36.51145,
+    "lng": 136.507483,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4351528522",
+    "name": "Kanazawa Shinto Shrine",
+    "name_ja": "金澤神社 兼六園鎮守",
+    "lat": 36.560482,
+    "lng": 136.662862,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5745117652",
+    "name": "Kotohira Shrine 金刀比羅神社",
+    "name_ja": "Kotohira Shrine 金刀比羅神社",
+    "lat": 36.924878,
+    "lng": 137.428538,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5043360959",
+    "name": "Nakabayashi-Kasuga Jinja Shrine",
+    "name_ja": "中林春日神社",
+    "lat": 36.506898,
+    "lng": 136.601478,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5886894494",
+    "name": "Cherry blossom trees",
+    "name_ja": "桜並木",
+    "lat": 35.857492,
+    "lng": 139.855362,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_11500037820",
+    "name": "Fuji View",
+    "name_ja": "Fuji View",
+    "lat": 35.546644,
+    "lng": 139.599543,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_6334952048",
+    "name": "Fujimi-dai",
+    "name_ja": "富士見台",
+    "lat": 35.608335,
+    "lng": 139.632151,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_2866251362",
+    "name": "Fujimiyama Hill",
+    "name_ja": "富士見山",
+    "lat": 35.65759,
+    "lng": 139.762602,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_13140838777",
+    "name": "Fuji Shrine",
+    "name_ja": "富士神社",
+    "lat": 35.241824,
+    "lng": 136.91572,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_12407782926",
+    "name": "Kasuga Shrine",
+    "name_ja": "春日神社",
+    "lat": 35.157861,
+    "lng": 136.905237,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_12682008385",
+    "name": "Kumano Shrine",
+    "name_ja": "熊野神社",
+    "lat": 35.259792,
+    "lng": 136.887682,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_12420431175",
+    "name": "Nagoya Toshogu Shrine",
+    "name_ja": "名古屋東照宮",
+    "lat": 35.177543,
+    "lng": 136.899303,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_11823675027",
+    "name": "Tsushima Shrine",
+    "name_ja": "津嶋神社",
+    "lat": 35.245837,
+    "lng": 136.976067,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_520028211",
+    "name": "Misen Peak Observation Deck",
+    "name_ja": "弥山山頂展望台",
+    "lat": 34.279702,
+    "lng": 132.319646,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_7997071685",
+    "name": "Miyajima Aquarium",
+    "name_ja": "宮島水族館",
+    "lat": 34.295522,
+    "lng": 132.315823,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_3710510718",
+    "name": "Kotohira Jinja Shrine",
+    "name_ja": "金刀比羅神社",
+    "lat": 34.295119,
+    "lng": 132.318947,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_2787766731",
+    "name": "Misen Shrine",
+    "name_ja": "弥山神社",
+    "lat": 34.277669,
+    "lng": 132.318666,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_3399246265",
+    "name": "Sumiyoshi Shrine",
+    "name_ja": "住吉神社",
+    "lat": 34.408178,
+    "lng": 133.202872,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4796047724",
+    "name": "\"Matsushima\" of Izu-nishiizu trail",
+    "name_ja": "西伊豆の松島",
+    "lat": 34.782289,
+    "lng": 138.765696,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_6091850289",
+    "name": "360 Observation Deck",
+    "name_ja": "富士山ドラゴンタワー",
+    "lat": 35.136316,
+    "lng": 138.694321,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_7620337002",
+    "name": "Fuji Shiba-sakura Festival Observation Deck",
+    "name_ja": "富士芝桜展望広場",
+    "lat": 35.443353,
+    "lng": 138.600303,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_7153806044",
+    "name": "Fuji View",
+    "name_ja": "Fuji View",
+    "lat": 34.978972,
+    "lng": 138.912161,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_6091847785",
+    "name": "Fuji mountain",
+    "name_ja": "Fuji mountain",
+    "lat": 35.485851,
+    "lng": 138.770486,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_7106597685",
+    "name": "Fuji view point",
+    "name_ja": "Fuji view point",
+    "lat": 35.474712,
+    "lng": 138.587786,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_2068140284",
+    "name": "Fujimidai",
+    "name_ja": "富士見台",
+    "lat": 35.43554,
+    "lng": 139.231798,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_4921465854",
+    "name": "Kegon Falls",
+    "name_ja": "華厳の滝",
+    "lat": 36.738228,
+    "lng": 139.503602,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_6285023885",
+    "name": "MeijinomoriKuroiso",
+    "name_ja": "道の駅「明治の森」黒磯",
+    "lat": 37.000287,
+    "lng": 139.984446,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_3684822017",
+    "name": "Futarasanjinja Sizumiya",
+    "name_ja": "二荒山神社志津宮",
+    "lat": 36.782723,
+    "lng": 139.500414,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_9723745117",
+    "name": "Okitsushima-jinja Shrine",
+    "name_ja": "隠津島神社",
+    "lat": 37.334664,
+    "lng": 140.082422,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4568511598",
+    "name": "FUJI VIEWPOINT",
+    "name_ja": "展望塔",
+    "lat": 35.680591,
+    "lng": 138.511149,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_8997384014",
+    "name": "FUJIYAMA Twin Terrace 1st",
+    "name_ja": "FUJIYAMAツインテラス",
+    "lat": 35.546605,
+    "lng": 138.731834,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_8997392417",
+    "name": "FUJIYAMA Twin Terrace 2nd",
+    "name_ja": "FUJIYAMAツインテラス",
+    "lat": 35.546291,
+    "lng": 138.731149,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_6499036686",
+    "name": "Fuji Panorama deck",
+    "name_ja": "富士パノラマ台",
+    "lat": 35.501942,
+    "lng": 138.801821,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_4539620102",
+    "name": "Arakura Fuji Sengen Shrine",
+    "name_ja": "新倉富士浅間神社",
+    "lat": 35.500312,
+    "lng": 138.800134,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_2091786863",
+    "name": "Kasuga Jinja Shrine",
+    "name_ja": "春日神社",
+    "lat": 35.847807,
+    "lng": 139.381684,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4019105926",
+    "name": "Kumano Shrine",
+    "name_ja": "熊野神社",
+    "lat": 35.641151,
+    "lng": 139.449337,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_6484004563",
+    "name": "Kumano Shrine",
+    "name_ja": "熊野神社",
+    "lat": 35.558136,
+    "lng": 138.506405,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_7886120710",
+    "name": "Fuji viewpoint",
+    "name_ja": "富士見台",
+    "lat": 35.334527,
+    "lng": 139.558448,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_3606300878",
+    "name": "Jigoku Nozoki Viewpoint",
+    "name_ja": "地獄のぞき",
+    "lat": 35.159374,
+    "lng": 139.833286,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_12452733552",
+    "name": "Mount Fuji viewpoint",
+    "name_ja": "富士山",
+    "lat": 35.329275,
+    "lng": 139.541765,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_8810523771",
+    "name": "Hachimangū Shrine",
+    "name_ja": "八幡宮",
+    "lat": 35.335617,
+    "lng": 139.91827,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4530833965",
+    "name": "Itsukushima-jinja Shrine",
+    "name_ja": "厳島神社",
+    "lat": 34.902165,
+    "lng": 139.888367,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_6062413449",
+    "name": "Kasuga Shrine",
+    "name_ja": "春日神社",
+    "lat": 35.272461,
+    "lng": 139.923838,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8000774441",
+    "name": "Kompira Shrine",
+    "name_ja": "金毘羅宮",
+    "lat": 35.381246,
+    "lng": 139.915438,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5388424069",
+    "name": "Konpira Shrine",
+    "name_ja": "金毘羅神社",
+    "lat": 35.336349,
+    "lng": 139.867153,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8186243626",
+    "name": "Big Tenryukyo Bridge Viewpoint",
+    "name_ja": "天龍峡大橋 展望台",
+    "lat": 35.427972,
+    "lng": 137.813308,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_9297949928",
+    "name": "Miho Satoyama Viewpoint",
+    "name_ja": "みほっちのおすすめ絶景スポット",
+    "lat": 35.435688,
+    "lng": 137.783672,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_9000690502",
+    "name": "Fujiyama-no-jinja",
+    "name_ja": "富士山之神社",
+    "lat": 35.453427,
+    "lng": 137.893318,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_9647753322",
+    "name": "Hattogamine Hachimangu Honden",
+    "name_ja": "鳩ヶ嶺八幡宮本殿",
+    "lat": 35.496535,
+    "lng": 137.837083,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8299247825",
+    "name": "Kasuga Shrine",
+    "name_ja": "春日神社",
+    "lat": 35.456226,
+    "lng": 137.751976,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_2080804375",
+    "name": "Kunōzan Tōshō-gū",
+    "name_ja": "久能山東照宮",
+    "lat": 34.964786,
+    "lng": 138.467598,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8481348249",
+    "name": "Omiya Hachimangu",
+    "name_ja": "大宮八幡宮",
+    "lat": 35.451874,
+    "lng": 137.824267,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_7602275291",
+    "name": "三内八幡宮",
+    "name_ja": "三内八幡宮",
+    "lat": 40.820141,
+    "lng": 140.70153,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5603043222",
+    "name": "Mount Hakodate Observatory",
+    "name_ja": "函館山展望台",
+    "lat": 41.75943,
+    "lng": 140.704641,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_4778686488",
+    "name": "Hachidai Ryūkyō Jinko-jinja Shrine Hakodate",
+    "name_ja": "八大龍王神八江聖団函館分宮",
+    "lat": 41.785159,
+    "lng": 140.754407,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4508527990",
+    "name": "Hakodate Gokoku-jinja Shrine",
+    "name_ja": "函館護国神社",
+    "lat": 41.759303,
+    "lng": 140.71338,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4775632107",
+    "name": "Hakodate Suiten-gu Shrine",
+    "name_ja": "函館水天宮",
+    "lat": 41.769519,
+    "lng": 140.729676,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4743785773",
+    "name": "Hakodateitsukushima Shrine",
+    "name_ja": "函館厳島神社",
+    "lat": 41.772584,
+    "lng": 140.704344,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4743664179",
+    "name": "Shirahama Inari Shrine",
+    "name_ja": "白浜稲荷神社",
+    "lat": 41.747279,
+    "lng": 140.720136,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4508498882",
+    "name": "Sumiyoshi-jinja Shrine",
+    "name_ja": "住三吉神社",
+    "lat": 41.748938,
+    "lng": 140.716006,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_1927013578",
+    "name": "Kasuga Shrine",
+    "name_ja": "春日神社",
+    "lat": 33.244994,
+    "lng": 131.598225,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_13071551997",
+    "name": "Konpira Shrine",
+    "name_ja": "金比羅神社",
+    "lat": 33.26661,
+    "lng": 131.508475,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_622900365",
+    "name": "Sumiyoshi Shrine",
+    "name_ja": "住吉神社",
+    "lat": 33.2437,
+    "lng": 131.602788,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4279688789",
+    "name": "Otaru Canal",
+    "name_ja": "小樽運河",
+    "lat": 43.197773,
+    "lng": 141.003045,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_3887704767",
+    "name": "Sapporo Fushimi Inari shrine",
+    "name_ja": "札幌伏見稲荷神社",
+    "lat": 43.034966,
+    "lng": 141.32537,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8193052317",
+    "name": "Remains of Yakushidō",
+    "name_ja": "薬師堂遺跡",
+    "lat": 38.047976,
+    "lng": 140.718743,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_3090575055",
+    "name": "Fushimi Inari Jinja Shrine",
+    "name_ja": "伏見稲荷神社",
+    "lat": 38.256785,
+    "lng": 140.88417,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8204950017",
+    "name": "Izumo Jinja",
+    "name_ja": "出雲神社",
+    "lat": 38.07656,
+    "lng": 140.563026,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4564957407",
+    "name": "Kashima shrine",
+    "name_ja": "鹿嶋神社",
+    "lat": 38.305679,
+    "lng": 141.418803,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4811332228",
+    "name": "Kumano Jinja",
+    "name_ja": "熊野神社",
+    "lat": 38.238585,
+    "lng": 140.945981,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_7521954515",
+    "name": "Kumano Jinja",
+    "name_ja": "熊野神社",
+    "lat": 38.437593,
+    "lng": 140.924501,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8198305617",
+    "name": "Kumano Jinja",
+    "name_ja": "熊野神社",
+    "lat": 38.035868,
+    "lng": 140.72952,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8198442621",
+    "name": "Kumano Jinja",
+    "name_ja": "熊野神社",
+    "lat": 38.025841,
+    "lng": 140.734387,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8299067823",
+    "name": "Kumano Jinja",
+    "name_ja": "熊野神社",
+    "lat": 38.414654,
+    "lng": 140.853823,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_9594455983",
+    "name": "Asobihira-makino Watching House",
+    "name_ja": "遊び平牧野看視舎",
+    "lat": 33.141517,
+    "lng": 139.755309,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_5885062666",
+    "name": "Atsuta Beach",
+    "name_ja": "熱田ビーチ",
+    "lat": 26.502855,
+    "lng": 127.886279,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_5885062929",
+    "name": "Bise Ryugu",
+    "name_ja": "備瀬竜宮",
+    "lat": 26.712148,
+    "lng": 127.87673,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_5885064099",
+    "name": "Bisenoura Coast",
+    "name_ja": "備瀬ノ浦海岸",
+    "lat": 26.707952,
+    "lng": 127.88539,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_5885062946",
+    "name": "Matsumoto Shave Beach",
+    "name_ja": "松本シェイブビーチ",
+    "lat": 26.51598,
+    "lng": 127.916734,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_993598242",
+    "name": "Biseondam",
+    "name_ja": "비선담 Biseondam",
+    "lat": 35.362431,
+    "lng": 127.700414,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_13159230002",
+    "name": "Daikyokan Jigoku",
+    "name_ja": "Daikyokan Jigoku",
+    "lat": 32.739712,
+    "lng": 130.265192,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_6699717002",
+    "name": "Chiriku Hachiman Shrine",
+    "name_ja": "千栗八幡宮",
+    "lat": 33.33142,
+    "lng": 130.478657,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_3710097448",
+    "name": "Fushimi-inari Shrine",
+    "name_ja": "伏見稲荷神社",
+    "lat": 33.160367,
+    "lng": 130.396706,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4423140989",
+    "name": "Isenomiya Shrine",
+    "name_ja": "伊勢宮",
+    "lat": 32.751573,
+    "lng": 129.884437,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_3671105237",
+    "name": "Itsukushima Shrine (Benzaiten)",
+    "name_ja": "厳島神社（弁財天）",
+    "lat": 33.170607,
+    "lng": 130.414033,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_3699551654",
+    "name": "Kotohira Shrine",
+    "name_ja": "金刀比羅神社",
+    "lat": 33.163449,
+    "lng": 130.402863,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_3728560431",
+    "name": "Kumano Shrine",
+    "name_ja": "熊野神社",
+    "lat": 33.165737,
+    "lng": 130.429571,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5601790031",
+    "name": "Matsubara Kawaso-sha Shrine",
+    "name_ja": "松原河童社",
+    "lat": 33.252335,
+    "lng": 130.303725,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_2392293821",
+    "name": "Fujimi Iwa",
+    "name_ja": "富士見岩",
+    "lat": 35.506699,
+    "lng": 137.344465,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_5044557558",
+    "name": "Iseki-Suwa Jinja Shrine",
+    "name_ja": "井関諏訪神社",
+    "lat": 36.489888,
+    "lng": 136.511063,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5044557560",
+    "name": "Tedori-Suwa Jinja Shrine",
+    "name_ja": "手取諏訪神社",
+    "lat": 36.488043,
+    "lng": 136.504763,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_1917793868",
+    "name": "Yamazakura shrine",
+    "name_ja": "山桜神社",
+    "lat": 36.142135,
+    "lng": 137.257787,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_2837485301",
+    "name": "Yuwaku fushimi Inari Shrine",
+    "name_ja": "湯涌稲荷神社",
+    "lat": 36.485915,
+    "lng": 136.75822,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_9918623118",
+    "name": "Itagaki New path junction",
+    "name_ja": "板垣新道分岐",
+    "lat": 43.654876,
+    "lng": 142.921939,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_6463733103",
+    "name": "Jigokudani Yohodo",
+    "name_ja": "地獄谷遊歩道",
+    "lat": 38.802931,
+    "lng": 140.671664,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_8377446720",
+    "name": "Izumo Jinja",
+    "name_ja": "出雲神社",
+    "lat": 38.726728,
+    "lng": 141.272476,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_7698936697",
+    "name": "Kashima Jinja",
+    "name_ja": "鹿島神社",
+    "lat": 38.530516,
+    "lng": 141.231131,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8333998624",
+    "name": "Kashima Jinja",
+    "name_ja": "鹿島神社 香取御兒神社",
+    "lat": 38.775425,
+    "lng": 141.022125,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_10732366390",
+    "name": "Kashima-jinja Shrine",
+    "name_ja": "鹿島神社",
+    "lat": 38.54533,
+    "lng": 141.384797,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8451977020",
+    "name": "Kasuga Jinja",
+    "name_ja": "春日神社",
+    "lat": 38.583233,
+    "lng": 141.465006,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_7121509985",
+    "name": "Kumano Jinja",
+    "name_ja": "熊野神社",
+    "lat": 38.533432,
+    "lng": 140.970858,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_7564734092",
+    "name": "Kumano Jinja",
+    "name_ja": "熊野神社",
+    "lat": 38.535683,
+    "lng": 140.815211,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_7564736992",
+    "name": "Kumano Jinja",
+    "name_ja": "熊野神社",
+    "lat": 38.564602,
+    "lng": 140.79911,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8343770917",
+    "name": "Kumano Jinja",
+    "name_ja": "熊野神社",
+    "lat": 38.800303,
+    "lng": 140.90378,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8850245789",
+    "name": "Kusatsu-Shirane Crater Viewpoint",
+    "name_ja": "草津白根山火口展望台",
+    "lat": 36.641663,
+    "lng": 138.530029,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_3572139597",
+    "name": "Lake Chuzenji Observation Deck",
+    "name_ja": "中禅寺湖展望台",
+    "lat": 36.716748,
+    "lng": 139.484838,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_4406759193",
+    "name": "Lake Byakushiike",
+    "name_ja": "白紫池",
+    "lat": 31.954466,
+    "lng": 130.841798,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_5795667753",
+    "name": "Sakurajima viewpoint",
+    "name_ja": "Sakurajima viewpoint",
+    "lat": 31.619037,
+    "lng": 130.582645,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_8367318067",
+    "name": "Kamoikehie-jinja Shrine",
+    "name_ja": "鴨池日枝神社",
+    "lat": 31.568098,
+    "lng": 130.549862,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_7573100725",
+    "name": "Kasuga Shrine",
+    "name_ja": "春日神社(鹿児島市春日町)",
+    "lat": 31.606163,
+    "lng": 130.566135,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_3335463377",
+    "name": "Momiwa Observatory",
+    "name_ja": "桃岩展望台",
+    "lat": 45.296123,
+    "lng": 141.034199,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_2287555256",
+    "name": "Nachi Falls",
+    "name_ja": "那智滝",
+    "lat": 33.673825,
+    "lng": 135.888331,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_5517895642",
+    "name": "Dorogawahachimangu 洞川八幡宮",
+    "name_ja": "Dorogawahachimangu 洞川八幡宮",
+    "lat": 34.266833,
+    "lng": 135.876846,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_12383637433",
+    "name": "Katsuragi Shrine",
+    "name_ja": "葛木神社",
+    "lat": 34.419164,
+    "lng": 135.672886,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_2586664220",
+    "name": "Sakura Falls Observation platform",
+    "name_ja": "さくらの滝 展望台",
+    "lat": 43.731875,
+    "lng": 144.523344,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_9119228940",
+    "name": "ShinArashiyama Skypark Observatory",
+    "name_ja": "新嵐山スカイパーク展望台",
+    "lat": 42.829442,
+    "lng": 142.981484,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_12474546601",
+    "name": "Shirahige Falls Viewpoint",
+    "name_ja": "白髭の滝",
+    "lat": 43.474997,
+    "lng": 142.638951,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_5500663140",
+    "name": "Small bamboo forest with lookout",
+    "name_ja": "Small bamboo forest with lookout",
+    "lat": 35.253994,
+    "lng": 126.897972,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_6869477085",
+    "name": "Sokodai Viewpoint",
+    "name_ja": "双湖台",
+    "lat": 43.448816,
+    "lng": 144.203436,
+    "category": "viewpoint",
+    "emoji": "👁️",
+    "score": 32
+  },
+  {
+    "id": "osm_4438812883",
+    "name": "Fujikura shrine",
+    "name_ja": "藤倉神社",
+    "lat": 39.783671,
+    "lng": 140.192189,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_7099497046",
+    "name": "Fukuoka Inari Shrine",
+    "name_ja": "Fukuoka Inari Shrine",
+    "lat": 34.197692,
+    "lng": 130.935441,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_1204189118",
+    "name": "Sakamoto Hachimangu Shrine",
+    "name_ja": "坂本八幡宮",
+    "lat": 33.516774,
+    "lng": 130.513475,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_9660134686",
+    "name": "Hachimangu Shrine",
+    "name_ja": "厳原八幡宮神社",
+    "lat": 34.206415,
+    "lng": 129.289211,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4269770127",
+    "name": "ITSUKUSHIMA shrine",
+    "name_ja": "厳島神社",
+    "lat": 41.362013,
+    "lng": 139.813229,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5766035512",
+    "name": "KUMANO Shrine",
+    "name_ja": "熊野神社",
+    "lat": 41.42607,
+    "lng": 140.096661,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_6078429762",
+    "name": "YOSHINO HACHIMAN shrine",
+    "name_ja": "吉野八幡神社",
+    "lat": 41.430738,
+    "lng": 140.221381,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8564162549",
+    "name": "Ise-jinja",
+    "name_ja": "伊勢神社",
+    "lat": 32.215026,
+    "lng": 130.159998,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_10614803969",
+    "name": "Kamisuwa Shrine",
+    "name_ja": "上諏訪神社",
+    "lat": 36.57401,
+    "lng": 140.621815,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_2090595255",
+    "name": "Kashima Shrine",
+    "name_ja": "鹿島神宮",
+    "lat": 35.969656,
+    "lng": 140.635049,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_2090595610",
+    "name": "Kashima Shrine",
+    "name_ja": "鹿島神宮",
+    "lat": 35.968771,
+    "lng": 140.631543,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_5363724518",
+    "name": "Katori Soreisha Shrine",
+    "name_ja": "香取祖霊社",
+    "lat": 35.885047,
+    "lng": 140.525934,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_11269208496",
+    "name": "Kumano Shrine",
+    "name_ja": "熊野神社",
+    "lat": 35.653342,
+    "lng": 140.508093,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4755582672",
+    "name": "Kasuga Shrine",
+    "name_ja": "春日神社",
+    "lat": 36.292395,
+    "lng": 133.355408,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_10652024793",
+    "name": "Kotohira Shrine",
+    "name_ja": "Kotohira Shrine",
+    "lat": 39.133169,
+    "lng": 141.691178,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8451979317",
+    "name": "Kumano Jinja",
+    "name_ja": "熊野神社",
+    "lat": 38.60451,
+    "lng": 141.50099,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4837886783",
+    "name": "Kumano Sansyo jinja Shrine",
+    "name_ja": "熊野三所神社",
+    "lat": 33.684981,
+    "lng": 135.342466,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_6132360674",
+    "name": "Otate Hachimangu Shrine",
+    "name_ja": "緒立八幡宮",
+    "lat": 37.859485,
+    "lng": 138.98623,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_6181142786",
+    "name": "Shimosuwa Jinja Shrine",
+    "name_ja": "下諏訪神社",
+    "lat": 37.706876,
+    "lng": 138.829318,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4099487645",
+    "name": "Sumiyoshi Shrine",
+    "name_ja": "Sumiyoshi Shrine",
+    "lat": 33.222254,
+    "lng": 132.52176,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_7460556086",
+    "name": "Toyosaka Shrine",
+    "name_ja": "豊榮神社",
+    "lat": 35.109325,
+    "lng": 132.438306,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_12329831062",
+    "name": "Yakushi jinja",
+    "name_ja": "薬師神社",
+    "lat": 38.892776,
+    "lng": 140.328973,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_13260784185",
+    "name": "Yakushikokeshido",
+    "name_ja": "薬師こけし堂",
+    "lat": 37.681501,
+    "lng": 140.32478,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_4583423111",
+    "name": "kasuga shrine",
+    "name_ja": "春日神社",
+    "lat": 33.340363,
+    "lng": 129.441949,
+    "category": "shrine",
+    "emoji": "⛩️",
+    "score": 32
+  },
+  {
+    "id": "osm_8836115485",
+    "name": "Kiyomizu-dera Temple",
+    "name_ja": "清水寺",
+    "lat": 32.80021,
+    "lng": 131.090432,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_8356257825",
+    "name": "Yakushido",
+    "name_ja": "薬師堂",
+    "lat": 33.184525,
+    "lng": 131.032358,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_3210271732",
+    "name": "Shoryuji Temple",
+    "name_ja": "勝立寺",
+    "lat": 33.593461,
+    "lng": 130.400873,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_5309988746",
+    "name": "Inuyama Hōfuku-ji",
+    "name_ja": "井山宝福寺",
+    "lat": 34.691393,
+    "lng": 133.734308,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_5837401453",
+    "name": "Zuisenji Temple",
+    "name_ja": "随泉寺",
+    "lat": 35.122898,
+    "lng": 134.16988,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_6110018640",
+    "name": "Shinshoji 真照寺",
+    "name_ja": "Shinshoji 真照寺",
+    "lat": 36.871638,
+    "lng": 137.495068,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_5536923122",
+    "name": "Sojiji Temple",
+    "name_ja": "総持寺",
+    "lat": 37.286722,
+    "lng": 136.770104,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_11547236171",
+    "name": "Enmyo-ji Okunoin",
+    "name_ja": "円明寺奥の院(海岸山観音堂)",
+    "lat": 33.901468,
+    "lng": 132.721243,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_3399246663",
+    "name": "Manpukuji Temple (Inner Hall of Jodoji)",
+    "name_ja": "浄土寺奥之院満福寺",
+    "lat": 34.414673,
+    "lng": 133.212921,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_4943283222",
+    "name": "Shinshoji Temple",
+    "name_ja": "神勝寺",
+    "lat": 34.427126,
+    "lng": 133.308951,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_4743785772",
+    "name": "Hakodate Betsuin Daimachi Branch Office, Hongan-ji Temple Branch",
+    "name_ja": "本願寺派本願寺函館別院台町出張所",
+    "lat": 41.763526,
+    "lng": 140.694728,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_4745679809",
+    "name": "Hakodate Branch Temple",
+    "name_ja": "函館別院",
+    "lat": 41.772324,
+    "lng": 140.73639,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_6769085272",
+    "name": "Moiwa Kannon Okuno-in",
+    "name_ja": "藻岩観音奥之院",
+    "lat": 43.022445,
+    "lng": 141.322064,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_368861394",
+    "name": "Dasolsa",
+    "name_ja": "다솔사",
+    "lat": 35.11015,
+    "lng": 127.926651,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_3828923139",
+    "name": "Enmeiji",
+    "name_ja": "延命寺",
+    "lat": 32.747018,
+    "lng": 129.883632,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_3828906061",
+    "name": "Jinsoji",
+    "name_ja": "深祟寺",
+    "lat": 32.74939,
+    "lng": 129.885055,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_4478228791",
+    "name": "Tenryu shrine",
+    "name_ja": "Tenryu shrine",
+    "lat": 36.2553,
+    "lng": 136.907302,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_2004048168",
+    "name": "Hinatamiyakushido",
+    "name_ja": "日向見薬師堂",
+    "lat": 36.697017,
+    "lng": 138.773583,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_5092538150",
+    "name": "Kodaiin",
+    "name_ja": "光臺院",
+    "lat": 34.217462,
+    "lng": 135.584873,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_4795891626",
+    "name": "Koyasan Saizenin",
+    "name_ja": "高野山 西禅院",
+    "lat": 34.214339,
+    "lng": 135.579627,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_3446436276",
+    "name": "Kumagaiji",
+    "name_ja": "高野山 熊谷寺",
+    "lat": 34.21256,
+    "lng": 135.594764,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_2863675701",
+    "name": "Sakuramotobo",
+    "name_ja": "桜本坊",
+    "lat": 34.361173,
+    "lng": 135.863284,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_5046470099",
+    "name": "Sojiin",
+    "name_ja": "總持院",
+    "lat": 34.213758,
+    "lng": 135.581836,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_5046470106",
+    "name": "Yochiin",
+    "name_ja": "宿坊 桜池院",
+    "lat": 34.211671,
+    "lng": 135.578834,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_6165679349",
+    "name": "かむろ大師 奥之院",
+    "name_ja": "かむろ大師 奥之院",
+    "lat": 34.29623,
+    "lng": 135.586984,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_7460629185",
+    "name": "Eisen-ji",
+    "name_ja": "榮泉寺",
+    "lat": 35.116019,
+    "lng": 132.445351,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_7460556285",
+    "name": "Seisui-ji",
+    "name_ja": "清水寺",
+    "lat": 35.104964,
+    "lng": 132.436964,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_7626256260",
+    "name": "Risshakuji Okunoin",
+    "name_ja": "立石寺奥之院",
+    "lat": 38.315536,
+    "lng": 140.434712,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_4714325423",
+    "name": "Jiseonam (Temple)",
+    "name_ja": "지선암",
+    "lat": 34.820923,
+    "lng": 128.701814,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 31
+  },
+  {
+    "id": "osm_13383013218",
+    "name": "Gallery - Shuri Terrace",
+    "name_ja": "Gallery - Shuri Terrace",
+    "lat": 26.220103,
+    "lng": 127.712885,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_10047329439",
+    "name": "Hishionogogendai Museum",
+    "name_ja": "醤の郷現代美術館",
+    "lat": 34.474685,
+    "lng": 134.317926,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_5099545222",
+    "name": "Kochi Yosakoi Info exchange center",
+    "name_ja": "Kochi Yosakoi Info exchange center",
+    "lat": 33.559976,
+    "lng": 133.544893,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_11591001550",
+    "name": "Beppu Kannawa Jigoku Onsen Museum",
+    "name_ja": "別府鉄輪地獄温泉ミュージアム",
+    "lat": 33.315658,
+    "lng": 131.474062,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_4693003290",
+    "name": "Contemporary Art Museum",
+    "name_ja": "現代美術館",
+    "lat": 32.803237,
+    "lng": 130.710938,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_2800567801",
+    "name": "Fujifilm Photo Salon Fukuoka",
+    "name_ja": "富士フイルムフォトサロン 福岡",
+    "lat": 33.586679,
+    "lng": 130.419163,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1423779941",
+    "name": "Fukuoka Asian Art Museum",
+    "name_ja": "福岡アジア美術館",
+    "lat": 33.594969,
+    "lng": 130.405817,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_5264951969",
+    "name": "Fukuoka City Science Museum",
+    "name_ja": "福岡市科学館",
+    "lat": 33.577353,
+    "lng": 130.377929,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1423986329",
+    "name": "Aichi Prefectural Museum of Ceramics",
+    "name_ja": "愛知県陶磁美術館",
+    "lat": 35.185816,
+    "lng": 137.097609,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1423986138",
+    "name": "Art Museum",
+    "name_ja": "芸術資料館",
+    "lat": 35.167382,
+    "lng": 137.069794,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1423991880",
+    "name": "Atsuta Shrine Treasure Hall",
+    "name_ja": "熱田神宮宝物館",
+    "lat": 35.124914,
+    "lng": 136.909453,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1423638572",
+    "name": "Art Museum That Sees The Sea",
+    "name_ja": "海の見える杜美術館",
+    "lat": 34.326863,
+    "lng": 132.280645,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1423636508",
+    "name": "HIroshima City Ebayama Museum of Meteorogy",
+    "name_ja": "江波山気象館",
+    "lat": 34.366199,
+    "lng": 132.435006,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1423637972",
+    "name": "Hatsukaichi Miyajima Museum of History and Folklore",
+    "name_ja": "宮島歴史民俗資料館",
+    "lat": 34.295316,
+    "lng": 132.31747,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1375543445",
+    "name": "Hiroshima City Museum of Contemporary Art",
+    "name_ja": "広島市現代美術館",
+    "lat": 34.386388,
+    "lng": 132.473331,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_5635161098",
+    "name": "Giyaman Glass Museum",
+    "name_ja": "ぎやまんガラス美術館",
+    "lat": 33.854657,
+    "lng": 132.785499,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1909970011",
+    "name": "Hiroshima Univ. Museum",
+    "name_ja": "広島大学総合博物館 本館",
+    "lat": 34.403033,
+    "lng": 132.710521,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_4423159293",
+    "name": "Fukushima Sakura Yugakusha",
+    "name_ja": "福島さくら遊学舎",
+    "lat": 37.415085,
+    "lng": 140.472048,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_318411516",
+    "name": "Aomori Prefectural Museum",
+    "name_ja": "青森県立美術館",
+    "lat": 40.807292,
+    "lng": 140.700886,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368734766",
+    "name": "Jikjiseongbo Museum",
+    "name_ja": "직지성보박물관",
+    "lat": 36.116572,
+    "lng": 128.003892,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_12879573271",
+    "name": "BEPPU STUDIO 01",
+    "name_ja": "BEPPU STUDIO 01",
+    "lat": 33.275245,
+    "lng": 131.505796,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368735969",
+    "name": "Dasolsa Service Station Museum",
+    "name_ja": "다솔사휴게소박물관",
+    "lat": 35.092066,
+    "lng": 127.928312,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368734217",
+    "name": "Jinju National Museum",
+    "name_ja": "国立晋州博物館",
+    "lat": 35.189053,
+    "lng": 128.076799,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1421000405",
+    "name": "Fujii Folk Museum",
+    "name_ja": "藤井美術民芸館",
+    "lat": 36.142812,
+    "lng": 137.259202,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_5853170686",
+    "name": "Glass museum KOMA",
+    "name_ja": "ガラス美術館 駒",
+    "lat": 36.234107,
+    "lng": 137.186108,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1420913955",
+    "name": "Gokayama folklore museum",
+    "name_ja": "南砺市立五箇山民俗館",
+    "lat": 36.404476,
+    "lng": 136.886852,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_4414361293",
+    "name": "Hirata Folk Art Museum",
+    "name_ja": "平田記念館",
+    "lat": 36.142487,
+    "lng": 137.25993,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_11054631075",
+    "name": "Kanazawa Shoko Art Museum 金澤翔子美術館",
+    "name_ja": "Kanazawa Shoko Art Museum 金澤翔子美術館",
+    "lat": 37.009247,
+    "lng": 140.736043,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_5026257021",
+    "name": "Homma Museum",
+    "name_ja": "本間美術館",
+    "lat": 38.923474,
+    "lng": 139.841999,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_5006955747",
+    "name": "Dewazakura Art Museum",
+    "name_ja": "出羽桜美術館",
+    "lat": 38.349643,
+    "lng": 140.370846,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_5008959429",
+    "name": "Goto Museum",
+    "name_ja": "後藤美術館",
+    "lat": 38.308626,
+    "lng": 140.439462,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_5004638023",
+    "name": "Hiroshige Museum",
+    "name_ja": "広重美術館",
+    "lat": 38.359656,
+    "lng": 140.380435,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_5847433095",
+    "name": "Daesan Art Museum",
+    "name_ja": "Daesan Art Museum",
+    "lat": 35.345037,
+    "lng": 128.74415,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368726187",
+    "name": "Gounsajin Art Museum",
+    "name_ja": "고운사진미술관",
+    "lat": 35.162074,
+    "lng": 129.163895,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368726159",
+    "name": "Gyeongnamdorip Art Museum",
+    "name_ja": "경남도립미술관",
+    "lat": 35.239458,
+    "lng": 128.690976,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_6570473587",
+    "name": "Amorepacific Museum of Art",
+    "name_ja": "アモーレパシフィック美術館",
+    "lat": 37.529177,
+    "lng": 126.968446,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368726120",
+    "name": "Areuko Art Museum",
+    "name_ja": "アルコ美術館",
+    "lat": 37.580384,
+    "lng": 127.003247,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368725602",
+    "name": "Baekak Art Museum",
+    "name_ja": "백악미술관",
+    "lat": 37.573589,
+    "lng": 126.984038,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_10780825905",
+    "name": "Bukchon Asian Cultural Art Museum",
+    "name_ja": "북촌동양문화박물관",
+    "lat": 37.583843,
+    "lng": 126.98347,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_2669761339",
+    "name": "Children’s Museum of National Museum of Korea",
+    "name_ja": "国立中央博物館 こども博物館",
+    "lat": 37.52383,
+    "lng": 126.978337,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368726227",
+    "name": "Insadong Korea Art Museum",
+    "name_ja": "仁寺洞韓国美術館",
+    "lat": 37.571902,
+    "lng": 126.987296,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_2968450739",
+    "name": "Asahikawa City Sculpture Museum Station Gallery",
+    "name_ja": "旭川市彫刻美術館 ステーションギャラリー",
+    "lat": 43.76237,
+    "lng": 142.359269,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_5654851226",
+    "name": "Asahikawa art museum",
+    "name_ja": "北海道立旭川美術館",
+    "lat": 43.774135,
+    "lng": 142.355423,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368734462",
+    "name": "Chamsorichukeumgiediseun Museum",
+    "name_ja": "참소리축음기에디슨박물관",
+    "lat": 37.777198,
+    "lng": 128.932292,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368725368",
+    "name": "Chuncheon Art Museum",
+    "name_ja": "春川美術館",
+    "lat": 37.882446,
+    "lng": 127.731233,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368636049",
+    "name": "Iseungbok Memorial Hall",
+    "name_ja": "이승복기념관",
+    "lat": 37.672575,
+    "lng": 128.463167,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_12712998501",
+    "name": "EX Future Technology Theme Paradise",
+    "name_ja": "沈阳 Ex 未来科技馆",
+    "lat": 41.803112,
+    "lng": 123.478419,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1420949573",
+    "name": "Fukui Prefectural Ceramic Art Museum",
+    "name_ja": "福井県陶芸館",
+    "lat": 35.934871,
+    "lng": 136.058348,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_10585495670",
+    "name": "Haeum Art Museum",
+    "name_ja": "해움미술관",
+    "lat": 37.27225,
+    "lng": 127.014991,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368725962",
+    "name": "Hyangam Art Museum",
+    "name_ja": "향암미술관",
+    "lat": 36.718102,
+    "lng": 129.354619,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_11202303923",
+    "name": "Ise netsuke chokoku-kan",
+    "name_ja": "伊勢根付彫刻館",
+    "lat": 34.495942,
+    "lng": 136.666806,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_2028461919",
+    "name": "Isekawasakisyouninkan",
+    "name_ja": "伊勢河崎商人館",
+    "lat": 34.496939,
+    "lng": 136.717526,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_1423609168",
+    "name": "Izumo Science Center",
+    "name_ja": "出雲科学館",
+    "lat": 35.361965,
+    "lng": 132.765959,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_368658504",
+    "name": "Jeongeup City Art Museum",
+    "name_ja": "井邑市立美術館",
+    "lat": 35.552112,
+    "lng": 126.861488,
+    "category": "museum",
+    "emoji": "🏛️",
+    "score": 30
+  },
+  {
+    "id": "osm_4696585556",
+    "name": "Canal Water Fountain Terrace",
+    "name_ja": "Canal Water Fountain Terrace",
+    "lat": 33.655997,
+    "lng": 130.355745,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_4696585133",
+    "name": "Forest of seasons",
+    "name_ja": "Forest of seasons",
+    "lat": 33.65777,
+    "lng": 130.348336,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_4586848191",
+    "name": "Fukuoka Shinsei Christ Church",
+    "name_ja": "Fukuoka Shinsei Christ Church",
+    "lat": 33.547306,
+    "lng": 130.430861,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_13707028101",
+    "name": "Giant Gourd Sakura",
+    "name_ja": "ひょうたん桜",
+    "lat": 33.588057,
+    "lng": 133.169413,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_12997690215",
+    "name": "Cherry Tree Avenue",
+    "name_ja": "桜並木通り",
+    "lat": 40.613629,
+    "lng": 141.209109,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_12888996944",
+    "name": "A Radio Journey \"Naked\"",
+    "name_ja": "ラジオジャーニー『音で旅する別府』",
+    "lat": 33.277214,
+    "lng": 131.502698,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_12895774908",
+    "name": "Asobeach",
+    "name_ja": "あそびーち",
+    "lat": 33.258765,
+    "lng": 131.536585,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_7018805885",
+    "name": "Beppu Beach Sand Bath",
+    "name_ja": "別府海浜砂湯",
+    "lat": 33.311893,
+    "lng": 131.501481,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_1436115037",
+    "name": "Chise Nupuri",
+    "name_ja": "チセヌプリ",
+    "lat": 42.888083,
+    "lng": 140.596813,
+    "category": "nature",
+    "emoji": "🌿",
+    "score": 29
+  },
+  {
+    "id": "osm_5895799085",
+    "name": "Bise Fukugi",
+    "name_ja": "Bise Fukugi",
+    "lat": 26.702843,
+    "lng": 127.88057,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_2002204634",
+    "name": "Cape Bise",
+    "name_ja": "美瀬崎",
+    "lat": 26.709532,
+    "lng": 127.879968,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_8083632494",
+    "name": "Cheonsabyeokhwa Village Enterprise",
+    "name_ja": "고소동 천사벽화골목",
+    "lat": 34.738347,
+    "lng": 127.739982,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_5598639822",
+    "name": "Daisetsu Mori-no Garden",
+    "name_ja": "大雪 森のガーデン",
+    "lat": 43.798734,
+    "lng": 142.821279,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_8154535440",
+    "name": "Amenosakahoko",
+    "name_ja": "天ノ逆鉾",
+    "lat": 31.88616,
+    "lng": 130.918996,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_5833677585",
+    "name": "Cruise Ship Dock",
+    "name_ja": "Cruise Ship Dock",
+    "lat": 31.534988,
+    "lng": 130.55441,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_12883859751",
+    "name": "Cherry Blossom Tunnel",
+    "name_ja": "桜のトンネル",
+    "lat": 40.60888,
+    "lng": 140.462067,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_4757529227",
+    "name": "Geoje Bamboo (Maengjoongjuk) Theme Park",
+    "name_ja": "맹종죽테마공원",
+    "lat": 34.967746,
+    "lng": 128.650372,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_11807097035",
+    "name": "Big Sakura Tree",
+    "name_ja": "왕벚나무",
+    "lat": 37.526043,
+    "lng": 126.923352,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_444221477",
+    "name": "Biseondae",
+    "name_ja": "비선대",
+    "lat": 38.163629,
+    "lng": 128.466914,
+    "category": "nature",
+    "emoji": "🌿",
+    "score": 29
+  },
+  {
+    "id": "osm_6765472585",
+    "name": "'stone splitting' cherrytree",
+    "name_ja": "石割桜",
+    "lat": 39.70379,
+    "lng": 141.151233,
+    "category": "attraction",
+    "emoji": "🎯",
+    "score": 29
+  },
+  {
+    "id": "osm_10780740002",
+    "name": "江ノ島海岸",
+    "name_ja": "江ノ島海岸",
+    "lat": 42.691258,
+    "lng": 140.040702,
+    "category": "beach",
+    "emoji": "🏖️",
+    "score": 28
+  },
+  {
+    "id": "osm_302592266",
+    "name": "11 Fujii-dera",
+    "name_ja": "第11番札所 藤井寺",
+    "lat": 34.051669,
+    "lng": 134.348534,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 26
+  },
+  {
+    "id": "osm_811019635",
+    "name": "43 Meiseki-ji",
+    "name_ja": "第43番札所 明石寺",
+    "lat": 33.369234,
+    "lng": 132.519022,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 26
+  },
+  {
+    "id": "osm_331437344",
+    "name": "25 Shinsho-ji",
+    "name_ja": "第25番札所 津照寺",
+    "lat": 33.288237,
+    "lng": 134.148276,
+    "category": "temple",
+    "emoji": "🛕",
+    "score": 26
+  }
+]

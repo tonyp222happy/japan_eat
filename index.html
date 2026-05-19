@@ -346,7 +346,7 @@
         Promise.all([
             fetch('data.json').then(r => r.json()),
             fetch('frontend/data/famous_restaurants.json').then(r => r.json()),
-            fetch('frontend/data/scenic_spots_filtered.json').then(r => r.json())
+            fetch('frontend/data/scenic_spots_famous.json').then(r => r.json())
         ]).then(([allRestaurants, famous, scenic]) => {
             restaurants = allRestaurants;
             famousRestaurants = famous;
@@ -459,13 +459,12 @@
 
                 // Only show scenic spots within viewport + some margin
                 const bounds = map.getBounds();
-                const nearby = scenicSpots.filter(s =>
-                    bounds.contains([s.lat, s.lng])
-                );
+                const nearby = scenicSpots.filter(s => bounds.contains([s.lat, s.lng]));
 
-                // Limit markers based on zoom level
-                const maxMarkers = zoom >= 12 ? 500 : zoom >= 8 ? 200 : 50;
-                nearby.slice(0, maxMarkers).forEach(s => {
+                // Sort by distance from center, limit to 15 famous spots
+                const sorted = nearby.map(s => ({...s, dist: haversine(center.lat, center.lng, s.lat, s.lng)}))
+                    .sort((a, b) => a.dist - b.dist);
+                sorted.slice(0, 15).forEach(s => {
                     const m = L.marker([s.lat, s.lng], { icon: createScenicMarker(s.emoji) });
                     m.on('click', () => showScenicBottomSheet(s));
                     scenicLayer.addLayer(m);
@@ -590,9 +589,7 @@
             const total = showFamous ? famousRestaurants.length : restaurants.length;
             let scenicText = '';
             if (showScenic) {
-                const bounds = map.getBounds();
-                const visible = scenicSpots.filter(s => bounds.contains([s.lat, s.lng])).length;
-                scenicText = ` | 🏯 ${visible} spots`;
+                scenicText = ` | 🏯 ${scenicSpots.length} famous spots total`;
             }
             document.getElementById('stats').textContent = `${count} of ${total}${scenicText}`;
         }
@@ -652,17 +649,17 @@
             const bounds = map.getBounds();
             const nearby = scenicSpots.filter(s => bounds.contains([s.lat, s.lng]));
 
-            // Sort by distance from map center
+            // Sort by distance from map center, limit to 15
             const center = map.getCenter();
             const sorted = nearby.map(s => ({...s, dist: haversine(center.lat, center.lng, s.lat, s.lng)}))
                 .sort((a, b) => a.dist - b.dist);
+            const display = sorted.slice(0, 15);
 
-            if (sorted.length === 0) {
-                sidebar.innerHTML = `<div class="empty-state">🔍 Zoom in to see scenic spots</div>`;
+            if (display.length === 0) {
+                sidebar.innerHTML = `<div class="empty-state">🔍 No famous spots nearby. Try zooming out or panning the map.</div>`;
                 return;
             }
 
-            const display = sorted.slice(0, 100);
             const categoryEmoji = {
                 'castle': '🏯', 'shrine': '⛩️', 'temple': '🛕', 'garden': '🌸',
                 'museum': '🏛️', 'nature': '🌿', 'viewpoint': '👁️', 'attraction': '🎯',
