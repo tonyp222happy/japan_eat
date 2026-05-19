@@ -346,7 +346,7 @@
         Promise.all([
             fetch('data.json').then(r => r.json()),
             fetch('data/famous_restaurants.json').then(r => r.json()),
-            fetch('data/scenic_spots_filtered.json').then(r => r.json())
+            fetch('data/scenic_spots_famous.json').then(r => r.json())
         ]).then(([allRestaurants, famous, scenic]) => {
             restaurants = allRestaurants;
             famousRestaurants = famous;
