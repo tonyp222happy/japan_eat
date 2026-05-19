@@ -20,7 +20,7 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
-        
+
         /* Header */
         header { background: var(--primary); color: white; padding: 16px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
         header h1 { font-size: 1.3rem; display: flex; align-items: center; gap: 8px; }
@@ -30,17 +30,15 @@
         /* Controls */
         .controls { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 12px 16px; position: sticky; top: 70px; z-index: 999; }
         .controls-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-        .btn { padding: 8px 14px; border: none; border-radius: var(--radius); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+        .btn { padding: 8px 14px; border: none; border-radius: var(--radius); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; transition: all 0.2s; white-space: nowrap; }
         .btn-primary { background: var(--primary); color: white; }
         .btn-primary:hover { background: var(--primary-dark); }
         .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
         .btn-outline:hover { background: var(--bg); }
+        .btn-outline.active { background: #FFF3E0; border-color: #FF9800; color: #E65100; }
+        .btn-outline.active-scenic { background: #E8F5E9; border-color: #4CAF50; color: #2E7D32; }
         .search-input { flex: 1; min-width: 150px; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.9rem; }
         .search-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(228,64,64,0.1); }
-        .filter-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-        .chip { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; border: 1px solid var(--border); background: white; transition: all 0.15s; white-space: nowrap; }
-        .chip:hover { background: var(--bg); }
-        .chip.active { background: var(--primary); color: white; border-color: var(--primary); }
         .stats { font-size: 0.8rem; color: var(--text-secondary); margin-left: auto; }
 
         /* Main layout */
@@ -57,6 +55,7 @@
         .card-info { flex: 1; min-width: 0; }
         .card-name { font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 6px; }
         .new-badge { background: #FFD700; color: #333; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .famous-badge { background: #FF6B00; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; font-weight: 500; }
         .card-area { font-size: 0.8rem; color: var(--text-secondary); }
         .card-meta { display: flex; gap: 12px; margin-top: 6px; font-size: 0.8rem; }
         .card-meta span { display: flex; align-items: center; gap: 4px; }
@@ -65,6 +64,20 @@
         .card-actions { display: flex; gap: 8px; margin-top: 8px; }
         .card-actions a { font-size: 0.8rem; color: var(--primary); text-decoration: none; padding: 4px 0; }
         .card-actions a:hover { text-decoration: underline; }
+
+        /* Scenic spot cards */
+        .scenic-card { padding: 14px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+        .scenic-card:hover { background: #F0FFF0; }
+        .scenic-card.highlighted { background: #E8F5E9; border-left: 3px solid #4CAF50; }
+        .scenic-header { display: flex; gap: 12px; align-items: center; }
+        .scenic-emoji { font-size: 2rem; flex-shrink: 0; }
+        .scenic-info { flex: 1; min-width: 0; }
+        .scenic-name { font-weight: 600; font-size: 0.95rem; }
+        .scenic-name-ja { font-size: 0.85rem; color: var(--text-secondary); }
+        .scenic-category { display: inline-block; background: #E8F5E9; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-top: 6px; color: #2E7D32; }
+        .scenic-actions { display: flex; gap: 8px; margin-top: 8px; }
+        .scenic-actions a { font-size: 0.8rem; color: #4CAF50; text-decoration: none; padding: 4px 0; }
+        .scenic-actions a:hover { text-decoration: underline; }
 
         /* Loading & empty states */
         .loading { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
@@ -87,6 +100,138 @@
         .popup-content h4 { margin-bottom: 4px; }
         .popup-content p { font-size: 0.85rem; color: var(--text-secondary); }
 
+        /* Emoji markers */
+        .emoji-marker {
+            display: flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; border-radius: 50%;
+            font-size: 18px; border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            color: white; font-weight: bold;
+        }
+        .scenic-marker {
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        /* Bottom sheet popup (jp-foodmap style) */
+        #bs-backdrop {
+            position: fixed; inset: 0; z-index: 10001;
+            background: rgba(0,0,0,0.35);
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.22s ease-out;
+        }
+        #bs-backdrop.bs-open { opacity: 1; pointer-events: auto; }
+        #bs-sheet {
+            position: fixed; left: 0; right: 0; bottom: 0;
+            z-index: 10002;
+            max-height: 75vh; max-height: 75dvh;
+            background: #fff;
+            border-radius: 14px 14px 0 0;
+            box-shadow: 0 -8px 24px rgba(0,0,0,0.18);
+            transform: translateY(100%);
+            transition: transform 0.25s ease-out;
+            display: flex; flex-direction: column;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        #bs-sheet.bs-open { transform: translateY(0); }
+        @media (min-width: 700px) {
+            #bs-sheet { left: 50%; transform: translate(-50%, 100%);
+                        max-width: 680px; right: auto;
+                        max-height: 80vh; max-height: 80dvh;
+                        border-radius: 14px 14px 0 0; }
+            #bs-sheet.bs-open { transform: translate(-50%, 0); }
+        }
+        @media (min-width: 1100px) {
+            #bs-sheet { max-width: 880px;
+                        max-height: 85vh; max-height: 85dvh; }
+        }
+        #bs-grip {
+            position: relative;
+            padding: 9px 0 6px; flex-shrink: 0;
+            cursor: grab; touch-action: none;
+        }
+        #bs-grip::before {
+            content: ''; display: block;
+            width: 38px; height: 4px; margin: 0 auto;
+            background: #d1d5db; border-radius: 2px;
+        }
+        #bs-close {
+            position: absolute; top: 4px; right: 6px;
+            background: none; border: none;
+            font-size: 22px; line-height: 1; color: #9ca3af;
+            cursor: pointer; padding: 4px 10px;
+        }
+        #bs-close:hover { color: #374151; }
+        #bs-content {
+            overflow-y: auto;
+            padding: 0 14px 14px;
+            flex: 1 1 auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        /* Restaurant detail card */
+        .rst-card { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                    font-size: 13px; color: #1f2937; }
+        .rst-header { display: flex; justify-content: space-between;
+                      align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+        .rst-title { font-weight: 700; font-size: 16px; flex: 1; min-width: 0;
+                     line-height: 1.3; }
+        .rst-title .rst-rating { color: #c33; margin-left: 4px; font-weight: 700; }
+        .rst-actions { display: flex; gap: 6px; flex-shrink: 0; }
+        .rst-photos { display: grid; grid-template-columns: repeat(3, 1fr);
+                      gap: 6px; margin-bottom: 10px; }
+        .rst-photos a { display: block; min-width: 0; }
+        .rst-photos img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+                          border-radius: 6px; display: block; background: #f3f4f6; }
+        .rst-genre { color: #4b5563; margin-bottom: 8px; }
+        .rst-info { display: grid; grid-template-columns: 1fr;
+                    gap: 4px 16px; margin-bottom: 8px; }
+        .rst-info-row { display: flex; gap: 6px; align-items: baseline;
+                        line-height: 1.45; }
+        .rst-info-row .rst-label { color: #9ca3af; flex-shrink: 0;
+                                   font-size: 12px; min-width: 38px; }
+        .rst-info-row .rst-value { color: #1f2937; min-width: 0;
+                                   overflow-wrap: anywhere; }
+        .rst-policy { font-size: 12px; color: #6b7280; line-height: 1.5;
+                      margin-bottom: 8px; }
+        .rst-footer { display: flex; justify-content: space-between;
+                      align-items: center; gap: 8px; flex-wrap: wrap; }
+        .rst-footer a { color: #2563eb; text-decoration: none; font-size: 13px; }
+        .rst-footer a:hover { text-decoration: underline; }
+        .rst-chip { background: #3b9c4f; color: #fff; padding: 2px 8px;
+                    border-radius: 4px; font-size: 11px; font-weight: 500; }
+        .rst-chip.rst-chip-off { background: #9ca3af; }
+        .rst-btn { padding: 4px 10px; font-size: 12px; cursor: pointer;
+                   border: 1px solid #d1d5db; border-radius: 5px;
+                   background: #f9fafb; color: #1f2937; }
+        .rst-btn:hover { background: #f3f4f6; }
+        @media (min-width: 700px) {
+            .rst-card { font-size: 14px; }
+            .rst-title { font-size: 18px; }
+            .rst-photos { gap: 8px; }
+        }
+        @media (min-width: 1100px) {
+            #bs-content { padding: 0 22px 22px; }
+            .rst-card { font-size: 14px; }
+            .rst-title { font-size: 20px; }
+            .rst-info { grid-template-columns: 1fr 1fr; column-gap: 24px; }
+        }
+
+        /* Scenic spot detail in bottom sheet */
+        .scenic-detail { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        .scenic-detail-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .scenic-detail-emoji { font-size: 3rem; }
+        .scenic-detail-title { font-weight: 700; font-size: 18px; }
+        .scenic-detail-subtitle { font-size: 14px; color: #6b7280; }
+        .scenic-detail-info { display: grid; gap: 8px; margin-bottom: 12px; }
+        .scenic-detail-row { display: flex; gap: 8px; align-items: baseline; }
+        .scenic-detail-label { color: #9ca3af; font-size: 12px; min-width: 40px; }
+        .scenic-detail-value { color: #1f2937; }
+        .scenic-detail-footer { display: flex; gap: 8px; }
+        .scenic-detail-footer a { color: #2563eb; text-decoration: none; font-size: 13px; }
+        .scenic-detail-footer a:hover { text-decoration: underline; }
+
         /* Genre dropdown */
         .genre-dropdown { position: relative; }
         .genre-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); max-height: 300px; overflow-y: auto; z-index: 1001; min-width: 200px; padding: 8px; }
@@ -96,7 +241,6 @@
         .genre-menu-item.active { background: var(--primary); color: white; }
         .genre-count { color: var(--text-secondary); font-size: 0.75rem; }
         .genre-menu-item.active .genre-count { color: rgba(255,255,255,0.8); }
-
     </style>
 </head>
 <body>
@@ -114,6 +258,8 @@
                 <button class="btn btn-outline" id="genreBtn">🍜 Genre ▾</button>
                 <div class="genre-menu" id="genreMenu"></div>
             </div>
+            <button class="btn btn-outline" id="famousBtn">🌟 Famous</button>
+            <button class="btn btn-outline" id="scenicBtn">🏯 Scenic Spots</button>
             <span class="stats" id="stats">Loading...</span>
         </div>
     </div>
@@ -125,69 +271,65 @@
         </div>
     </div>
 
+    <!-- Bottom Sheet Popup -->
+    <div id="bs-backdrop"></div>
+    <div id="bs-sheet" role="dialog" aria-hidden="true">
+        <div id="bs-grip">
+            <button id="bs-close" aria-label="Close">×</button>
+        </div>
+        <div id="bs-content"></div>
+    </div>
+
     <script>
         // State
         let restaurants = [];
+        let famousRestaurants = [];
+        let scenicSpots = [];
         let markers = [];
         let userMarker = null;
         let userLat = null, userLng = null;
         let activeGenre = null;
         let searchTerm = '';
-        let map, markersLayer;
+        let showFamous = false;
+        let showScenic = false;
+        let map, markersLayer, scenicLayer;
 
-        // Initialize map — scroll wheel zooms the map directly when cursor is over it
-        // Sidebar scrolls independently (no page scroll conflict)
+        // Initialize map
         map = L.map('map', { scrollWheelZoom: true, zoomControl: true }).setView([36.5, 138], 5);
 
-        // Keyboard zoom: + to zoom in, - to zoom out
+        // Keyboard zoom
         document.addEventListener('keydown', function(e) {
-            if (e.target.tagName === 'INPUT') return; // Don't intercept when typing
+            if (e.target.tagName === 'INPUT') return;
             if (e.key === '+' || e.key === '=') map.zoomIn();
             if (e.key === '-' || e.key === '_') map.zoomOut();
         });
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
             maxZoom: 18
         }).addTo(map);
         markersLayer = L.layerGroup().addTo(map);
+        scenicLayer = L.layerGroup();
 
-        // Custom icons
+        // User location icon
         const userIcon = L.divIcon({
             html: '<div style="background:#4285F4;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3)"></div>',
             iconSize: [22, 22], iconAnchor: [11, 11], className: ''
         });
-        const restaurantIcon = L.divIcon({
-            html: '<div style="background:#E44040;width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.2)"></div>',
-            iconSize: [16, 16], iconAnchor: [8, 8], className: ''
-        });
 
-        // Load data
-        fetch('data.json')
-            .then(r => r.json())
-            .then(data => {
-                restaurants = data;
-                buildGenreMenu();
-                filterAndDisplay();
-            })
-            .catch(err => {
-                document.getElementById('sidebar').innerHTML = `<div class="empty-state">⚠️ Failed to load data: ${err.message}</div>`;
+        // Create emoji marker for restaurants
+        function createEmojiMarker(emoji, color, size = 32) {
+            return L.divIcon({
+                html: `<div class="emoji-marker" style="background:${color};font-size:${size * 0.56}px;width:${size}px;height:${size}px;">${emoji}</div>`,
+                iconSize: [size, size], iconAnchor: [size/2, size/2], className: ''
             });
+        }
 
-        // Genre menu
-        function buildGenreMenu() {
-            const counts = {};
-            restaurants.forEach(r => { counts[r.genre] = (counts[r.genre] || 0) + 1; });
-            const sorted = Object.entries(counts).sort((a,b) => b[1] - a[1]);
-            const menu = document.getElementById('genreMenu');
-            menu.innerHTML = sorted.map(([genre, count]) => 
-                `<div class="genre-menu-item" data-genre="${genre}">${genre}<span class="genre-count">${count}</span></div>`
-            ).join('');
-            menu.querySelectorAll('.genre-menu-item').forEach(el => {
-                el.addEventListener('click', () => {
-                    activeGenre = activeGenre === el.dataset.genre ? null : el.dataset.genre;
-                    menu.querySelectorAll('.genre-menu-item').forEach(e => e.classList.toggle('active', e.dataset.genre === activeGenre));
-                    filterAndDisplay();
-                });
+        // Create scenic spot marker
+        function createScenicMarker(emoji) {
+            return L.divIcon({
+                html: `<div class="scenic-marker">${emoji}</div>`,
+                iconSize: [28, 28], iconAnchor: [14, 14], className: ''
             });
         }
 
@@ -200,9 +342,49 @@
             return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         }
 
-        // Filter and display — always sorted by distance from map center
+        // Load all data
+        Promise.all([
+            fetch('data.json').then(r => r.json()),
+            fetch('data/famous_restaurants.json').then(r => r.json()),
+            fetch('data/scenic_spots_filtered.json').then(r => r.json())
+        ]).then(([allRestaurants, famous, scenic]) => {
+            restaurants = allRestaurants;
+            famousRestaurants = famous;
+            scenicSpots = scenic;
+            buildGenreMenu();
+            filterAndDisplay();
+        }).catch(err => {
+            document.getElementById('sidebar').innerHTML = `<div class="empty-state">⚠️ Failed to load data: ${err.message}</div>`;
+        });
+
+        // Genre menu
+        function buildGenreMenu() {
+            const counts = {};
+            restaurants.forEach(r => { counts[r.genre] = (counts[r.genre] || 0) + 1; });
+            const sorted = Object.entries(counts).sort((a,b) => b[1] - a[1]);
+            const menu = document.getElementById('genreMenu');
+            menu.innerHTML = sorted.map(([genre, count]) =>
+                `<div class="genre-menu-item" data-genre="${genre}">${genre}<span class="genre-count">${count}</span></div>`
+            ).join('');
+            menu.querySelectorAll('.genre-menu-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    activeGenre = activeGenre === el.dataset.genre ? null : el.dataset.genre;
+                    menu.querySelectorAll('.genre-menu-item').forEach(e => e.classList.toggle('active', e.dataset.genre === activeGenre));
+                    filterAndDisplay();
+                });
+            });
+        }
+
+        // Filter and display
         function filterAndDisplay() {
             let filtered = restaurants;
+            let cardType = 'restaurant';
+
+            // Famous filter
+            if (showFamous) {
+                const famousIds = new Set(famousRestaurants.map(r => r.id));
+                filtered = filtered.filter(r => famousIds.has(r.id));
+            }
 
             // Genre filter
             if (activeGenre) filtered = filtered.filter(r => r.genre === activeGenre);
@@ -213,18 +395,184 @@
                 filtered = filtered.filter(r => r.name.toLowerCase().includes(term) || r.area.toLowerCase().includes(term));
             }
 
-            // Always sort by distance from map center
+            // Sort by distance from map center
             const center = map.getCenter();
-            const centerLat = center.lat;
-            const centerLng = center.lng;
-            filtered = filtered.map(r => ({...r, dist: haversine(centerLat, centerLng, r.lat, r.lng)}))
+            filtered = filtered.map(r => ({...r, dist: haversine(center.lat, center.lng, r.lat, r.lng)}))
                 .filter(r => r.dist !== null && !isNaN(r.dist))
                 .sort((a, b) => a.dist - b.dist);
 
-            updateStats(filtered.length);
+            // Update markers (limit for performance)
             updateMarkers(filtered);
-            renderCards(filtered);
+
+            // Update scenic spots
+            updateScenicMarkers();
+
+            // Render cards
+            if (showScenic && !showFamous) {
+                renderScenicCards();
+            } else {
+                renderCards(filtered);
+            }
+
+            updateStats(filtered.length);
         }
+
+        // Update restaurant markers
+        function updateMarkers(list) {
+            markersLayer.clearLayers();
+
+            if (showFamous) {
+                // Use emoji markers for famous restaurants
+                const famousMap = {};
+                famousRestaurants.forEach(r => famousMap[r.id] = r);
+
+                list.slice(0, 500).forEach(r => {
+                    const famous = famousMap[r.id];
+                    const emoji = famous ? famous.emoji : '🍽️';
+                    const color = famous ? famous.color : '#E44040';
+                    const m = L.marker([r.lat, r.lng], { icon: createEmojiMarker(emoji, color) });
+                    m.on('click', () => showRestaurantBottomSheet(r, famous));
+                    markersLayer.addLayer(m);
+                });
+            } else {
+                // Use simple red dots for all restaurants
+                const restaurantIcon = L.divIcon({
+                    html: '<div style="background:#E44040;width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.2)"></div>',
+                    iconSize: [16, 16], iconAnchor: [8, 8], className: ''
+                });
+                list.slice(0, 500).forEach(r => {
+                    const m = L.marker([r.lat, r.lng], { icon: restaurantIcon });
+                    m.bindPopup(`<div class="popup-content"><h4>${r.name}</h4><p>${r.area}</p><p>${r.genre}${r.dist !== undefined ? ` · ${r.dist.toFixed(1)}km` : ''}</p></div>`);
+                    m.on('click', () => highlightCard(r.id));
+                    markersLayer.addLayer(m);
+                });
+            }
+        }
+
+        // Update scenic spot markers
+        function updateScenicMarkers() {
+            scenicLayer.clearLayers();
+
+            if (showScenic) {
+                const center = map.getCenter();
+                const zoom = map.getZoom();
+
+                // Only show scenic spots within viewport + some margin
+                const bounds = map.getBounds();
+                const nearby = scenicSpots.filter(s =>
+                    bounds.contains([s.lat, s.lng])
+                );
+
+                // Limit markers based on zoom level
+                const maxMarkers = zoom >= 12 ? 500 : zoom >= 8 ? 200 : 50;
+                nearby.slice(0, maxMarkers).forEach(s => {
+                    const m = L.marker([s.lat, s.lng], { icon: createScenicMarker(s.emoji) });
+                    m.on('click', () => showScenicBottomSheet(s));
+                    scenicLayer.addLayer(m);
+                });
+            }
+        }
+
+        // Bottom sheet for restaurant
+        function showRestaurantBottomSheet(r, famous) {
+            const backdrop = document.getElementById('bs-backdrop');
+            const sheet = document.getElementById('bs-sheet');
+            const content = document.getElementById('bs-content');
+
+            const photos = r.image_url ? `<div class="rst-photos"><a href="${r.image_url}" target="_blank" rel="noopener"><img src="${r.image_url}" loading="lazy" alt="${r.name}" onerror="this.parentElement.style.display='none'"></a></div>` : '';
+
+            const reservable = r.reservable === true ? '可预订' : r.reservable === false ? '无法预订' : '';
+            const dinnerPrice = famous ? famous.budget_dinner : (r.budget_dinner || '—');
+            const lunchPrice = famous ? famous.budget_lunch : (r.budget_lunch || '—');
+            const rating = r.rating ? `★${r.rating}` : '';
+            const reviewCount = r.review_count ? `${r.review_count} reviews` : '';
+            const savedCount = famous && famous.saved_count ? `${(famous.saved_count / 1000).toFixed(1)}K saves` : '';
+            const station = r.station_name ? `📍 ${r.station_name}駅` : '';
+            const address = r.address || '';
+            const hours = r.hours_raw ? r.hours_raw.substring(0, 100) + (r.hours_raw.length > 100 ? '...' : '') : '';
+            const phone = r.phone || '';
+
+            content.innerHTML = `
+                <div class="rst-card">
+                    <div class="rst-header">
+                        <div class="rst-title">${r.name}${rating ? `<span class="rst-rating">${rating}</span>` : ''}</div>
+                        <div class="rst-actions">
+                            <button class="rst-btn" onclick="window.open('${r.tabelog_url}', '_blank')">食べログ ↗</button>
+                            <button class="rst-btn" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}', '_blank')">Directions ↗</button>
+                        </div>
+                    </div>
+                    ${photos}
+                    <div class="rst-genre">${r.genre}</div>
+                    <div class="rst-info">
+                        <div class="rst-info-row"><span class="rst-label">晚</span><span class="rst-value">${dinnerPrice}</span></div>
+                        <div class="rst-info-row"><span class="rst-label">午</span><span class="rst-value">${lunchPrice}</span></div>
+                        <div class="rst-info-row"><span class="rst-label">地址</span><span class="rst-value">${address}</span></div>
+                        <div class="rst-info-row"><span class="rst-label">车站</span><span class="rst-value">${station}</span></div>
+                        ${phone ? `<div class="rst-info-row"><span class="rst-label">电话</span><span class="rst-value">${phone}</span></div>` : ''}
+                        ${hours ? `<div class="rst-info-row"><span class="rst-label">时间</span><span class="rst-value">${hours}</span></div>` : ''}
+                    </div>
+                    ${reservable ? `<div class="rst-policy">${reservable}</div>` : ''}
+                    <div class="rst-footer">
+                        <div>
+                            ${savedCount ? `<span style="color:#FF6B00;font-weight:600;">🌟 ${savedCount}</span>` : ''}
+                            ${reviewCount ? `<span style="color:#6b7280;font-size:12px;margin-left:8px;">${reviewCount}</span>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            backdrop.classList.add('bs-open');
+            sheet.classList.add('bs-open');
+            sheet.setAttribute('aria-hidden', 'false');
+        }
+
+        // Bottom sheet for scenic spot
+        function showScenicBottomSheet(s) {
+            const backdrop = document.getElementById('bs-backdrop');
+            const sheet = document.getElementById('bs-sheet');
+            const content = document.getElementById('bs-content');
+
+            const osmUrl = `https://www.openstreetmap.org/${s.id.startsWith('osm_') ? 'node' : 'way'}/${s.id.replace('osm_', '')}`;
+
+            content.innerHTML = `
+                <div class="scenic-detail">
+                    <div class="scenic-detail-header">
+                        <div class="scenic-detail-emoji">${s.emoji}</div>
+                        <div>
+                            <div class="scenic-detail-title">${s.name}</div>
+                            <div class="scenic-detail-subtitle">${s.name_ja}</div>
+                        </div>
+                    </div>
+                    <div class="scenic-detail-info">
+                        <div class="scenic-detail-row">
+                            <span class="scenic-detail-label">类型</span>
+                            <span class="scenic-detail-value">${s.category}</span>
+                        </div>
+                        <div class="scenic-detail-row">
+                            <span class="scenic-detail-label">坐标</span>
+                            <span class="scenic-detail-value">${s.lat.toFixed(6)}, ${s.lng.toFixed(6)}</span>
+                        </div>
+                    </div>
+                    <div class="scenic-detail-footer">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}" target="_blank" rel="noopener">Directions ↗</a>
+                        <a href="${osmUrl}" target="_blank" rel="noopener">OpenStreetMap ↗</a>
+                    </div>
+                </div>
+            `;
+
+            backdrop.classList.add('bs-open');
+            sheet.classList.add('bs-open');
+            sheet.setAttribute('aria-hidden', 'false');
+        }
+
+        // Close bottom sheet
+        function closeBottomSheet() {
+            document.getElementById('bs-backdrop').classList.remove('bs-open');
+            document.getElementById('bs-sheet').classList.remove('bs-open');
+            document.getElementById('bs-sheet').setAttribute('aria-hidden', 'true');
+        }
+        document.getElementById('bs-close').addEventListener('click', closeBottomSheet);
+        document.getElementById('bs-backdrop').addEventListener('click', closeBottomSheet);
 
         // Debounce helper
         function debounce(fn, delay) {
@@ -239,49 +587,14 @@
         map.on('moveend zoomend', debounce(() => filterAndDisplay(), 300));
 
         function updateStats(count) {
-            const total = restaurants.length;
-            document.getElementById('stats').textContent = `${count} of ${total}`;
-        }
-
-        function updateMarkers(list) {
-            markersLayer.clearLayers();
-            list.slice(0, 500).forEach(r => { // Limit markers for performance
-                const m = L.marker([r.lat, r.lng], { icon: restaurantIcon });
-                m.bindPopup(`<div class="popup-content"><h4>${r.name}</h4><p>${r.area}</p><p>${r.genre}${r.dist !== undefined ? ` · ${r.dist.toFixed(1)}km` : ''}</p></div>`);
-                m.on('click', () => highlightCard(r.id));
-                markersLayer.addLayer(m);
-            });
-        }
-
-        function renderCards(list) {
-            const sidebar = document.getElementById('sidebar');
-            if (list.length === 0) {
-                sidebar.innerHTML = `<div class="empty-state">🔍 No restaurants found in this area</div>`;
-                return;
+            const total = showFamous ? famousRestaurants.length : restaurants.length;
+            let scenicText = '';
+            if (showScenic) {
+                const bounds = map.getBounds();
+                const visible = scenicSpots.filter(s => bounds.contains([s.lat, s.lng])).length;
+                scenicText = ` | 🏯 ${visible} spots`;
             }
-
-            const display = list.slice(0, 200); // Limit rendered cards
-            sidebar.innerHTML = display.map(r => `
-                <div class="restaurant-card" data-id="${r.id}" onclick="focusRestaurant(${r.lat}, ${r.lng}, '${r.name.replace(/'/g, "\\'")}')">
-                    <div class="card-header">
-                        <img class="card-image" src="${r.image_url}" alt="${r.name}" loading="lazy" onerror="this.style.display='none'">
-                        <div class="card-info">
-                            <div class="card-name">${r.name}${r.is_new ? '<span class="new-badge">NEW</span>' : ''}</div>
-                            <div class="card-area">${r.area}${r.station_name ? ` · ${r.station_name}駅` : ''}</div>
-                            <div class="card-meta">
-                                ${r.rating ? `<span>⭐ ${r.rating}</span>` : ''}
-                                ${r.review_count ? `<span>📝 ${r.review_count} reviews</span>` : ''}
-                                ${r.dist !== undefined ? `<span class="card-distance">📍 ${r.dist.toFixed(1)}km</span>` : ''}
-                            </div>
-                            <span class="card-genre">${r.genre}</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a href="${r.tabelog_url}" target="_blank" rel="noopener">食べログ →</a>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}" target="_blank" rel="noopener">Directions →</a>
-                    </div>
-                </div>
-            `).join('');
+            document.getElementById('stats').textContent = `${count} of ${total}${scenicText}`;
         }
 
         function highlightCard(id) {
@@ -292,15 +605,89 @@
 
         function focusRestaurant(lat, lng, name) {
             map.panTo([lat, lng], { animate: true });
-            // Find and open the popup
-            markersLayer.eachLayer(layer => {
-                if (Math.abs(layer.getLatLng().lat - lat) < 0.0001 && Math.abs(layer.getLatLng().lng - lng) < 0.0001) {
-                    layer.openPopup();
-                }
-            });
         }
 
-        // Geolocation — center map on user, list re-sorts automatically
+        function renderCards(list) {
+            const sidebar = document.getElementById('sidebar');
+            if (list.length === 0) {
+                sidebar.innerHTML = `<div class="empty-state">🔍 No restaurants found in this area</div>`;
+                return;
+            }
+
+            const famousMap = {};
+            if (showFamous) {
+                famousRestaurants.forEach(r => famousMap[r.id] = r);
+            }
+
+            const display = list.slice(0, 200);
+            sidebar.innerHTML = display.map(r => {
+                const famous = famousMap[r.id];
+                const famousBadge = famous ? `<span class="famous-badge">🌟 ${(famous.saved_count / 1000).toFixed(1)}K</span>` : '';
+                return `
+                    <div class="restaurant-card" data-id="${r.id}" onclick="focusRestaurant(${r.lat}, ${r.lng}, '${r.name.replace(/'/g, "\\'")}')">
+                        <div class="card-header">
+                            <img class="card-image" src="${r.image_url}" alt="${r.name}" loading="lazy" onerror="this.style.display='none'">
+                            <div class="card-info">
+                                <div class="card-name">${r.name}${r.is_new ? '<span class="new-badge">NEW</span>' : ''}${famousBadge}</div>
+                                <div class="card-area">${r.area}${r.station_name ? ` · ${r.station_name}駅` : ''}</div>
+                                <div class="card-meta">
+                                    ${r.rating ? `<span>⭐ ${r.rating}</span>` : ''}
+                                    ${r.review_count ? `<span>📝 ${r.review_count} reviews</span>` : ''}
+                                    ${r.dist !== undefined ? `<span class="card-distance">📍 ${r.dist.toFixed(1)}km</span>` : ''}
+                                </div>
+                                <span class="card-genre">${r.genre}</span>
+                            </div>
+                        </div>
+                        <div class="card-actions">
+                            <a href="${r.tabelog_url}" target="_blank" rel="noopener">食べログ →</a>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}" target="_blank" rel="noopener">Directions →</a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderScenicCards() {
+            const sidebar = document.getElementById('sidebar');
+            const bounds = map.getBounds();
+            const nearby = scenicSpots.filter(s => bounds.contains([s.lat, s.lng]));
+
+            // Sort by distance from map center
+            const center = map.getCenter();
+            const sorted = nearby.map(s => ({...s, dist: haversine(center.lat, center.lng, s.lat, s.lng)}))
+                .sort((a, b) => a.dist - b.dist);
+
+            if (sorted.length === 0) {
+                sidebar.innerHTML = `<div class="empty-state">🔍 Zoom in to see scenic spots</div>`;
+                return;
+            }
+
+            const display = sorted.slice(0, 100);
+            const categoryEmoji = {
+                'castle': '🏯', 'shrine': '⛩️', 'temple': '🛕', 'garden': '🌸',
+                'museum': '🏛️', 'nature': '🌿', 'viewpoint': '👁️', 'attraction': '🎯',
+                'historic': '📜', 'beach': '🏖️', 'onsen': '♨️'
+            };
+
+            sidebar.innerHTML = display.map(s => `
+                <div class="scenic-card" onclick="focusRestaurant(${s.lat}, ${s.lng}, '${s.name.replace(/'/g, "\\'")}')">
+                    <div class="scenic-header">
+                        <div class="scenic-emoji">${s.emoji}</div>
+                        <div class="scenic-info">
+                            <div class="scenic-name">${s.name}</div>
+                            <div class="scenic-name-ja">${s.name_ja}</div>
+                            ${s.dist !== undefined ? `<div class="card-distance">📍 ${s.dist.toFixed(1)}km</div>` : ''}
+                            <span class="scenic-category">${categoryEmoji[s.category] || '📍'} ${s.category}</span>
+                        </div>
+                    </div>
+                    <div class="scenic-actions">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}" target="_blank" rel="noopener">Directions →</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Geolocation
         document.getElementById('locateBtn').addEventListener('click', () => {
             if (!navigator.geolocation) { alert('Geolocation is not supported by your browser'); return; }
             document.getElementById('locateBtn').textContent = '⏳ Locating...';
@@ -310,7 +697,6 @@
                     userLng = pos.coords.longitude;
                     if (userMarker) map.removeLayer(userMarker);
                     userMarker = L.marker([userLat, userLng], { icon: userIcon }).addTo(map).bindPopup('You are here').openPopup();
-                    // Center map on user — moveend listener triggers re-sort
                     map.setView([userLat, userLng], map.getZoom() < 10 ? 12 : map.getZoom());
                     document.getElementById('locateBtn').textContent = '📍 Near Me';
                 },
@@ -333,7 +719,26 @@
         document.addEventListener('click', () => document.getElementById('genreMenu').classList.remove('show'));
         document.getElementById('genreMenu').addEventListener('click', (e) => e.stopPropagation());
 
-        // Address/city search — geocode and zoom to result, list re-sorts automatically
+        // Famous toggle
+        document.getElementById('famousBtn').addEventListener('click', () => {
+            showFamous = !showFamous;
+            document.getElementById('famousBtn').classList.toggle('active', showFamous);
+            filterAndDisplay();
+        });
+
+        // Scenic spots toggle
+        document.getElementById('scenicBtn').addEventListener('click', () => {
+            showScenic = !showScenic;
+            document.getElementById('scenicBtn').classList.toggle('active-scenic', showScenic);
+            if (showScenic) {
+                scenicLayer.addTo(map);
+            } else {
+                map.removeLayer(scenicLayer);
+            }
+            filterAndDisplay();
+        });
+
+        // Address/city search
         let addressTimeout = null;
         document.getElementById('addressInput').addEventListener('input', (e) => {
             clearTimeout(addressTimeout);
@@ -349,14 +754,12 @@
                             userLng = parseFloat(lon);
                             if (userMarker) map.removeLayer(userMarker);
                             userMarker = L.marker([userLat, userLng], { icon: userIcon }).addTo(map).bindPopup(display_name).openPopup();
-                            // Zoom to the searched location — moveend triggers re-sort
                             map.setView([userLat, userLng], 13);
                         }
                     })
                     .catch(err => console.error('Address search failed:', err));
             }, 800);
         });
-        // Allow Enter to trigger search immediately
         document.getElementById('addressInput').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 clearTimeout(addressTimeout);
