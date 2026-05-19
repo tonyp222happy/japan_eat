@@ -97,6 +97,21 @@
         .genre-count { color: var(--text-secondary); font-size: 0.75rem; }
         .genre-menu-item.active .genre-count { color: rgba(255,255,255,0.8); }
 
+        /* Price dropdown */
+        .price-dropdown { position: relative; }
+        .price-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); z-index: 1001; min-width: 200px; padding: 8px; }
+        .price-menu.show { display: block; }
+        .price-menu-item { padding: 6px 12px; cursor: pointer; font-size: 0.85rem; border-radius: 4px; display: flex; justify-content: space-between; }
+        .price-menu-item:hover { background: var(--bg); }
+        .price-menu-item.active { background: var(--primary); color: white; }
+        .price-count { color: var(--text-secondary); font-size: 0.75rem; }
+        .price-menu-item.active .price-count { color: rgba(255,255,255,0.8); }
+
+        /* Bookable toggle */
+        .toggle-btn { padding: 8px 14px; border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; font-size: 0.9rem; background: white; color: var(--text); transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+        .toggle-btn:hover { background: var(--bg); }
+        .toggle-btn.active { background: #E8F5E9; border-color: #4CAF50; color: #2E7D32; }
+
     </style>
 </head>
 <body>
@@ -114,6 +129,11 @@
                 <button class="btn btn-outline" id="genreBtn">🍜 Genre ▾</button>
                 <div class="genre-menu" id="genreMenu"></div>
             </div>
+            <div class="price-dropdown">
+                <button class="btn btn-outline" id="priceBtn">💰 Price ▾</button>
+                <div class="price-menu" id="priceMenu"></div>
+            </div>
+            <button class="toggle-btn" id="bookableBtn">📅 予約可</button>
             <span class="stats" id="stats">Loading...</span>
         </div>
     </div>
@@ -133,6 +153,8 @@
         let userLat = null, userLng = null;
         let activeGenre = null;
         let searchTerm = '';
+        let activePrice = null; // { label, min, max }
+        let bookableOnly = false;
         let map, markersLayer;
 
         // Initialize map — scroll wheel zooms the map directly when cursor is over it
@@ -167,6 +189,7 @@
             .then(data => {
                 restaurants = data;
                 buildGenreMenu();
+                buildPriceMenu();
                 filterAndDisplay();
             })
             .catch(err => {
@@ -191,6 +214,48 @@
             });
         }
 
+        // Price menu
+        const priceRanges = [
+            { label: '〜¥1,000', min: 0, max: 1000 },
+            { label: '¥1,000〜¥2,000', min: 1000, max: 2000 },
+            { label: '¥2,000〜¥3,000', min: 2000, max: 3000 },
+            { label: '¥3,000〜¥5,000', min: 3000, max: 5000 },
+            { label: '¥5,000〜¥10,000', min: 5000, max: 10000 },
+            { label: '¥10,000〜', min: 10000, max: Infinity },
+        ];
+
+        function buildPriceMenu() {
+            const menu = document.getElementById('priceMenu');
+            menu.innerHTML = priceRanges.map((range, i) => {
+                const count = restaurants.filter(r => matchesPrice(r, range)).length;
+                return `<div class="price-menu-item" data-index="${i}">${range.label}<span class="price-count">${count}</span></div>`;
+            }).join('');
+            menu.querySelectorAll('.price-menu-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    const idx = parseInt(el.dataset.index);
+                    activePrice = activePrice && activePrice.index === idx ? null : { ...priceRanges[idx], index: idx };
+                    menu.querySelectorAll('.price-menu-item').forEach(e => {
+                        e.classList.toggle('active', parseInt(e.dataset.index) === activePrice?.index);
+                    });
+                    filterAndDisplay();
+                });
+            });
+        }
+
+        function parseBudgetMidpoint(budgetStr) {
+            if (!budgetStr) return null;
+            const nums = budgetStr.replace(/[￥,〜～]/g, '').split(/[‐～~]/).map(s => parseInt(s.trim())).filter(n => !isNaN(n));
+            if (nums.length === 0) return null;
+            if (nums.length === 1) return nums[0];
+            return (nums[0] + nums[1]) / 2;
+        }
+
+        function matchesPrice(r, range) {
+            const mid = parseBudgetMidpoint(r.budget_dinner || r.budget_lunch);
+            if (mid === null) return false;
+            return mid >= range.min && mid < range.max;
+        }
+
         // Haversine distance
         function haversine(lat1, lng1, lat2, lng2) {
             const R = 6371;
@@ -206,6 +271,12 @@
 
             // Genre filter
             if (activeGenre) filtered = filtered.filter(r => r.genre === activeGenre);
+
+            // Price filter
+            if (activePrice) filtered = filtered.filter(r => matchesPrice(r, activePrice));
+
+            // Bookable filter
+            if (bookableOnly) filtered = filtered.filter(r => r.reservable === true);
 
             // Search filter
             if (searchTerm) {
@@ -330,8 +401,25 @@
             e.stopPropagation();
             document.getElementById('genreMenu').classList.toggle('show');
         });
-        document.addEventListener('click', () => document.getElementById('genreMenu').classList.remove('show'));
+        document.addEventListener('click', () => {
+            document.getElementById('genreMenu').classList.remove('show');
+            document.getElementById('priceMenu').classList.remove('show');
+        });
         document.getElementById('genreMenu').addEventListener('click', (e) => e.stopPropagation());
+
+        // Price dropdown toggle
+        document.getElementById('priceBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('priceMenu').classList.toggle('show');
+        });
+        document.getElementById('priceMenu').addEventListener('click', (e) => e.stopPropagation());
+
+        // Bookable toggle
+        document.getElementById('bookableBtn').addEventListener('click', () => {
+            bookableOnly = !bookableOnly;
+            document.getElementById('bookableBtn').classList.toggle('active', bookableOnly);
+            filterAndDisplay();
+        });
 
         // Address/city search — geocode and zoom to result, list re-sorts automatically
         let addressTimeout = null;
