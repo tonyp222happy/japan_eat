@@ -259,6 +259,22 @@
         .genre-menu-item.active { background: var(--primary); color: white; }
         .genre-count { color: var(--text-secondary); font-size: 0.75rem; }
         .genre-menu-item.active .genre-count { color: rgba(255,255,255,0.8); }
+
+        /* Price filter dropdown */
+        .price-dropdown { position: relative; }
+        .price-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); z-index: 1001; min-width: 260px; padding: 12px; }
+        .price-menu.show { display: block; }
+        .price-section { margin-bottom: 10px; }
+        .price-section:last-child { margin-bottom: 0; }
+        .price-label { font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; color: var(--text-secondary); }
+        .price-row { display: flex; align-items: center; gap: 6px; }
+        .price-input { width: 65px; padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.8rem; text-align: center; }
+        .price-sep { color: var(--text-secondary); font-size: 0.8rem; }
+        .price-presets { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+        .price-preset { padding: 2px 8px; font-size: 0.7rem; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; background: var(--bg); }
+        .price-preset:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        .price-preset.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .price-clear { font-size: 0.75rem; color: var(--text-secondary); cursor: pointer; margin-top: 6px; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -275,6 +291,42 @@
             <div class="genre-dropdown">
                 <button class="btn btn-outline" id="genreBtn">🍜 Genre ▾</button>
                 <div class="genre-menu" id="genreMenu"></div>
+            </div>
+            <div class="price-dropdown">
+                <button class="btn btn-outline" id="priceBtn">💰 Price ▾</button>
+                <div class="price-menu" id="priceMenu">
+                    <div class="price-section">
+                        <div class="price-label">🌞 Lunch</div>
+                        <div class="price-row">
+                            <input type="number" class="price-input" id="lunchMin" placeholder="Min" min="0" step="100">
+                            <span class="price-sep">～</span>
+                            <input type="number" class="price-input" id="lunchMax" placeholder="Max" min="0" step="100">
+                            <span class="price-sep">¥</span>
+                        </div>
+                        <div class="price-presets" id="lunchPresets">
+                            <span class="price-preset" data-max="1000">~¥1K</span>
+                            <span class="price-preset" data-max="3000">~¥3K</span>
+                            <span class="price-preset" data-max="5000">~¥5K</span>
+                            <span class="price-preset" data-max="10000">~¥10K</span>
+                        </div>
+                    </div>
+                    <div class="price-section">
+                        <div class="price-label">🌙 Dinner</div>
+                        <div class="price-row">
+                            <input type="number" class="price-input" id="dinnerMin" placeholder="Min" min="0" step="100">
+                            <span class="price-sep">～</span>
+                            <input type="number" class="price-input" id="dinnerMax" placeholder="Max" min="0" step="100">
+                            <span class="price-sep">¥</span>
+                        </div>
+                        <div class="price-presets" id="dinnerPresets">
+                            <span class="price-preset" data-max="3000">~¥3K</span>
+                            <span class="price-preset" data-max="5000">~¥5K</span>
+                            <span class="price-preset" data-max="10000">~¥10K</span>
+                            <span class="price-preset" data-max="20000">~¥20K</span>
+                        </div>
+                    </div>
+                    <div class="price-clear" id="priceClear">Clear price filter</div>
+                </div>
             </div>
             <button class="btn btn-outline" id="famousBtn">🌟 Famous</button>
             <button class="btn btn-outline" id="scenicBtn">🏯 Scenic Spots</button>
@@ -310,6 +362,8 @@
         let searchTerm = '';
         let showFamous = false;
         let showScenic = false;
+        // Price filter state: { lunch: {min, max}, dinner: {min, max} }
+        let priceFilter = { lunch: null, dinner: null };
         let map, markersLayer, scenicLayer;
 
         // Initialize map
@@ -360,6 +414,30 @@
             const dLng = (lng2 - lng1) * Math.PI / 180;
             const a = Math.sin(dLat/2) ** 2 + Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) * Math.sin(dLng/2) ** 2;
             return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        }
+
+        // Parse budget string like "￥1,000～￥1,999" or "￥1,000" or "～￥3,000"
+        // Returns { min, max } in yen, or null if unparseable
+        function parseBudget(str) {
+            if (!str || typeof str !== 'string') return null;
+            const cleaned = str.replace(/[￥¥\s]/g, '').replace(/,/g, '');
+            const parts = cleaned.split(/[～~—-]/);
+            const nums = parts.map(p => parseInt(p.trim(), 10)).filter(n => !isNaN(n));
+            if (nums.length === 0) return null;
+            if (nums.length === 1) return { min: 0, max: nums[0] }; // "～￥3,000" means up to 3K
+            return { min: nums[0], max: nums[1] };
+        }
+
+        // Check if a restaurant's budget falls within the price filter
+        function priceMatches(budgetStr, filter) {
+            if (!filter || !filter.min && !filter.max) return true;
+            const budget = parseBudget(budgetStr);
+            if (!budget) return true; // Can't parse, include by default
+            // Check overlap: ranges overlap if budget.max >= filter.min && budget.min <= filter.max
+            if (filter.min && filter.max) return budget.max >= filter.min && budget.min <= filter.max;
+            if (filter.min) return budget.max >= filter.min;
+            if (filter.max) return budget.min <= filter.max;
+            return true;
         }
 
         // Decompress short-key data → full names
@@ -439,6 +517,14 @@
             if (searchTerm) {
                 const term = searchTerm.toLowerCase();
                 filtered = filtered.filter(r => r.name.toLowerCase().includes(term) || r.area.toLowerCase().includes(term));
+            }
+
+            // Price filter (lunch & dinner)
+            if (priceFilter.lunch) {
+                filtered = filtered.filter(r => priceMatches(r.budget_lunch, priceFilter.lunch));
+            }
+            if (priceFilter.dinner) {
+                filtered = filtered.filter(r => priceMatches(r.budget_dinner, priceFilter.dinner));
             }
 
             // Sort by distance from map center
@@ -762,8 +848,65 @@
             e.stopPropagation();
             document.getElementById('genreMenu').classList.toggle('show');
         });
-        document.addEventListener('click', () => document.getElementById('genreMenu').classList.remove('show'));
+        document.addEventListener('click', () => {
+            document.getElementById('genreMenu').classList.remove('show');
+            document.getElementById('priceMenu').classList.remove('show');
+        });
         document.getElementById('genreMenu').addEventListener('click', (e) => e.stopPropagation());
+
+        // Price dropdown toggle
+        document.getElementById('priceBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('priceMenu').classList.toggle('show');
+        });
+        document.getElementById('priceMenu').addEventListener('click', (e) => e.stopPropagation());
+
+        // Price filter: lunch min/max inputs
+        ['lunchMin', 'lunchMax', 'dinnerMin', 'dinnerMax'].forEach(id => {
+            document.getElementById(id).addEventListener('input', () => {
+                const lm = parseInt(document.getElementById('lunchMin').value) || 0;
+                const lx = parseInt(document.getElementById('lunchMax').value) || 0;
+                const dm = parseInt(document.getElementById('dinnerMin').value) || 0;
+                const dx = parseInt(document.getElementById('dinnerMax').value) || 0;
+                priceFilter.lunch = (lm || lx) ? { min: lm, max: lx || Infinity } : null;
+                priceFilter.dinner = (dm || dx) ? { min: dm, max: dx || Infinity } : null;
+                // Update active state of price button
+                document.getElementById('priceBtn').classList.toggle('active', !!(priceFilter.lunch || priceFilter.dinner));
+                filterAndDisplay();
+            });
+        });
+
+        // Price preset buttons
+        ['lunchPresets', 'dinnerPresets'].forEach(presetId => {
+            document.querySelectorAll(`#${presetId} .price-preset`).forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const isLunch = presetId === 'lunchPresets';
+                    const maxVal = parseInt(btn.dataset.max);
+                    const minId = isLunch ? 'lunchMin' : 'dinnerMin';
+                    const maxId = isLunch ? 'lunchMax' : 'dinnerMax';
+                    document.getElementById(minId).value = '';
+                    document.getElementById(maxId).value = maxVal;
+                    // Toggle active class
+                    document.querySelectorAll(`#${presetId} .price-preset`).forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    // Trigger filter
+                    document.getElementById(maxId).dispatchEvent(new Event('input'));
+                });
+            });
+        });
+
+        // Clear price filter
+        document.getElementById('priceClear').addEventListener('click', () => {
+            document.getElementById('lunchMin').value = '';
+            document.getElementById('lunchMax').value = '';
+            document.getElementById('dinnerMin').value = '';
+            document.getElementById('dinnerMax').value = '';
+            priceFilter.lunch = null;
+            priceFilter.dinner = null;
+            document.getElementById('priceBtn').classList.remove('active');
+            document.querySelectorAll('.price-preset').forEach(b => b.classList.remove('active'));
+            filterAndDisplay();
+        });
 
         // Famous toggle
         document.getElementById('famousBtn').addEventListener('click', () => {
