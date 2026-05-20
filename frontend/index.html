@@ -108,10 +108,28 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
             color: white; font-weight: bold;
         }
-        .scenic-marker {
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px;
+        .scenic-marker-wrap {
+            display: flex; flex-direction: column; align-items: center;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+        .scenic-marker-wrap:hover { transform: scale(1.15); }
+        .scenic-marker-icon {
+            display: flex; align-items: center; justify-content: center;
+            width: 30px; height: 30px;
+            background: rgba(255,255,255,0.92);
+            border: 2px solid #4CAF50;
+            border-radius: 50%;
+            font-size: 16px;
+        }
+        .scenic-marker-label {
+            font-size: 10px; color: #1f2937; font-weight: 600;
+            background: rgba(255,255,255,0.9);
+            padding: 1px 4px; border-radius: 3px;
+            margin-top: 2px;
+            max-width: 70px; text-align: center;
+            line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
 
         /* Bottom sheet popup (jp-foodmap style) */
@@ -325,11 +343,13 @@
             });
         }
 
-        // Create scenic spot marker
-        function createScenicMarker(emoji) {
+        // Create scenic spot marker with name label
+        function createScenicMarker(emoji, name) {
+            // Use short name for label (English if short enough, else Japanese)
+            const shortName = name.length > 12 ? name.substring(0, 11) + '…' : name;
             return L.divIcon({
-                html: `<div class="scenic-marker">${emoji}</div>`,
-                iconSize: [28, 28], iconAnchor: [14, 14], className: ''
+                html: `<div class="scenic-marker-wrap"><div class="scenic-marker-icon">${emoji}</div><div class="scenic-marker-label">${shortName}</div></div>`,
+                iconSize: [70, 44], iconAnchor: [35, 22], className: ''
             });
         }
 
@@ -466,7 +486,7 @@
                 // Limit markers based on zoom level
                 const maxMarkers = zoom >= 12 ? 500 : zoom >= 8 ? 200 : 50;
                 nearby.slice(0, maxMarkers).forEach(s => {
-                    const m = L.marker([s.lat, s.lng], { icon: createScenicMarker(s.emoji) });
+                    const m = L.marker([s.lat, s.lng], { icon: createScenicMarker(s.emoji, s.name) });
                     m.on('click', () => showScenicBottomSheet(s));
                     scenicLayer.addLayer(m);
                 });
