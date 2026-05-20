@@ -362,18 +362,26 @@
             return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         }
 
+        // Decompress short-key data → full names
+        const M = {n:'name',a:'area',g:'genre',u:'tabelog_url',i:'image_url',h:'holiday',nw:'is_new',la:'lat',lo:'lng',r:'rating',c:'review_count',bl:'budget_lunch',bd:'budget_dinner',p:'phone',rv:'reservable',addr:'address',st:'station_name',hr:'hours_raw',sg:'sub_genres',aw:'awards',wm:'walk_minutes'};
+        const FM = {n:'name',ne:'name_en',g:'genre',a:'area',la:'lat',lo:'lng',r:'rating',sc:'saved_count',c:'review_count',bl:'budget_lunch',bd:'budget_dinner',p:'phone',rv:'reservable',hr:'hours_raw',u:'tabelog_url',i:'image_url',addr:'address',st:'station_name',em:'emoji',cl:'color'};
+        const SM = {n:'name',nj:'name_ja',la:'lat',lo:'lng',cat:'category',em:'emoji',sc:'score'};
+        function decompress(arr, map) { return arr.map(o => { const d = {}; for (const [k,v] of Object.entries(o)) { d[map[k]||k] = v; if (k==='id') d.id=v; } return d; }); }
+
         // Load all data
         Promise.all([
-            fetch('data.json').then(r => r.json()),
-            fetch('data/famous_restaurants.json').then(r => r.json()),
-            fetch('data/scenic_spots_famous.json').then(r => r.json())
+            fetch('data.json').then(r => { if (!r.ok) throw new Error(`data.json HTTP ${r.status}`); return r.json(); }),
+            fetch('frontend/data/famous_restaurants.json').then(r => { if (!r.ok) throw new Error(`famous HTTP ${r.status}`); return r.json(); }),
+            fetch('frontend/data/scenic_spots_famous.json').then(r => { if (!r.ok) throw new Error(`scenic HTTP ${r.status}`); return r.json(); })
         ]).then(([allRestaurants, famous, scenic]) => {
-            restaurants = allRestaurants;
-            famousRestaurants = famous;
-            scenicSpots = scenic;
+            restaurants = decompress(allRestaurants, M);
+            famousRestaurants = decompress(famous, FM);
+            scenicSpots = decompress(scenic, SM);
+            console.log(`Loaded ${restaurants.length} restaurants, ${famousRestaurants.length} famous, ${scenicSpots.length} scenic spots`);
             buildGenreMenu();
             filterAndDisplay();
         }).catch(err => {
+            console.error('Data load error:', err);
             document.getElementById('sidebar').innerHTML = `<div class="empty-state">⚠️ Failed to load data: ${err.message}</div>`;
         });
 
