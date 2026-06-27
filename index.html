@@ -481,15 +481,61 @@
                 if (loadStatus) loadStatus.innerHTML = `<div class="empty-state">⚠️ Failed to load data: ${err.message}<br><small>Check browser console (F12) for details</small></div>`;
             });
 
+        // Genre translations and icons
+        const genreInfo = {
+            'ラーメン': { en: 'Ramen', icon: '🍜' },
+            '中国料理': { en: 'Chinese', icon: '🥡' },
+            '焼肉': { en: 'Yakiniku', icon: '🥩' },
+            'イタリアン': { en: 'Italian', icon: '🍝' },
+            '寿司': { en: 'Sushi', icon: '🍣' },
+            'カレー': { en: 'Curry', icon: '🍛' },
+            'アジア・エスニック': { en: 'Asian', icon: '🥢' },
+            'うどん': { en: 'Udon', icon: '🍲' },
+            '和菓子・甘味処': { en: 'Wagashi', icon: '🍡' },
+            'フレンチ': { en: 'French', icon: '🥐' },
+            'パン': { en: 'Bakery', icon: '🍞' },
+            '日本料理': { en: 'Japanese', icon: '🍱' },
+            'スイーツ': { en: 'Sweets', icon: '🍰' },
+            '焼き鳥': { en: 'Yakitori', icon: '🍢' },
+            '居酒屋': { en: 'Izakaya', icon: '🏮' },
+            'ステーキ': { en: 'Steak', icon: '🥩' },
+            '洋食': { en: 'Western', icon: '🍽️' },
+            'カフェ': { en: 'Cafe', icon: '☕' },
+            'そば': { en: 'Soba', icon: '🍜' },
+            '食堂': { en: 'Diner', icon: '🍚' },
+            'スペイン料理': { en: 'Spanish', icon: '🥘' },
+            'ハンバーガー': { en: 'Burger', icon: '🍔' },
+            'とんかつ': { en: 'Tonkatsu', icon: '🍖' },
+            '鳥料理': { en: 'Chicken', icon: '🍗' },
+            'バー': { en: 'Bar', icon: '🍸' },
+            '創作料理・イノベーティブ': { en: 'Creative', icon: '✨' },
+            'ピザ': { en: 'Pizza', icon: '🍕' },
+            '天ぷら': { en: 'Tempura', icon: '🍤' },
+            'すき焼き・しゃぶしゃぶ': { en: 'Sukiyaki', icon: '🫕' },
+            'うなぎ': { en: 'Eel', icon: '🐟' },
+            '餃子': { en: 'Gyoza', icon: '🥟' },
+            'アイス・ジェラート': { en: 'Gelato', icon: '🍨' },
+            '立ち飲み': { en: 'Standing Bar', icon: '🍶' },
+            'お好み焼き': { en: 'Okonomiyaki', icon: '🥞' },
+            '喫茶': { en: 'Kissaten', icon: '🫖' }
+        };
+        
+        function getGenreLabel(genre) {
+            const info = genreInfo[genre];
+            if (!info) return genre;
+            return `${info.icon} ${info.en}`;
+        }
+
         // Genre menu
         function buildGenreMenu() {
             const counts = {};
             restaurants.forEach(r => { counts[r.genre] = (counts[r.genre] || 0) + 1; });
             const sorted = Object.entries(counts).sort((a,b) => b[1] - a[1]);
             const menu = document.getElementById('genreMenu');
-            menu.innerHTML = sorted.map(([genre, count]) =>
-                `<div class="genre-menu-item" data-genre="${genre}">${genre}<span class="genre-count">${count}</span></div>`
-            ).join('');
+            menu.innerHTML = sorted.map(([genre, count]) => {
+                const label = getGenreLabel(genre);
+                return `<div class="genre-menu-item" data-genre="${genre}">${label}<span class="genre-count">${count}</span></div>`;
+            }).join('');
             menu.querySelectorAll('.genre-menu-item').forEach(el => {
                 el.addEventListener('click', () => {
                     activeGenre = activeGenre === el.dataset.genre ? null : el.dataset.genre;
@@ -553,32 +599,18 @@
         function updateMarkers(list) {
             markersLayer.clearLayers();
 
-            if (showFamous) {
-                // Use emoji markers for famous restaurants
-                const famousMap = {};
-                famousRestaurants.forEach(r => famousMap[r.id] = r);
-
-                list.slice(0, 500).forEach(r => {
-                    const famous = famousMap[r.id];
-                    const emoji = famous ? famous.emoji : '🍽️';
-                    const color = famous ? famous.color : '#E44040';
-                    const m = L.marker([r.lat, r.lng], { icon: createEmojiMarker(emoji, color) });
-                    m.on('click', () => showRestaurantBottomSheet(r, famous));
-                    markersLayer.addLayer(m);
-                });
-            } else {
-                // Use simple red dots for all restaurants
-                const restaurantIcon = L.divIcon({
-                    html: '<div style="background:#E44040;width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.2)"></div>',
-                    iconSize: [16, 16], iconAnchor: [8, 8], className: ''
-                });
-                list.slice(0, 500).forEach(r => {
-                    const m = L.marker([r.lat, r.lng], { icon: restaurantIcon });
-                    m.bindPopup(`<div class="popup-content"><h4>${r.name}</h4><p>${r.area}</p><p>${r.genre}${r.dist !== undefined ? ` · ${r.dist.toFixed(1)}km` : ''}</p></div>`);
-                    m.on('click', () => highlightCard(r.id));
-                    markersLayer.addLayer(m);
-                });
-            }
+            // Use simple uniform markers for all restaurants
+            const restaurantIcon = L.divIcon({
+                html: '<div style="background:#E44040;width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.2)"></div>',
+                iconSize: [16, 16], iconAnchor: [8, 8], className: ''
+            });
+            list.slice(0, 500).forEach(r => {
+                const m = L.marker([r.lat, r.lng], { icon: restaurantIcon });
+                const genreLabel = getGenreLabel(r.genre);
+                m.bindPopup(`<div class="popup-content"><h4>${r.name}</h4><p>${r.area}</p><p>${genreLabel}${r.dist !== undefined ? ` · ${r.dist.toFixed(1)}km` : ''}</p></div>`);
+                m.on('click', () => highlightCard(r.id));
+                markersLayer.addLayer(m);
+            });
         }
 
         // Update scenic spot markers
@@ -634,7 +666,7 @@
                         </div>
                     </div>
                     ${photos}
-                    <div class="rst-genre">${r.genre}</div>
+                    <div class="rst-genre">${getGenreLabel(r.genre)}</div>
                     <div class="rst-info">
                         <div class="rst-info-row"><span class="rst-label">晚</span><span class="rst-value">${dinnerPrice}</span></div>
                         <div class="rst-info-row"><span class="rst-label">午</span><span class="rst-value">${lunchPrice}</span></div>
@@ -767,7 +799,7 @@
                                     ${r.review_count ? `<span>📝 ${r.review_count} reviews</span>` : ''}
                                     ${r.dist !== undefined ? `<span class="card-distance">📍 ${r.dist.toFixed(1)}km</span>` : ''}
                                 </div>
-                                <span class="card-genre">${r.genre}</span>
+                                <span class="card-genre">${getGenreLabel(r.genre)}</span>
                             </div>
                         </div>
                         <div class="card-actions">
