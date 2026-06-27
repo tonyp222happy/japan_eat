@@ -452,40 +452,34 @@
         const SM = {n:'name',nj:'name_ja',la:'lat',lo:'lng',cat:'category',em:'emoji',sc:'score'};
         function decompress(arr, map) { return arr.map(o => { const d = {}; for (const [k,v] of Object.entries(o)) { d[map[k]||k] = v; if (k==='id') d.id=v; } return d; }); }
 
-        // Load all data with cache-busting to avoid stale GitHub Pages cache
+        // Load all data in parallel for faster loading
         const v = Date.now();
         const loadStatus = document.querySelector('.loading');
         function updateStatus(msgKey) { if (loadStatus) loadStatus.innerHTML = `<div class="spinner"></div><br>${s(msgKey)}`; }
 
         updateStatus('loadingData');
-        fetch('data.json?v=' + v)
-            .then(r => { if (!r.ok) throw new Error(`data.json HTTP ${r.status}`); updateStatus('parsingData'); return r.json(); })
-            .then(allRestaurants => {
-                updateStatus('loadingFamous');
-                restaurants = decompress(allRestaurants, M);
-                console.log(`Loaded ${restaurants.length} restaurants`);
-                return fetch('frontend/data/famous_restaurants.json?v=' + v);
-            })
-            .then(r => { if (!r.ok) throw new Error(`famous HTTP ${r.status}`); return r.json(); })
-            .then(famous => {
-                updateStatus('loadingScenic');
-                famousRestaurants = decompress(famous, FM);
-                console.log(`Loaded ${famousRestaurants.length} famous spots`);
-                return fetch('frontend/data/scenic_spots_famous.json?v=' + v);
-            })
-            .then(r => { if (!r.ok) throw new Error(`scenic HTTP ${r.status}`); return r.json(); })
-            .then(scenic => {
-                scenicSpots = decompress(scenic, SM);
-                console.log(`Loaded ${scenicSpots.length} scenic spots`);
-                updateStatus('ready');
-                setTimeout(() => { if (loadStatus) loadStatus.remove(); }, 500);
-                buildGenreMenu();
-                filterAndDisplay();
-            })
-            .catch(err => {
-                console.error('Data load error:', err);
-                if (loadStatus) loadStatus.innerHTML = `<div class="empty-state">${s('loadFailed')}: ${err.message}<br><small>${s('checkConsole')}</small></div>`;
-            });
+        
+        Promise.all([
+            fetch('data.json?v=' + v).then(r => { if (!r.ok) throw new Error(`data.json HTTP ${r.status}`); return r.json(); }),
+            fetch('frontend/data/famous_restaurants.json?v=' + v).then(r => { if (!r.ok) throw new Error(`famous HTTP ${r.status}`); return r.json(); }),
+            fetch('frontend/data/scenic_spots_famous.json?v=' + v).then(r => { if (!r.ok) throw new Error(`scenic HTTP ${r.status}`); return r.json(); })
+        ])
+        .then(([allRestaurants, famous, scenic]) => {
+            restaurants = decompress(allRestaurants, M);
+            famousRestaurants = decompress(famous, FM);
+            scenicSpots = decompress(scenic, SM);
+            
+            console.log(`Loaded ${restaurants.length} restaurants, ${famousRestaurants.length} famous, ${scenicSpots.length} scenic spots`);
+            
+            updateStatus('ready');
+            setTimeout(() => { if (loadStatus) loadStatus.remove(); }, 500);
+            buildGenreMenu();
+            filterAndDisplay();
+        })
+        .catch(err => {
+            console.error('Data load error:', err);
+            if (loadStatus) loadStatus.innerHTML = `<div class="empty-state">${s('loadFailed')}: ${err.message}<br><small>${s('checkConsole')}</small></div>`;
+        });
 
         // Genre translations and icons
         const genreInfo = {
