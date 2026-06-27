@@ -452,82 +452,7 @@
         const SM = {n:'name',nj:'name_ja',la:'lat',lo:'lng',cat:'category',em:'emoji',sc:'score'};
         function decompress(arr, map) { return arr.map(o => { const d = {}; for (const [k,v] of Object.entries(o)) { d[map[k]||k] = v; if (k==='id') d.id=v; } return d; }); }
 
-        // Load all data in parallel for faster loading
-        const v = Date.now();
-        const loadStatus = document.querySelector('.loading');
-        function updateStatus(msgKey) { if (loadStatus) loadStatus.innerHTML = `<div class="spinner"></div><br>${t(msgKey)}`; }
-
-        updateStatus('loadingData');
-        
-        Promise.all([
-            fetch('data.json?v=' + v).then(r => { if (!r.ok) throw new Error(`data.json HTTP ${r.status}`); return r.json(); }),
-            fetch('frontend/data/famous_restaurants.json?v=' + v).then(r => { if (!r.ok) throw new Error(`famous HTTP ${r.status}`); return r.json(); }),
-            fetch('frontend/data/scenic_spots_famous.json?v=' + v).then(r => { if (!r.ok) throw new Error(`scenic HTTP ${r.status}`); return r.json(); })
-        ])
-        .then(([allRestaurants, famous, scenic]) => {
-            restaurants = decompress(allRestaurants, M);
-            famousRestaurants = decompress(famous, FM);
-            scenicSpots = decompress(scenic, SM);
-            
-            console.log(`Loaded ${restaurants.length} restaurants, ${famousRestaurants.length} famous, ${scenicSpots.length} scenic spots`);
-            
-            updateStatus('ready');
-            setTimeout(() => { if (loadStatus) loadStatus.remove(); }, 500);
-            buildGenreMenu();
-            filterAndDisplay();
-        })
-        .catch(err => {
-            console.error('Data load error:', err);
-            if (loadStatus) loadStatus.innerHTML = `<div class="empty-state">${t('loadFailed')}: ${err.message}<br><small>${t('checkConsole')}</small></div>`;
-        });
-
-        // Genre translations and icons
-        const genreInfo = {
-            'ラーメン': { en: 'Ramen', icon: '🍜' },
-            '中国料理': { en: 'Chinese', icon: '🥡' },
-            '焼肉': { en: 'Yakiniku', icon: '🥩' },
-            'イタリアン': { en: 'Italian', icon: '🍝' },
-            '寿司': { en: 'Sushi', icon: '🍣' },
-            'カレー': { en: 'Curry', icon: '🍛' },
-            'アジア・エスニック': { en: 'Asian', icon: '🥢' },
-            'うどん': { en: 'Udon', icon: '🍲' },
-            '和菓子・甘味処': { en: 'Wagashi', icon: '🍡' },
-            'フレンチ': { en: 'French', icon: '🥐' },
-            'パン': { en: 'Bakery', icon: '🍞' },
-            '日本料理': { en: 'Japanese', icon: '🍱' },
-            'スイーツ': { en: 'Sweets', icon: '🍰' },
-            '焼き鳥': { en: 'Yakitori', icon: '🍢' },
-            '居酒屋': { en: 'Izakaya', icon: '🏮' },
-            'ステーキ': { en: 'Steak', icon: '🥩' },
-            '洋食': { en: 'Western', icon: '🍽️' },
-            'カフェ': { en: 'Cafe', icon: '☕' },
-            'そば': { en: 'Soba', icon: '🍜' },
-            '食堂': { en: 'Diner', icon: '🍚' },
-            'スペイン料理': { en: 'Spanish', icon: '🥘' },
-            'ハンバーガー': { en: 'Burger', icon: '🍔' },
-            'とんかつ': { en: 'Tonkatsu', icon: '🍖' },
-            '鳥料理': { en: 'Chicken', icon: '🍗' },
-            'バー': { en: 'Bar', icon: '🍸' },
-            '創作料理・イノベーティブ': { en: 'Creative', icon: '✨' },
-            'ピザ': { en: 'Pizza', icon: '🍕' },
-            '天ぷら': { en: 'Tempura', icon: '🍤' },
-            'すき焼き・しゃぶしゃぶ': { en: 'Sukiyaki', icon: '🫕' },
-            'うなぎ': { en: 'Eel', icon: '🐟' },
-            '餃子': { en: 'Gyoza', icon: '🥟' },
-            'アイス・ジェラート': { en: 'Gelato', icon: '🍨' },
-            '立ち飲み': { en: 'Standing Bar', icon: '🍶' },
-            'お好み焼き': { en: 'Okonomiyaki', icon: '🥞' },
-            '喫茶': { en: 'Kissaten', icon: '🫖' }
-        };
-        
-        function getGenreLabel(genre) {
-            const info = genreInfo[genre];
-            if (!info) return genre;
-            if (currentLang === 'ja') return `${genre}`;
-            return `${info.icon} ${info.en}`;
-        }
-
-        // Language toggle
+        // Language toggle - must be defined before data loading
         let currentLang = 'en';
         const uiStrings = {
             en: {
@@ -633,6 +558,81 @@
         };
 
         function t(key) { return uiStrings[currentLang][key] || key; }
+
+        // Load all data in parallel for faster loading
+        const v = Date.now();
+        const loadStatus = document.querySelector('.loading');
+        function updateStatus(msgKey) { if (loadStatus) loadStatus.innerHTML = `<div class="spinner"></div><br>${t(msgKey)}`; }
+
+        updateStatus('loadingData');
+        
+        Promise.all([
+            fetch('data.json?v=' + v).then(r => { if (!r.ok) throw new Error(`data.json HTTP ${r.status}`); return r.json(); }),
+            fetch('frontend/data/famous_restaurants.json?v=' + v).then(r => { if (!r.ok) throw new Error(`famous HTTP ${r.status}`); return r.json(); }),
+            fetch('frontend/data/scenic_spots_famous.json?v=' + v).then(r => { if (!r.ok) throw new Error(`scenic HTTP ${r.status}`); return r.json(); })
+        ])
+        .then(([allRestaurants, famous, scenic]) => {
+            restaurants = decompress(allRestaurants, M);
+            famousRestaurants = decompress(famous, FM);
+            scenicSpots = decompress(scenic, SM);
+            
+            console.log(`Loaded ${restaurants.length} restaurants, ${famousRestaurants.length} famous, ${scenicSpots.length} scenic spots`);
+            
+            updateStatus('ready');
+            setTimeout(() => { if (loadStatus) loadStatus.remove(); }, 500);
+            buildGenreMenu();
+            filterAndDisplay();
+        })
+        .catch(err => {
+            console.error('Data load error:', err);
+            if (loadStatus) loadStatus.innerHTML = `<div class="empty-state">${t('loadFailed')}: ${err.message}<br><small>${t('checkConsole')}</small></div>`;
+        });
+
+        // Genre translations and icons
+        const genreInfo = {
+            'ラーメン': { en: 'Ramen', icon: '🍜' },
+            '中国料理': { en: 'Chinese', icon: '🥡' },
+            '焼肉': { en: 'Yakiniku', icon: '🥩' },
+            'イタリアン': { en: 'Italian', icon: '🍝' },
+            '寿司': { en: 'Sushi', icon: '🍣' },
+            'カレー': { en: 'Curry', icon: '🍛' },
+            'アジア・エスニック': { en: 'Asian', icon: '🥢' },
+            'うどん': { en: 'Udon', icon: '🍲' },
+            '和菓子・甘味処': { en: 'Wagashi', icon: '🍡' },
+            'フレンチ': { en: 'French', icon: '🥐' },
+            'パン': { en: 'Bakery', icon: '🍞' },
+            '日本料理': { en: 'Japanese', icon: '🍱' },
+            'スイーツ': { en: 'Sweets', icon: '🍰' },
+            '焼き鳥': { en: 'Yakitori', icon: '🍢' },
+            '居酒屋': { en: 'Izakaya', icon: '🏮' },
+            'ステーキ': { en: 'Steak', icon: '🥩' },
+            '洋食': { en: 'Western', icon: '🍽️' },
+            'カフェ': { en: 'Cafe', icon: '☕' },
+            'そば': { en: 'Soba', icon: '🍜' },
+            '食堂': { en: 'Diner', icon: '🍚' },
+            'スペイン料理': { en: 'Spanish', icon: '🥘' },
+            'ハンバーガー': { en: 'Burger', icon: '🍔' },
+            'とんかつ': { en: 'Tonkatsu', icon: '🍖' },
+            '鳥料理': { en: 'Chicken', icon: '🍗' },
+            'バー': { en: 'Bar', icon: '🍸' },
+            '創作料理・イノベーティブ': { en: 'Creative', icon: '✨' },
+            'ピザ': { en: 'Pizza', icon: '🍕' },
+            '天ぷら': { en: 'Tempura', icon: '🍤' },
+            'すき焼き・しゃぶしゃぶ': { en: 'Sukiyaki', icon: '🫕' },
+            'うなぎ': { en: 'Eel', icon: '🐟' },
+            '餃子': { en: 'Gyoza', icon: '🥟' },
+            'アイス・ジェラート': { en: 'Gelato', icon: '🍨' },
+            '立ち飲み': { en: 'Standing Bar', icon: '🍶' },
+            'お好み焼き': { en: 'Okonomiyaki', icon: '🥞' },
+            '喫茶': { en: 'Kissaten', icon: '🫖' }
+        };
+        
+        function getGenreLabel(genre) {
+            const info = genreInfo[genre];
+            if (!info) return genre;
+            if (currentLang === 'ja') return `${genre}`;
+            return `${info.icon} ${info.en}`;
+        }
 
         function applyLanguage() {
             const lang = uiStrings[currentLang];
