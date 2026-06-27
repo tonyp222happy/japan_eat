@@ -455,9 +455,9 @@
         // Load all data in parallel for faster loading
         const v = Date.now();
         const loadStatus = document.querySelector('.loading');
-        function updateStatus(msgKey) { if (loadStatus) loadStatus.innerHTML = `<div class="spinner"></div><br>${s(msgKey)}`; }
+        function updateStatus(msgKey) { if (loadStatus) loadStatus.innerHTML = `<div class="spinner"></div><br>${t(msgKey)}`; }
 
-        updateStatus('loadingData');
+        updateStatut('loadingData');
         
         Promise.all([
             fetch('data.json?v=' + v).then(r => { if (!r.ok) throw new Error(`data.json HTTP ${r.status}`); return r.json(); }),
@@ -471,14 +471,14 @@
             
             console.log(`Loaded ${restaurants.length} restaurants, ${famousRestaurants.length} famous, ${scenicSpots.length} scenic spots`);
             
-            updateStatus('ready');
+            updateStatut('ready');
             setTimeout(() => { if (loadStatus) loadStatus.remove(); }, 500);
             buildGenreMenu();
             filterAndDisplay();
         })
         .catch(err => {
             console.error('Data load error:', err);
-            if (loadStatus) loadStatus.innerHTML = `<div class="empty-state">${s('loadFailed')}: ${err.message}<br><small>${s('checkConsole')}</small></div>`;
+            if (loadStatus) loadStatus.innerHTML = `<div class="empty-state">${t('loadFailed')}: ${err.message}<br><small>${t('checkConsole')}</small></div>`;
         });
 
         // Genre translations and icons
@@ -632,7 +632,7 @@
             }
         };
 
-        function s(key) { return uiStrings[currentLang][key] || key; }
+        function t(key) { return uiStrings[currentLang][key] || key; }
 
         function applyLanguage() {
             const lang = uiStrings[currentLang];
@@ -689,7 +689,7 @@
                         genreBtn.textContent = `${getGenreLabel(activeGenre)} ✕`;
                         genreBtn.classList.add('active');
                     } else {
-                        genreBtn.textContent = s('genreBtn');
+                        genreBtn.textContent = t('genreBtn');
                         genreBtn.classList.remove('active');
                     }
                     filterAndDisplay();
@@ -797,13 +797,13 @@
 
             const photos = r.image_url ? `<div class="rst-photos"><a href="${r.image_url}" target="_blank" rel="noopener"><img src="${r.image_url}" loading="lazy" alt="${r.name}" onerror="this.parentElement.style.display='none'"></a></div>` : '';
 
-            const reservable = r.reservable === true ? s('reservableYes') : r.reservable === false ? s('reservableNo') : '';
+            const reservable = r.reservable === true ? t('reservableYes') : r.reservable === false ? t('reservableNo') : '';
             const dinnerPrice = famous ? famous.budget_dinner : (r.budget_dinner || '—');
             const lunchPrice = famous ? famous.budget_lunch : (r.budget_lunch || '—');
             const rating = r.rating ? `★${r.rating}` : '';
-            const reviewCount = r.review_count ? `${r.review_count} ${s('reviews')}` : '';
-            const savedCount = famous && famous.saved_count ? `${(famous.saved_count / 1000).toFixed(1)}K ${s('saves')}` : '';
-            const station = r.station_name ? `📍 ${r.station_name}${s('stationSuffix')}` : '';
+            const reviewCount = r.review_count ? `${r.review_count} ${t('reviews')}` : '';
+            const savedCount = famous && famous.saved_count ? `${(famous.saved_count / 1000).toFixed(1)}K ${t('saves')}` : '';
+            const station = r.station_name ? `📍 ${r.station_name}${t('stationSuffix')}` : '';
             const address = r.address || '';
             const hours = r.hours_raw ? r.hours_raw.substring(0, 100) + (r.hours_raw.length > 100 ? '...' : '') : '';
             const phone = r.phone || '';
@@ -813,19 +813,19 @@
                     <div class="rst-header">
                         <div class="rst-title">${r.name}${rating ? `<span class="rst-rating">${rating}</span>` : ''}</div>
                         <div class="rst-actions">
-                            <button class="rst-btn" onclick="window.open('${r.tabelog_url}', '_blank')">${s('tabelog')} ↗</button>
-                            <button class="rst-btn" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}', '_blank')">${s('directions')} ↗</button>
+                            <button class="rst-btn" onclick="window.open('${r.tabelog_url}', '_blank')">${t('tabelog')} ↗</button>
+                            <button class="rst-btn" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}', '_blank')">${t('directions')} ↗</button>
                         </div>
                     </div>
                     ${photos}
                     <div class="rst-genre">${getGenreLabel(r.genre)}</div>
                     <div class="rst-info">
-                        <div class="rst-info-row"><span class="rst-label">${s('dinnerLabel')}</span><span class="rst-value">${dinnerPrice}</span></div>
-                        <div class="rst-info-row"><span class="rst-label">${s('lunchLabel')}</span><span class="rst-value">${lunchPrice}</span></div>
-                        <div class="rst-info-row"><span class="rst-label">${s('addressLabel')}</span><span class="rst-value">${address}</span></div>
-                        <div class="rst-info-row"><span class="rst-label">${s('stationLabel')}</span><span class="rst-value">${station}</span></div>
-                        ${phone ? `<div class="rst-info-row"><span class="rst-label">${s('phoneLabel')}</span><span class="rst-value">${phone}</span></div>` : ''}
-                        ${hours ? `<div class="rst-info-row"><span class="rst-label">${s('hoursLabel')}</span><span class="rst-value">${hours}</span></div>` : ''}
+                        <div class="rst-info-row"><span class="rst-label">${t('dinnerLabel')}</span><span class="rst-value">${dinnerPrice}</span></div>
+                        <div class="rst-info-row"><span class="rst-label">${t('lunchLabel')}</span><span class="rst-value">${lunchPrice}</span></div>
+                        <div class="rst-info-row"><span class="rst-label">${t('addressLabel')}</span><span class="rst-value">${address}</span></div>
+                        <div class="rst-info-row"><span class="rst-label">${t('stationLabel')}</span><span class="rst-value">${station}</span></div>
+                        ${phone ? `<div class="rst-info-row"><span class="rst-label">${t('phoneLabel')}</span><span class="rst-value">${phone}</span></div>` : ''}
+                        ${hours ? `<div class="rst-info-row"><span class="rst-label">${t('hoursLabel')}</span><span class="rst-value">${hours}</span></div>` : ''}
                     </div>
                     ${reservable ? `<div class="rst-policy">${reservable}</div>` : ''}
                     <div class="rst-footer">
@@ -859,16 +859,16 @@
                     </div>
                     <div class="scenic-detail-info">
                         <div class="scenic-detail-row">
-                            <span class="scenic-detail-label">${s('typeLabel')}:</span>
+                            <span class="scenic-detail-label">${t('typeLabel')}:</span>
                             <span class="scenic-detail-value">${spot.category}</span>
                         </div>
                         <div class="scenic-detail-row">
-                            <span class="scenic-detail-label">${s('coordsLabel')}:</span>
+                            <span class="scenic-detail-label">${t('coordsLabel')}:</span>
                             <span class="scenic-detail-value">${spot.lat.toFixed(4)}, ${spot.lng.toFixed(4)}</span>
                         </div>
                     </div>
                     <div class="scenic-detail-footer">
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}" target="_blank" rel="noopener">${s('directions')} ↗</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}" target="_blank" rel="noopener">${t('directions')} ↗</a>
                     </div>
                 </div>
             `;
@@ -905,9 +905,9 @@
             if (showScenic) {
                 const bounds = map.getBounds();
                 const visible = scenicSpots.filter(s => bounds.contains([s.lat, s.lng])).length;
-                scenicText = ` | 🏯 ${visible} ${s('spots')}`;
+                scenicText = ` | 🏯 ${visible} ${t('spots')}`;
             }
-            document.getElementById('stats').textContent = `${count} ${s('of')} ${total}${scenicText}`;
+            document.getElementById('stats').textContent = `${count} ${t('of')} ${total}${scenicText}`;
         }
 
         function highlightCard(id) {
@@ -936,8 +936,8 @@
             sidebar.innerHTML = display.map(r => {
                 const famous = famousMap[r.id];
                 const famousBadge = famous ? `<span class="famous-badge">🌟 ${(famous.saved_count / 1000).toFixed(1)}K</span>` : '';
-                const newBadge = r.is_new ? `<span class="new-badge">${s('newBadge')}</span>` : '';
-                const stationSuffix = r.station_name ? ` · ${r.station_name}${s('stationSuffix')}` : '';
+                const newBadge = r.is_new ? `<span class="new-badge">${t('newBadge')}</span>` : '';
+                const stationSuffix = r.station_name ? ` · ${r.station_name}${t('stationSuffix')}` : '';
                 return `
                     <div class="restaurant-card" data-id="${r.id}" onclick="focusRestaurant(${r.lat}, ${r.lng}, '${r.name.replace(/'/g, "\\'")}')">
                         <div class="card-header">
@@ -947,15 +947,15 @@
                                 <div class="card-area">${r.area}${stationSuffix}</div>
                                 <div class="card-meta">
                                     ${r.rating ? `<span>⭐ ${r.rating}</span>` : ''}
-                                    ${r.review_count ? `<span>📝 ${r.review_count} ${s('reviews')}</span>` : ''}
-                                    ${r.dist !== undefined ? `<span class="card-distance">📍 ${r.dist.toFixed(1)}${s('kmUnit')}</span>` : ''}
+                                    ${r.review_count ? `<span>📝 ${r.review_count} ${t('reviews')}</span>` : ''}
+                                    ${r.dist !== undefined ? `<span class="card-distance">📍 ${r.dist.toFixed(1)}${t('kmUnit')}</span>` : ''}
                                 </div>
                                 <span class="card-genre">${getGenreLabel(r.genre)}</span>
                             </div>
                         </div>
                         <div class="card-actions">
-                            <a href="${r.tabelog_url}" target="_blank" rel="noopener">${s('tabelog')} →</a>
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}" target="_blank" rel="noopener">${s('directions')} →</a>
+                            <a href="${r.tabelog_url}" target="_blank" rel="noopener">${t('tabelog')} →</a>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}" target="_blank" rel="noopener">${t('directions')} →</a>
                         </div>
                     </div>
                 `;
@@ -991,12 +991,12 @@
                         <div class="scenic-info">
                             <div class="scenic-name">${s.name}</div>
                             <div class="scenic-name-ja">${s.name_ja}</div>
-                            ${s.dist !== undefined ? `<div class="card-distance">📍 ${s.dist.toFixed(1)}${s('kmUnit')}</div>` : ''}
+                            ${s.dist !== undefined ? `<div class="card-distance">📍 ${s.dist.toFixed(1)}${t('kmUnit')}</div>` : ''}
                             <span class="scenic-category">${categoryEmoji[s.category] || '📍'} ${s.category}</span>
                         </div>
                     </div>
                     <div class="scenic-actions">
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}" target="_blank" rel="noopener">${s('directions')} →</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}" target="_blank" rel="noopener">${t('directions')} →</a>
                     </div>
                 </div>
             `).join('');
@@ -1004,18 +1004,18 @@
 
         // Geolocation
         document.getElementById('locateBtn').addEventListener('click', () => {
-            if (!navigator.geolocation) { alert(s('geoNotSupported')); return; }
-            document.getElementById('locateBtn').textContent = s('locatingBtn');
+            if (!navigator.geolocation) { alert(t('geoNotSupported')); return; }
+            document.getElementById('locateBtn').textContent = t('locatingBtn');
             navigator.geolocation.getCurrentPosition(
                 pos => {
                     userLat = pos.coords.latitude;
                     userLng = pos.coords.longitude;
                     if (userMarker) map.removeLayer(userMarker);
-                    userMarker = L.marker([userLat, userLng], { icon: userIcon }).addTo(map).bindPopup(s('youAreHere')).openPopup();
+                    userMarker = L.marker([userLat, userLng], { icon: userIcon }).addTo(map).bindPopup(t('youAreHere')).openPopup();
                     map.setView([userLat, userLng], map.getZoom() < 10 ? 12 : map.getZoom());
-                    document.getElementById('locateBtn').textContent = s('locateBtn');
+                    document.getElementById('locateBtn').textContent = t('locateBtn');
                 },
-                err => { alert(s('geoFailed') + ': ' + err.message); document.getElementById('locateBtn').textContent = s('locateBtn'); },
+                err => { alert(t('geoFailed') + ': ' + err.message); document.getElementById('locateBtn').textContent = t('locateBtn'); },
                 { enableHighAccuracy: true, timeout: 10000 }
             );
         });
