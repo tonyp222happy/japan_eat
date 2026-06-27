@@ -843,7 +843,7 @@
         function renderCards(list) {
             const sidebar = document.getElementById('sidebar');
             if (list.length === 0) {
-                sidebar.innerHTML = `<div class="empty-state">🔍 No restaurants found in this area</div>`;
+                sidebar.innerHTML = `<div class="empty-state">${uiStrings[currentLang].noResults}</div>`;
                 return;
             }
 
@@ -891,7 +891,7 @@
                 .sort((a, b) => a.dist - b.dist);
 
             if (sorted.length === 0) {
-                sidebar.innerHTML = `<div class="empty-state">🔍 Zoom in to see scenic spots</div>`;
+                sidebar.innerHTML = `<div class="empty-state">${uiStrings[currentLang].zoomScenic}</div>`;
                 return;
             }
 
