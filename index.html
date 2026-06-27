@@ -22,10 +22,13 @@
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
 
         /* Header */
-        header { background: var(--primary); color: white; padding: 16px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-        header h1 { font-size: 1.3rem; display: flex; align-items: center; gap: 8px; }
-        header h1 span { font-size: 1.5rem; }
-        .subtitle { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+        header { background: var(--primary); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .header-left { flex: 1; min-width: 0; }
+        header h1 { font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+        header h1 .star-icon { font-size: 1.4rem; }
+        .subtitle { font-size: 0.8rem; opacity: 0.9; margin-top: 2px; }
+        #langBtn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 14px; border-radius: var(--radius); cursor: pointer; font-size: 0.8rem; white-space: nowrap; transition: background 0.2s; flex-shrink: 0; }
+        #langBtn:hover { background: rgba(255,255,255,0.35); }
 
         /* Controls */
         .controls { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 12px 16px; position: sticky; top: 70px; z-index: 999; }
@@ -279,9 +282,11 @@
 </head>
 <body>
     <header>
-        <h1><span>🌟</span> <span id="title-text">百名店 Nearby Finder</span></h1>
-        <div class="subtitle" id="subtitle-text">Find Tabelog Hyakumeiten (食べログ百名店) restaurants near you</div>
-        <button class="btn btn-sm" id="langBtn" style="margin-left:auto;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);color:white;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.75rem;">🇯🇵 日本語</button>
+        <div class="header-left">
+            <h1><span class="star-icon">🌟</span> <span id="title-text">百名店 Nearby Finder</span></h1>
+            <div class="subtitle" id="subtitle-text">Find Tabelog Hyakumeiten (食べログ百名店) restaurants near you</div>
+        </div>
+        <button id="langBtn">🇯🇵 日本語</button>
     </header>
 
     <div class="controls">
@@ -338,7 +343,7 @@
     <div class="main">
         <div id="map"></div>
         <div class="sidebar" id="sidebar">
-            <div class="loading"><div class="spinner"></div><br>Loading restaurants...</div>
+            <div class="loading"><div class="spinner"></div><br>Loading...</div>
         </div>
     </div>
 
@@ -450,20 +455,20 @@
         // Load all data with cache-busting to avoid stale GitHub Pages cache
         const v = Date.now();
         const loadStatus = document.querySelector('.loading');
-        function updateStatus(msg) { if (loadStatus) loadStatus.innerHTML = `<div class="spinner"></div><br>${msg}`; }
+        function updateStatus(msgKey) { if (loadStatus) loadStatus.innerHTML = `<div class="spinner"></div><br>${s(msgKey)}`; }
 
-        updateStatus('Downloading restaurant data (8MB)...');
+        updateStatus('loadingData');
         fetch('data.json?v=' + v)
-            .then(r => { if (!r.ok) throw new Error(`data.json HTTP ${r.status}`); updateStatus('Parsing restaurant data...'); return r.json(); })
+            .then(r => { if (!r.ok) throw new Error(`data.json HTTP ${r.status}`); updateStatus('parsingData'); return r.json(); })
             .then(allRestaurants => {
-                updateStatus('Loading famous restaurants...');
+                updateStatus('loadingFamous');
                 restaurants = decompress(allRestaurants, M);
                 console.log(`Loaded ${restaurants.length} restaurants`);
                 return fetch('frontend/data/famous_restaurants.json?v=' + v);
             })
             .then(r => { if (!r.ok) throw new Error(`famous HTTP ${r.status}`); return r.json(); })
             .then(famous => {
-                updateStatus('Loading scenic spots...');
+                updateStatus('loadingScenic');
                 famousRestaurants = decompress(famous, FM);
                 console.log(`Loaded ${famousRestaurants.length} famous spots`);
                 return fetch('frontend/data/scenic_spots_famous.json?v=' + v);
@@ -472,14 +477,14 @@
             .then(scenic => {
                 scenicSpots = decompress(scenic, SM);
                 console.log(`Loaded ${scenicSpots.length} scenic spots`);
-                updateStatus('Ready!');
+                updateStatus('ready');
                 setTimeout(() => { if (loadStatus) loadStatus.remove(); }, 500);
                 buildGenreMenu();
                 filterAndDisplay();
             })
             .catch(err => {
                 console.error('Data load error:', err);
-                if (loadStatus) loadStatus.innerHTML = `<div class="empty-state">⚠️ Failed to load data: ${err.message}<br><small>Check browser console (F12) for details</small></div>`;
+                if (loadStatus) loadStatus.innerHTML = `<div class="empty-state">${s('loadFailed')}: ${err.message}<br><small>${s('checkConsole')}</small></div>`;
             });
 
         // Genre translations and icons
@@ -536,63 +541,137 @@
                 subtitle: 'Find Tabelog Hyakumeiten (食べログ百名店) restaurants near you',
                 langBtn: '🇯🇵 日本語',
                 locateBtn: '📍 Near Me',
+                locatingBtn: '⏳ Locating...',
                 searchPlaceholder: 'Search restaurant name...',
                 addressPlaceholder: 'Search by city/address...',
                 genreBtn: '🍜 Genre ▾',
                 priceBtn: '💰 Price ▾',
                 lunch: '🌞 Lunch',
                 dinner: '🌙 Dinner',
+                priceMin: 'Min',
+                priceMax: 'Max',
                 priceClear: 'Clear price filter',
                 famousBtn: '🌟 Famous',
                 scenicBtn: '🏯 Scenic Spots',
                 noResults: '🔍 No restaurants found in this area',
                 zoomScenic: '🔍 Zoom in to see scenic spots',
                 reviews: 'reviews',
-                loading: 'Loading restaurants...'
+                loading: 'Loading restaurants...',
+                of: 'of',
+                spots: 'spots',
+                youAreHere: 'You are here',
+                geoNotSupported: 'Geolocation is not supported by your browser',
+                geoFailed: 'Could not get your location',
+                newBadge: 'NEW',
+                tabelog: 'Tabelog',
+                directions: 'Directions',
+                dinnerLabel: 'Dinner',
+                lunchLabel: 'Lunch',
+                addressLabel: 'Address',
+                stationLabel: 'Station',
+                phoneLabel: 'Phone',
+                hoursLabel: 'Hours',
+                reservableYes: 'Reservable',
+                reservableNo: 'Not reservable',
+                saves: 'saves',
+                typeLabel: 'Type',
+                coordsLabel: 'Coordinates',
+                stationSuffix: 'Station',
+                kmUnit: 'km',
+                loadingData: 'Downloading restaurant data (8MB)...',
+                parsingData: 'Parsing restaurant data...',
+                loadingFamous: 'Loading famous restaurants...',
+                loadingScenic: 'Loading scenic spots...',
+                ready: 'Ready!',
+                loadFailed: '⚠️ Failed to load data',
+                checkConsole: 'Check browser console (F12) for details'
             },
             ja: {
                 title: '百名店 ニアバイ',
                 subtitle: '食べログ百名店をあなたの近くで探そう',
                 langBtn: '🇬🇧 English',
                 locateBtn: '📍 現在地',
+                locatingBtn: '⏳ 位置取得中...',
                 searchPlaceholder: '店名で検索...',
                 addressPlaceholder: '住所・都市名で検索...',
                 genreBtn: '🍜 ジャンル ▾',
                 priceBtn: '💰 予算 ▾',
                 lunch: '🌞 ランチ',
                 dinner: '🌙 ディナー',
+                priceMin: '下限',
+                priceMax: '上限',
                 priceClear: '予算フィルターを解除',
                 famousBtn: '🌟 有名店',
                 scenicBtn: '🏯 名所',
                 noResults: '🔍 このエリアにレストランが見つかりませんでした',
                 zoomScenic: '🔍 ズームインして名所を表示',
                 reviews: '件のレビュー',
-                loading: '読み込み中...'
+                loading: '読み込み中...',
+                of: '/',
+                spots: '件',
+                youAreHere: '現在地',
+                geoNotSupported: 'お使いのブラウザは位置情報に対応していません',
+                geoFailed: '位置情報を取得できませんでした',
+                newBadge: '初選出',
+                tabelog: '食べログ',
+                directions: '道順',
+                dinnerLabel: '夜',
+                lunchLabel: '昼',
+                addressLabel: '住所',
+                stationLabel: '最寄駅',
+                phoneLabel: '電話',
+                hoursLabel: '営業時間',
+                reservableYes: '予約可',
+                reservableNo: '予約不可',
+                saves: '件保存',
+                typeLabel: 'タイプ',
+                coordsLabel: '座標',
+                stationSuffix: '駅',
+                kmUnit: 'km',
+                loadingData: 'レストランデータ (8MB) をダウンロード中...',
+                parsingData: 'データを解析中...',
+                loadingFamous: '有名店データを読み込み中...',
+                loadingScenic: '名所データを読み込み中...',
+                ready: '準備完了！',
+                loadFailed: '⚠️ データの読み込みに失敗しました',
+                checkConsole: '詳細はブラウザコンソール (F12) を確認してください'
             }
         };
 
+        function s(key) { return uiStrings[currentLang][key] || key; }
+
         function applyLanguage() {
-            const s = uiStrings[currentLang];
-            document.getElementById('title-text').textContent = s.title;
-            document.getElementById('subtitle-text').textContent = s.subtitle;
-            document.getElementById('langBtn').textContent = s.langBtn;
-            document.getElementById('locateBtn').textContent = s.locateBtn;
-            document.getElementById('searchInput').placeholder = s.searchPlaceholder;
-            document.getElementById('addressInput').placeholder = s.addressPlaceholder;
-            document.getElementById('genreBtn').textContent = s.genreBtn;
-            document.getElementById('priceBtn').textContent = s.priceBtn;
-            document.querySelectorAll('.price-label')[0].textContent = s.lunch;
-            document.querySelectorAll('.price-label')[1].textContent = s.dinner;
-            document.getElementById('priceClear').textContent = s.priceClear;
-            document.getElementById('famousBtn').textContent = s.famousBtn;
-            document.getElementById('scenicBtn').textContent = s.scenicBtn;
-            // Rebuild genre menu with correct language
+            const lang = uiStrings[currentLang];
+            document.getElementById('title-text').textContent = lang.title;
+            document.getElementById('subtitle-text').textContent = lang.subtitle;
+            document.getElementById('langBtn').textContent = lang.langBtn;
+            document.getElementById('locateBtn').textContent = lang.locateBtn;
+            document.getElementById('searchInput').placeholder = lang.searchPlaceholder;
+            document.getElementById('addressInput').placeholder = lang.addressPlaceholder;
+            document.getElementById('genreBtn').textContent = activeGenre ? `${getGenreLabel(activeGenre)} ✕` : lang.genreBtn;
+            document.getElementById('priceBtn').textContent = lang.priceBtn;
+            document.querySelectorAll('.price-label')[0].textContent = lang.lunch;
+            document.querySelectorAll('.price-label')[1].textContent = lang.dinner;
+            document.getElementById('lunchMin').placeholder = lang.priceMin;
+            document.getElementById('lunchMax').placeholder = lang.priceMax;
+            document.getElementById('dinnerMin').placeholder = lang.priceMin;
+            document.getElementById('dinnerMax').placeholder = lang.priceMax;
+            document.getElementById('priceClear').textContent = lang.priceClear;
+            document.getElementById('famousBtn').textContent = lang.famousBtn;
+            document.getElementById('scenicBtn').textContent = lang.scenicBtn;
+            // Rebuild genre menu + re-render cards with correct language
             buildGenreMenu();
+            filterAndDisplay();
         }
 
         document.getElementById('langBtn').addEventListener('click', () => {
             currentLang = currentLang === 'en' ? 'ja' : 'en';
             applyLanguage();
+        });
+
+        // Escape key closes bottom sheet
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeBottomSheet();
         });
 
         // Genre menu
@@ -603,12 +682,22 @@
             const menu = document.getElementById('genreMenu');
             menu.innerHTML = sorted.map(([genre, count]) => {
                 const label = getGenreLabel(genre);
-                return `<div class="genre-menu-item" data-genre="${genre}">${label}<span class="genre-count">${count}</span></div>`;
+                const isActive = activeGenre === genre ? 'active' : '';
+                return `<div class="genre-menu-item ${isActive}" data-genre="${genre}">${label}<span class="genre-count">${count}</span></div>`;
             }).join('');
             menu.querySelectorAll('.genre-menu-item').forEach(el => {
                 el.addEventListener('click', () => {
                     activeGenre = activeGenre === el.dataset.genre ? null : el.dataset.genre;
                     menu.querySelectorAll('.genre-menu-item').forEach(e => e.classList.toggle('active', e.dataset.genre === activeGenre));
+                    // Update genre button text
+                    const genreBtn = document.getElementById('genreBtn');
+                    if (activeGenre) {
+                        genreBtn.textContent = `${getGenreLabel(activeGenre)} ✕`;
+                        genreBtn.classList.add('active');
+                    } else {
+                        genreBtn.textContent = s('genreBtn');
+                        genreBtn.classList.remove('active');
+                    }
                     filterAndDisplay();
                 });
             });
@@ -714,13 +803,13 @@
 
             const photos = r.image_url ? `<div class="rst-photos"><a href="${r.image_url}" target="_blank" rel="noopener"><img src="${r.image_url}" loading="lazy" alt="${r.name}" onerror="this.parentElement.style.display='none'"></a></div>` : '';
 
-            const reservable = r.reservable === true ? '可预订' : r.reservable === false ? '无法预订' : '';
+            const reservable = r.reservable === true ? s('reservableYes') : r.reservable === false ? s('reservableNo') : '';
             const dinnerPrice = famous ? famous.budget_dinner : (r.budget_dinner || '—');
             const lunchPrice = famous ? famous.budget_lunch : (r.budget_lunch || '—');
             const rating = r.rating ? `★${r.rating}` : '';
-            const reviewCount = r.review_count ? `${r.review_count} reviews` : '';
-            const savedCount = famous && famous.saved_count ? `${(famous.saved_count / 1000).toFixed(1)}K saves` : '';
-            const station = r.station_name ? `📍 ${r.station_name}駅` : '';
+            const reviewCount = r.review_count ? `${r.review_count} ${s('reviews')}` : '';
+            const savedCount = famous && famous.saved_count ? `${(famous.saved_count / 1000).toFixed(1)}K ${s('saves')}` : '';
+            const station = r.station_name ? `📍 ${r.station_name}${s('stationSuffix')}` : '';
             const address = r.address || '';
             const hours = r.hours_raw ? r.hours_raw.substring(0, 100) + (r.hours_raw.length > 100 ? '...' : '') : '';
             const phone = r.phone || '';
@@ -730,19 +819,19 @@
                     <div class="rst-header">
                         <div class="rst-title">${r.name}${rating ? `<span class="rst-rating">${rating}</span>` : ''}</div>
                         <div class="rst-actions">
-                            <button class="rst-btn" onclick="window.open('${r.tabelog_url}', '_blank')">食べログ ↗</button>
-                            <button class="rst-btn" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}', '_blank')">Directions ↗</button>
+                            <button class="rst-btn" onclick="window.open('${r.tabelog_url}', '_blank')">${s('tabelog')} ↗</button>
+                            <button class="rst-btn" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}', '_blank')">${s('directions')} ↗</button>
                         </div>
                     </div>
                     ${photos}
                     <div class="rst-genre">${getGenreLabel(r.genre)}</div>
                     <div class="rst-info">
-                        <div class="rst-info-row"><span class="rst-label">晚</span><span class="rst-value">${dinnerPrice}</span></div>
-                        <div class="rst-info-row"><span class="rst-label">午</span><span class="rst-value">${lunchPrice}</span></div>
-                        <div class="rst-info-row"><span class="rst-label">地址</span><span class="rst-value">${address}</span></div>
-                        <div class="rst-info-row"><span class="rst-label">车站</span><span class="rst-value">${station}</span></div>
-                        ${phone ? `<div class="rst-info-row"><span class="rst-label">电话</span><span class="rst-value">${phone}</span></div>` : ''}
-                        ${hours ? `<div class="rst-info-row"><span class="rst-label">时间</span><span class="rst-value">${hours}</span></div>` : ''}
+                        <div class="rst-info-row"><span class="rst-label">${s('dinnerLabel')}</span><span class="rst-value">${dinnerPrice}</span></div>
+                        <div class="rst-info-row"><span class="rst-label">${s('lunchLabel')}</span><span class="rst-value">${lunchPrice}</span></div>
+                        <div class="rst-info-row"><span class="rst-label">${s('addressLabel')}</span><span class="rst-value">${address}</span></div>
+                        <div class="rst-info-row"><span class="rst-label">${s('stationLabel')}</span><span class="rst-value">${station}</span></div>
+                        ${phone ? `<div class="rst-info-row"><span class="rst-label">${s('phoneLabel')}</span><span class="rst-value">${phone}</span></div>` : ''}
+                        ${hours ? `<div class="rst-info-row"><span class="rst-label">${s('hoursLabel')}</span><span class="rst-value">${hours}</span></div>` : ''}
                     </div>
                     ${reservable ? `<div class="rst-policy">${reservable}</div>` : ''}
                     <div class="rst-footer">
@@ -760,35 +849,32 @@
         }
 
         // Bottom sheet for scenic spot
-        function showScenicBottomSheet(s) {
+        function showScenicBottomSheet(spot) {
             const backdrop = document.getElementById('bs-backdrop');
             const sheet = document.getElementById('bs-sheet');
             const content = document.getElementById('bs-content');
 
-            const osmUrl = `https://www.openstreetmap.org/${s.id.startsWith('osm_') ? 'node' : 'way'}/${s.id.replace('osm_', '')}`;
-
             content.innerHTML = `
                 <div class="scenic-detail">
                     <div class="scenic-detail-header">
-                        <div class="scenic-detail-emoji">${s.emoji}</div>
+                        <div class="scenic-detail-emoji">${spot.emoji}</div>
                         <div>
-                            <div class="scenic-detail-title">${s.name}</div>
-                            <div class="scenic-detail-subtitle">${s.name_ja}</div>
+                            <div class="scenic-detail-title">${spot.name}</div>
+                            <div class="scenic-detail-subtitle">${spot.name_ja}</div>
                         </div>
                     </div>
                     <div class="scenic-detail-info">
                         <div class="scenic-detail-row">
-                            <span class="scenic-detail-label">类型</span>
-                            <span class="scenic-detail-value">${s.category}</span>
+                            <span class="scenic-detail-label">${s('typeLabel')}:</span>
+                            <span class="scenic-detail-value">${spot.category}</span>
                         </div>
                         <div class="scenic-detail-row">
-                            <span class="scenic-detail-label">坐标</span>
-                            <span class="scenic-detail-value">${s.lat.toFixed(6)}, ${s.lng.toFixed(6)}</span>
+                            <span class="scenic-detail-label">${s('coordsLabel')}:</span>
+                            <span class="scenic-detail-value">${spot.lat.toFixed(4)}, ${spot.lng.toFixed(4)}</span>
                         </div>
                     </div>
                     <div class="scenic-detail-footer">
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}" target="_blank" rel="noopener">Directions ↗</a>
-                        <a href="${osmUrl}" target="_blank" rel="noopener">OpenStreetMap ↗</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}" target="_blank" rel="noopener">${s('directions')} ↗</a>
                     </div>
                 </div>
             `;
@@ -825,9 +911,9 @@
             if (showScenic) {
                 const bounds = map.getBounds();
                 const visible = scenicSpots.filter(s => bounds.contains([s.lat, s.lng])).length;
-                scenicText = ` | 🏯 ${visible} spots`;
+                scenicText = ` | 🏯 ${visible} ${s('spots')}`;
             }
-            document.getElementById('stats').textContent = `${count} of ${total}${scenicText}`;
+            document.getElementById('stats').textContent = `${count} ${s('of')} ${total}${scenicText}`;
         }
 
         function highlightCard(id) {
@@ -856,24 +942,26 @@
             sidebar.innerHTML = display.map(r => {
                 const famous = famousMap[r.id];
                 const famousBadge = famous ? `<span class="famous-badge">🌟 ${(famous.saved_count / 1000).toFixed(1)}K</span>` : '';
+                const newBadge = r.is_new ? `<span class="new-badge">${s('newBadge')}</span>` : '';
+                const stationSuffix = r.station_name ? ` · ${r.station_name}${s('stationSuffix')}` : '';
                 return `
                     <div class="restaurant-card" data-id="${r.id}" onclick="focusRestaurant(${r.lat}, ${r.lng}, '${r.name.replace(/'/g, "\\'")}')">
                         <div class="card-header">
                             <img class="card-image" src="${r.image_url}" alt="${r.name}" loading="lazy" onerror="this.style.display='none'">
                             <div class="card-info">
-                                <div class="card-name">${r.name}${r.is_new ? '<span class="new-badge">NEW</span>' : ''}${famousBadge}</div>
-                                <div class="card-area">${r.area}${r.station_name ? ` · ${r.station_name}駅` : ''}</div>
+                                <div class="card-name">${r.name}${newBadge}${famousBadge}</div>
+                                <div class="card-area">${r.area}${stationSuffix}</div>
                                 <div class="card-meta">
                                     ${r.rating ? `<span>⭐ ${r.rating}</span>` : ''}
-                                    ${r.review_count ? `<span>📝 ${r.review_count} ${uiStrings[currentLang].reviews}</span>` : ''}
-                                    ${r.dist !== undefined ? `<span class="card-distance">📍 ${r.dist.toFixed(1)}km</span>` : ''}
+                                    ${r.review_count ? `<span>📝 ${r.review_count} ${s('reviews')}</span>` : ''}
+                                    ${r.dist !== undefined ? `<span class="card-distance">📍 ${r.dist.toFixed(1)}${s('kmUnit')}</span>` : ''}
                                 </div>
                                 <span class="card-genre">${getGenreLabel(r.genre)}</span>
                             </div>
                         </div>
                         <div class="card-actions">
-                            <a href="${r.tabelog_url}" target="_blank" rel="noopener">食べログ →</a>
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}" target="_blank" rel="noopener">Directions →</a>
+                            <a href="${r.tabelog_url}" target="_blank" rel="noopener">${s('tabelog')} →</a>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}" target="_blank" rel="noopener">${s('directions')} →</a>
                         </div>
                     </div>
                 `;
@@ -909,12 +997,12 @@
                         <div class="scenic-info">
                             <div class="scenic-name">${s.name}</div>
                             <div class="scenic-name-ja">${s.name_ja}</div>
-                            ${s.dist !== undefined ? `<div class="card-distance">📍 ${s.dist.toFixed(1)}km</div>` : ''}
+                            ${s.dist !== undefined ? `<div class="card-distance">📍 ${s.dist.toFixed(1)}${s('kmUnit')}</div>` : ''}
                             <span class="scenic-category">${categoryEmoji[s.category] || '📍'} ${s.category}</span>
                         </div>
                     </div>
                     <div class="scenic-actions">
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}" target="_blank" rel="noopener">Directions →</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}" target="_blank" rel="noopener">${s('directions')} →</a>
                     </div>
                 </div>
             `).join('');
@@ -922,18 +1010,18 @@
 
         // Geolocation
         document.getElementById('locateBtn').addEventListener('click', () => {
-            if (!navigator.geolocation) { alert('Geolocation is not supported by your browser'); return; }
-            document.getElementById('locateBtn').textContent = '⏳ Locating...';
+            if (!navigator.geolocation) { alert(s('geoNotSupported')); return; }
+            document.getElementById('locateBtn').textContent = s('locatingBtn');
             navigator.geolocation.getCurrentPosition(
                 pos => {
                     userLat = pos.coords.latitude;
                     userLng = pos.coords.longitude;
                     if (userMarker) map.removeLayer(userMarker);
-                    userMarker = L.marker([userLat, userLng], { icon: userIcon }).addTo(map).bindPopup('You are here').openPopup();
+                    userMarker = L.marker([userLat, userLng], { icon: userIcon }).addTo(map).bindPopup(s('youAreHere')).openPopup();
                     map.setView([userLat, userLng], map.getZoom() < 10 ? 12 : map.getZoom());
-                    document.getElementById('locateBtn').textContent = '📍 Near Me';
+                    document.getElementById('locateBtn').textContent = s('locateBtn');
                 },
-                err => { alert('Could not get your location: ' + err.message); document.getElementById('locateBtn').textContent = '📍 Near Me'; },
+                err => { alert(s('geoFailed') + ': ' + err.message); document.getElementById('locateBtn').textContent = s('locateBtn'); },
                 { enableHighAccuracy: true, timeout: 10000 }
             );
         });
