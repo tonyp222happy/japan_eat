@@ -343,7 +343,12 @@
     <div class="main">
         <div id="map"></div>
         <div class="sidebar" id="sidebar">
-            <div class="loading"><div class="spinner"></div><br>Loading...</div>
+            <div id="sidebar-content">
+                <div style="padding: 20px; text-align: center; color: #666; font-size: 14px;">
+                    <div style="margin-bottom: 10px;">Loading restaurants...</div>
+                    <div style="width: 40px; height: 40px; border: 3px solid #f3f3f3; border-top: 3px solid #E44040; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -497,7 +502,7 @@
                 coordsLabel: 'Coordinates',
                 stationSuffix: 'Station',
                 kmUnit: 'km',
-                loadingData: 'Downloading restaurant data (8MB)...',
+                loadingData: 'Downloading restaurant data (6MB)...',
                 parsingData: 'Parsing restaurant data...',
                 loadingFamous: 'Loading famous restaurants...',
                 loadingScenic: 'Loading scenic spots...',
@@ -559,17 +564,14 @@
 
         function t(key) { return uiStrings[currentLang][key] || key; }
 
-        // Load all data in parallel for faster loading
+        // Load all data in background (don't block map initialization)
         const v = Date.now();
-        const loadStatus = document.querySelector('.loading');
-        function updateStatus(msgKey) { if (loadStatus) loadStatus.innerHTML = `<div class="spinner"></div><br>${t(msgKey)}`; }
-
-        updateStatus('loadingData');
         
+        // Load data in background
         Promise.all([
-            fetch('data.json?v=' + v).then(r => { if (!r.ok) throw new Error(`data.json HTTP ${r.status}`); return r.json(); }),
-            fetch('frontend/data/famous_restaurants.json?v=' + v).then(r => { if (!r.ok) throw new Error(`famous HTTP ${r.status}`); return r.json(); }),
-            fetch('frontend/data/scenic_spots_famous.json?v=' + v).then(r => { if (!r.ok) throw new Error(`scenic HTTP ${r.status}`); return r.json(); })
+            fetch('data.json?v=' + v).then(r => r.json()),
+            fetch('frontend/data/famous_restaurants.json?v=' + v).then(r => r.json()),
+            fetch('frontend/data/scenic_spots_famous.json?v=' + v).then(r => r.json())
         ])
         .then(([allRestaurants, famous, scenic]) => {
             restaurants = decompress(allRestaurants, M);
@@ -578,14 +580,11 @@
             
             console.log(`Loaded ${restaurants.length} restaurants, ${famousRestaurants.length} famous, ${scenicSpots.length} scenic spots`);
             
-            updateStatus('ready');
-            setTimeout(() => { if (loadStatus) loadStatus.remove(); }, 500);
             buildGenreMenu();
             filterAndDisplay();
         })
         .catch(err => {
             console.error('Data load error:', err);
-            if (loadStatus) loadStatus.innerHTML = `<div class="empty-state">${t('loadFailed')}: ${err.message}<br><small>${t('checkConsole')}</small></div>`;
         });
 
         // Genre translations and icons
