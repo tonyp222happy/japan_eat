@@ -457,7 +457,7 @@
         const loadStatus = document.querySelector('.loading');
         function updateStatus(msgKey) { if (loadStatus) loadStatus.innerHTML = `<div class="spinner"></div><br>${t(msgKey)}`; }
 
-        updateStatut('loadingData');
+        updateStatus('loadingData');
         
         Promise.all([
             fetch('data.json?v=' + v).then(r => { if (!r.ok) throw new Error(`data.json HTTP ${r.status}`); return r.json(); }),
@@ -471,7 +471,7 @@
             
             console.log(`Loaded ${restaurants.length} restaurants, ${famousRestaurants.length} famous, ${scenicSpots.length} scenic spots`);
             
-            updateStatut('ready');
+            updateStatus('ready');
             setTimeout(() => { if (loadStatus) loadStatus.remove(); }, 500);
             buildGenreMenu();
             filterAndDisplay();
