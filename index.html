@@ -279,8 +279,9 @@
 </head>
 <body>
     <header>
-        <h1><span>🌟</span> 百名店 Nearby Finder</h1>
-        <div class="subtitle">Find Tabelog Hyakumeiten (食べログ百名店) restaurants near you</div>
+        <h1><span>🌟</span> <span id="title-text">百名店 Nearby Finder</span></h1>
+        <div class="subtitle" id="subtitle-text">Find Tabelog Hyakumeiten (食べログ百名店) restaurants near you</div>
+        <button class="btn btn-sm" id="langBtn" style="margin-left:auto;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);color:white;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.75rem;">🇯🇵 日本語</button>
     </header>
 
     <div class="controls">
@@ -523,8 +524,76 @@
         function getGenreLabel(genre) {
             const info = genreInfo[genre];
             if (!info) return genre;
+            if (currentLang === 'ja') return `${genre}`;
             return `${info.icon} ${info.en}`;
         }
+
+        // Language toggle
+        let currentLang = 'en';
+        const uiStrings = {
+            en: {
+                title: '百名店 Nearby Finder',
+                subtitle: 'Find Tabelog Hyakumeiten (食べログ百名店) restaurants near you',
+                langBtn: '🇯🇵 日本語',
+                locateBtn: '📍 Near Me',
+                searchPlaceholder: 'Search restaurant name...',
+                addressPlaceholder: 'Search by city/address...',
+                genreBtn: '🍜 Genre ▾',
+                priceBtn: '💰 Price ▾',
+                lunch: '🌞 Lunch',
+                dinner: '🌙 Dinner',
+                priceClear: 'Clear price filter',
+                famousBtn: '🌟 Famous',
+                scenicBtn: '🏯 Scenic Spots',
+                noResults: '🔍 No restaurants found in this area',
+                zoomScenic: '🔍 Zoom in to see scenic spots',
+                reviews: 'reviews',
+                loading: 'Loading restaurants...'
+            },
+            ja: {
+                title: '百名店 ニアバイ',
+                subtitle: '食べログ百名店をあなたの近くで探そう',
+                langBtn: '🇬🇧 English',
+                locateBtn: '📍 現在地',
+                searchPlaceholder: '店名で検索...',
+                addressPlaceholder: '住所・都市名で検索...',
+                genreBtn: '🍜 ジャンル ▾',
+                priceBtn: '💰 予算 ▾',
+                lunch: '🌞 ランチ',
+                dinner: '🌙 ディナー',
+                priceClear: '予算フィルターを解除',
+                famousBtn: '🌟 有名店',
+                scenicBtn: '🏯 名所',
+                noResults: '🔍 このエリアにレストランが見つかりませんでした',
+                zoomScenic: '🔍 ズームインして名所を表示',
+                reviews: '件のレビュー',
+                loading: '読み込み中...'
+            }
+        };
+
+        function applyLanguage() {
+            const s = uiStrings[currentLang];
+            document.getElementById('title-text').textContent = s.title;
+            document.getElementById('subtitle-text').textContent = s.subtitle;
+            document.getElementById('langBtn').textContent = s.langBtn;
+            document.getElementById('locateBtn').textContent = s.locateBtn;
+            document.getElementById('searchInput').placeholder = s.searchPlaceholder;
+            document.getElementById('addressInput').placeholder = s.addressPlaceholder;
+            document.getElementById('genreBtn').textContent = s.genreBtn;
+            document.getElementById('priceBtn').textContent = s.priceBtn;
+            document.querySelectorAll('.price-label')[0].textContent = s.lunch;
+            document.querySelectorAll('.price-label')[1].textContent = s.dinner;
+            document.getElementById('priceClear').textContent = s.priceClear;
+            document.getElementById('famousBtn').textContent = s.famousBtn;
+            document.getElementById('scenicBtn').textContent = s.scenicBtn;
+            // Rebuild genre menu with correct language
+            buildGenreMenu();
+        }
+
+        document.getElementById('langBtn').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ja' : 'en';
+            applyLanguage();
+        });
 
         // Genre menu
         function buildGenreMenu() {
@@ -796,7 +865,7 @@
                                 <div class="card-area">${r.area}${r.station_name ? ` · ${r.station_name}駅` : ''}</div>
                                 <div class="card-meta">
                                     ${r.rating ? `<span>⭐ ${r.rating}</span>` : ''}
-                                    ${r.review_count ? `<span>📝 ${r.review_count} reviews</span>` : ''}
+                                    ${r.review_count ? `<span>📝 ${r.review_count} ${uiStrings[currentLang].reviews}</span>` : ''}
                                     ${r.dist !== undefined ? `<span class="card-distance">📍 ${r.dist.toFixed(1)}km</span>` : ''}
                                 </div>
                                 <span class="card-genre">${getGenreLabel(r.genre)}</span>
