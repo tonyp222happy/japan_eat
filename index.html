@@ -451,8 +451,8 @@
             return true;
         }
 
-        // Decompress short-key data → full names
-        const M = {n:'name',a:'area',g:'genre',u:'tabelog_url',i:'image_url',h:'holiday',nw:'is_new',la:'lat',lo:'lng',r:'rating',c:'review_count',bl:'budget_lunch',bd:'budget_dinner',p:'phone',rv:'reservable',addr:'address',st:'station_name',hr:'hours_raw',sg:'sub_genres',aw:'awards',wm:'walk_minutes'};
+        // Decompress short-key data → full names (optimized: only essential fields for initial display)
+        const M = {n:'name',a:'area',g:'genre',u:'tabelog_url',i:'image_url',nw:'is_new',la:'lat',lo:'lng',r:'rating',c:'review_count'};
         const FM = {n:'name',ne:'name_en',g:'genre',a:'area',la:'lat',lo:'lng',r:'rating',sc:'saved_count',c:'review_count',bl:'budget_lunch',bd:'budget_dinner',p:'phone',rv:'reservable',hr:'hours_raw',u:'tabelog_url',i:'image_url',addr:'address',st:'station_name',em:'emoji',cl:'color'};
         const SM = {n:'name',nj:'name_ja',la:'lat',lo:'lng',cat:'category',em:'emoji',sc:'score'};
         function decompress(arr, map) { return arr.map(o => { const d = {}; for (const [k,v] of Object.entries(o)) { d[map[k]||k] = v; if (k==='id') d.id=v; } return d; }); }
@@ -796,7 +796,7 @@
 
             const photos = r.image_url ? `<div class="rst-photos"><a href="${r.image_url}" target="_blank" rel="noopener"><img src="${r.image_url}" loading="lazy" alt="${r.name}" onerror="this.parentElement.style.display='none'"></a></div>` : '';
 
-            const reservable = r.reservable === true ? t('reservableYes') : r.reservable === false ? t('reservableNo') : '';
+            const reservable = r.reservable !== undefined ? (r.reservable === true ? t('reservableYes') : t('reservableNo')) : '';
             const dinnerPrice = famous ? famous.budget_dinner : (r.budget_dinner || '—');
             const lunchPrice = famous ? famous.budget_lunch : (r.budget_lunch || '—');
             const rating = r.rating ? `★${r.rating}` : '';
