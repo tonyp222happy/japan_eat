@@ -1,18 +1,31 @@
-# Large data files — keep local only
+# Python scraper code (private)
+*.py
+!app.js
+
+# Data processing
 data/*.json
-data/*.csv
+!data.json
 
-# Worktrees (managed by git)
-.worktrees/
-
-# Python
+# Dependencies
+requirements.txt
 __pycache__/
 *.pyc
-*.egg-info/
+
+# Temporary files
+*.log
+*.tmp
+.cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Hermes
-.hermes/
+# Data archives
+*.zip
+*.tar.gz

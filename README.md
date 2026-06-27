@@ -1,100 +1,53 @@
-# Hyakumeiten (百名店) Scraper
+# 🍣 Japan Eat - Tabelog Hyakumeiten (百名店)
 
-Scrape and geocode Tabelog Hyakumeiten restaurant data from [award.tabelog.com/hyakumeiten](https://award.tabelog.com/hyakumeiten/).
+A curated collection of Japan's best restaurants from [Tabelog Hyakumeiten](https://award.tabelog.com/hyakumeiten/), featuring 3,000+ award-winning establishments across 30+ cuisine genres.
 
-## Setup
+## 🌐 Live Website
 
-```bash
-pip install -r requirements.txt
-```
+**[View Interactive Map →](https://tonyp222happy.github.io/japan_eat/)**
 
-## Usage
+Explore restaurants by:
+- 📍 Location (interactive map)
+- 🍱 Cuisine type (sushi, ramen, tempura, etc.)
+- 🏆 Award category
 
-### 1. Scrape all categories
+## 📊 Data Coverage
 
-```bash
-# Scrape all ~68 genre+region pages
-python scraper.py
+- **3,000+ restaurants** from Tabelog's prestigious Hyakumeiten list
+- **30+ cuisine genres** including sushi, ramen, kaiseki, tempura, yakitori, and more
+- **All major regions** - Tokyo, Osaka, Kyoto, Hokkaido, Kyushu, and beyond
+- **Geocoded locations** for precise mapping
+- **Regular updates** - Data refreshed when Tabelog announces new award winners
 
-# Scrape specific genres only
-python scraper.py --genre shokudo ramen_tokyo sushi_east
+## 🗂️ Data Format
 
-# Custom output path
-python scraper.py --output data/my_restaurants.json
-
-# Dry run — show URLs without scraping
-python scraper.py --dry-run
-
-# Append to existing data (for incremental updates)
-python scraper.py --append
-
-# Verbose output
-python scraper.py -v
-```
-
-### 2. Geocode restaurants
-
-```bash
-# Geocode all restaurants (requires scraped data first)
-python geocoder.py
-
-# Custom input/output
-python geocoder.py --input data/restaurants.json --output data/geocoded.json
-
-# Resume from checkpoint (if interrupted)
-python geocoder.py --resume
-
-# Dry run
-python geocoder.py --dry-run
-
-# Faster/slower rate limiting
-python geocoder.py --rate-limit 0.5   # faster (risk of rate limiting)
-python geocoder.py --rate-limit 2.0   # slower (safer)
-
-# Overwrite existing lat/lng values
-python geocoder.py --overwrite
-```
-
-## Output Format
-
-`data/restaurants.json`:
+The restaurant data (`data.json`) includes:
 ```json
 {
   "id": "13016622",
-  "name": "炭焼き かどた/お料理すゞ㐂",
+  "name": "炭焼き かどた",
   "area": "東京都 恵比寿駅",
   "genre": "食堂",
-  "region": null,
   "tabelog_url": "https://tabelog.com/tokyo/A1303/A130302/13016622/",
-  "image_url": "https://...",
+  "image_url": "...",
   "holiday": "日曜日",
-  "is_new": false,
-  "lat": null,
-  "lng": null
+  "lat": 35.6421,
+  "lng": 139.7119
 }
 ```
 
-After geocoding, `lat` and `lng` fields are populated.
+## 📝 About
 
-## Data Coverage
+This project showcases Japan's culinary excellence by visualizing the Tabelog Hyakumeiten award winners. The data is sourced from Tabelog's official awards page and geocoded for interactive exploration.
 
-- ~68 genre+region category pages
-- ~3,000+ restaurants total
-- 30+ cuisine genres
-- All major Japanese regions
+**Note:** The scraping and data processing scripts are private. This repository contains only the public-facing website and aggregated data.
 
-## Rate Limiting
+## 🙏 Credits
 
-- Scraper: 1 second delay between pages (configurable with `--delay`)
-- Geocoder: 1.1 second delay between Nominatim requests (required by Nominatim policy)
-- Geocoding ~3,000 restaurants takes ~55 minutes
+- Data source: [Tabelog Hyakumeiten](https://award.tabelog.com/hyakumeiten/)
+- Geocoding: OpenStreetMap Nominatim
+- Visualization: Custom interactive map
 
-## Ongoing Maintenance
+## 📄 License
 
-Re-run periodically when Tabelog updates the Hyakumeiten list (typically annually):
-
-```bash
-# Full refresh
-python scraper.py --append
-python geocoder.py --resume
-```
+Data is for personal reference only. Please respect Tabelog's terms of service.
